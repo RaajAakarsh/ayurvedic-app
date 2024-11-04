@@ -37,6 +37,9 @@ import ManageProducts from './screens/Retailers/ManageProducts';
 import MyOrders from './screens/Retailers/MyOrders';
 // import CustomerSupport from './screens/Retailers/CustomerSupport';
 
+import Footer from './screens/Footer';
+import Notification from './screens/Patients/Notification'; // Patient notifications
+import DoctorNotification from './screens/Doctors/DoctorNotification'; // Doctor notifications
 import { AuthContext } from './context/AuthContext';
 
 function App() {
@@ -76,6 +79,9 @@ function App() {
         <Route path="/prakritidetermination" element={<PrakritiDetermination />} />
         <Route path="/appointed-doctor" element={<AppointedDoctor />} />
         <Route path="/patient-home" element={<PatientPage />} />
+        
+        <Route path="/notifications" component={Notification} />
+        <Route path="/doctor-notifications" component={DoctorNotification} />
 
         <Route element={<ProtectedRoute />}>
           <Route path="/doctor-home" element={<DoctorHomeScreen />} />
@@ -91,6 +97,7 @@ function App() {
           {/* <Route path="/customer-support" element={<CustomerSupport />} /> */}
         </Route>
       </Routes>
+      <Footer />
     </Router>
   );
 }
