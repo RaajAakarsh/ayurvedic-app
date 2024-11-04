@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import '../NavBar.css'; // Ensure styles from NavBar are included
 import logo from '../../media/logo.png';
 import locationIcon from '../../media/location.png';
@@ -10,7 +10,8 @@ import { AuthContext } from '../../context/AuthContext'; // Import AuthContext
 const API_KEY = 'f08bb887cc0d42bb8b9fb21993c3a6d3'; // Replace with your OpenCage API key
 
 function PatientNavBar() {
-  const { auth, signOut } = useContext(AuthContext); // Get auth context to access user info
+  const navigate = useNavigate();
+  const { auth, setAuth } = useContext(AuthContext); // Get auth context to access user info
   const [showModal, setShowModal] = useState(false);
   const [userLocation, setUserLocation] = useState('Fetching location...');
   const [cityName, setCityName] = useState(''); // State for city name
@@ -19,7 +20,11 @@ function PatientNavBar() {
   const userName = auth.user ? auth.user.name : 'Guest';
   const userPhone = auth.user ? auth.user.phone : 'N/A';
   const userEmail = auth.user ? auth.user.email : 'N/A';
-
+  const handleSignOut = () => {
+    setAuth({ token: null, user: null });
+    localStorage.removeItem('token');
+    navigate('/signin');
+  };
   useEffect(() => {
     // Function to get the user's location
     const fetchLocation = () => {
@@ -63,10 +68,6 @@ function PatientNavBar() {
 
   const handleProfileClick = () => {
     setShowModal(!showModal); // Toggle modal visibility
-  };
-
-  const handleSignOut = () => {
-    signOut(); // Call signOut function from AuthContext
   };
 
   return (

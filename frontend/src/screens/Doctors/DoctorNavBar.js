@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import '../NavBar.css'; // Ensure styles from NavBar are included
 import logo from '../../media/logo.png'; // Adjust the path if needed
 import locationIcon from '../../media/location.png'; // Adjust the path if needed
@@ -10,10 +10,10 @@ import notificationIcon from '../../media/notifications.png';
 const API_KEY = 'f08bb887cc0d42bb8b9fb21993c3a6d3'; // Your OpenCage API key
 
 function DoctorNavBar() {
-  const { auth, signOut } = useContext(AuthContext); // Get auth context to access user info
+  const { auth, setAuth } = useContext(AuthContext); // Get auth context to access user info
   const [userLocation, setUserLocation] = useState('Fetching location...');
   const [showModal, setShowModal] = useState(false);
-
+  const navigate = useNavigate();
   const profilePic = ''; // Logic to fetch user's profile picture URL
   const doctorName = auth.user ? auth.user.name : 'Guest'; // Display the doctor's name or 'Guest'
 
@@ -60,7 +60,9 @@ function DoctorNavBar() {
   };
 
   const handleSignOut = () => {
-    signOut(); // Call signOut function from AuthContext
+    setAuth({ token: null, user: null });
+    localStorage.removeItem('token');
+    navigate('/signin');
   };
 
   return (

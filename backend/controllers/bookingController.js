@@ -64,3 +64,31 @@ exports.getAllBookings = async (req, res) => {
     return res.status(500).json({ error: "Server error" });
   }
 };
+
+exports.getNotifications = async (req, res) => {
+  const { email } = req.query;
+  console.log(email);
+  if (!email) {
+    return res.status(400).json({ error: "User email is required" });
+  }
+
+  try {
+    // Fetch bookings for the specified user email
+    const bookings = await Booking.find({ patientEmail: email }).sort({ createdAt: -1 });
+
+    // Map bookings to notification-like format
+    const notifications = bookings.map(booking => ({
+      message: `Your appointment with Dr. ${booking.doctorName} is confirmed for ${booking.timeSlot}.`,
+      date: booking.createdAt,
+    }));
+
+    return res.status(200).json({
+      message: "Notifications retrieved successfully",
+      notifications,
+    });
+  } catch (error) {
+    console.error("Error fetching notifications:", error);
+    return res.status(500).json({ error: "Server error" });
+  }
+};;
+

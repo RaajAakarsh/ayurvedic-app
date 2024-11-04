@@ -1,13 +1,31 @@
-import React from 'react';
-import './Notification.css'; // Add any styles you need
+import React, { useEffect, useState, useContext } from 'react';
+import { AuthContext } from '../../context/AuthContext';
+import './Notification.css';
 
 const Notification = () => {
-  // Sample notifications data, you can replace this with real data from your backend or context
-  const notifications = [
-    { id: 1, message: "Your appointment is confirmed for tomorrow.", date: "2024-11-04" },
-    { id: 2, message: "New consultation available for your preferred doctor.", date: "2024-11-02" },
-    { id: 3, message: "Your prescription has been updated.", date: "2024-11-01" },
-  ];
+  const { auth } = useContext(AuthContext); // Get auth context to use email
+  const [notifications, setNotifications] = useState([]);
+  const userEmail = auth.user?.email; // Get the user's email from context
+  console.log(userEmail);
+  useEffect(() => {
+    const fetchNotifications = async () => {
+      try {
+        const response = await fetch(`http://localhost:8080/api/bookings/notifications?email=${userEmail}`);
+        const data = await response.json();
+        if (response.ok) {
+          setNotifications(data.notifications);
+        } else {
+          console.error("Error fetching notifications:", data.error);
+        }
+      } catch (error) {
+        console.error("Error fetching notifications:", error);
+      }
+    };
+
+    if (userEmail) {
+      fetchNotifications();
+    }
+  }, [userEmail]);
 
   return (
     <div className="notification-container">
@@ -17,9 +35,9 @@ const Notification = () => {
       ) : (
         <ul>
           {notifications.map(notification => (
-            <li key={notification.id}>
+            <li key={notification._id}>
               <p>{notification.message}</p>
-              <span>{notification.date}</span>
+              <span>{new Date(notification.date).toLocaleDateString()}</span>
             </li>
           ))}
         </ul>

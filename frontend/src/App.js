@@ -79,9 +79,7 @@ function App() {
         <Route path="/prakritidetermination" element={<PrakritiDetermination />} />
         <Route path="/appointed-doctor" element={<AppointedDoctor />} />
         <Route path="/patient-home" element={<PatientPage />} />
-        
-        <Route path="/notifications" component={Notification} />
-        <Route path="/doctor-notifications" component={DoctorNotification} />
+      
 
         <Route element={<ProtectedRoute />}>
           <Route path="/doctor-home" element={<DoctorHomeScreen />} />
@@ -89,8 +87,9 @@ function App() {
           <Route path="/appointment-slots" element={<AppointmentSlots />} />
           <Route path="/patient-list" element={<PatientList />} />
           <Route path="/health-blogs" element={<HealthBlogs />} />
-    
+          <Route path="/notifications" element={<Notification/>} />
           <Route path="/retailer-home" element={<RetailerDashboard />} />
+          <Route path="/doctor-notifications" element={<DoctorNotification />} />
           <Route path="/manage-products" element={<ManageProducts />} />
           {/* <Route path="/analytics" element={<Analytics />} /> */}
           <Route path="/my-orders" element={<MyOrders />} />
