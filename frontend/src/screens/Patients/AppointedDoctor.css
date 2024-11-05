@@ -35,6 +35,15 @@
     margin-bottom: 10px;
 }
 
+.pending h1 {
+    font-size: 30px;
+}
+
+.current h1 {
+    font-size: 50px;
+    padding-top: 20px;
+}
+
 .supplements h2 {
     text-align: center;
     margin-top: 20px;
@@ -44,6 +53,11 @@
     display: flex;
     justify-content: space-around;
     padding: 10px;
+}
+
+.medicine p,
+.medicine button {
+    font-size: 18px;
 }
 
 .medicine {
