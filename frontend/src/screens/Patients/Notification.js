@@ -1,6 +1,6 @@
-import React, { useEffect, useState, useContext } from 'react';
-import { AuthContext } from '../../context/AuthContext';
-import './Notification.css';
+import React, { useEffect, useState, useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
+import "./Notification.css";
 
 const Notification = () => {
   const { auth } = useContext(AuthContext); // Get auth context to use email
@@ -10,7 +10,9 @@ const Notification = () => {
   useEffect(() => {
     const fetchNotifications = async () => {
       try {
-        const response = await fetch(`http://localhost:8080/api/bookings/notifications?email=${userEmail}`);
+        const response = await fetch(
+          `http://localhost:8080/api/bookings/notifications?email=${userEmail}`
+        );
         const data = await response.json();
         if (response.ok) {
           setNotifications(data.notifications);
@@ -34,7 +36,7 @@ const Notification = () => {
         <p>No new notifications.</p>
       ) : (
         <ul>
-          {notifications.map(notification => (
+          {notifications.map((notification) => (
             <li key={notification._id}>
               <p>{notification.message}</p>
               <span>{new Date(notification.date).toLocaleDateString()}</span>

@@ -1,29 +1,33 @@
-import React, { useContext, useState, useEffect } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
-import '../NavBar.css'; // Ensure styles from NavBar are included
-import logo from '../../media/logo.png';
-import locationIcon from '../../media/location.png';
-import defaultProfilePic from '../../media/default-profile.png'; // Default profile picture
-import notificationIcon from '../../media/notifications.png';
-import { AuthContext } from '../../context/AuthContext'; // Import AuthContext
+import React, { useContext, useState, useEffect } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import "../NavBar.css"; // Ensure styles from NavBar are included
+import "./PatientNavBar.css"
+import logo from "../../media/logo.png";
+import locationIcon from "../../media/location.png";
+import defaultProfilePic from "../../media/default-profile.png"; // Default profile picture
+import notificationIcon from "../../media/notifications.png";
+import { AuthContext } from "../../context/AuthContext"; // Import AuthContext
 
-const API_KEY = 'f08bb887cc0d42bb8b9fb21993c3a6d3'; // Replace with your OpenCage API key
+const API_KEY = "f08bb887cc0d42bb8b9fb21993c3a6d3"; // Replace with your OpenCage API key
 
 function PatientNavBar() {
   const navigate = useNavigate();
   const { auth, setAuth } = useContext(AuthContext); // Get auth context to access user info
   const [showModal, setShowModal] = useState(false);
-  const [userLocation, setUserLocation] = useState('Fetching location...');
-  const [cityName, setCityName] = useState(''); // State for city name
+  const [userLocation, setUserLocation] = useState("Fetching location...");
+  const [cityName, setCityName] = useState(""); // State for city name
 
-  const profilePic = ''; // Logic to fetch user's profile picture URL
-  const userName = auth.user ? auth.user.name : 'Guest';
-  const userPhone = auth.user ? auth.user.phone : 'N/A';
-  const userEmail = auth.user ? auth.user.email : 'N/A';
+  const profilePic = ""; // Logic to fetch user's profile picture URL
+  const userFirstName = auth.user ? auth.user.firstName : "Guest";
+  const userLastName = auth.user ? auth.user.lastName : "";
+
+  const userName = userFirstName + " " + userLastName;
+  const userPhone = auth.user ? auth.user.phone : "N/A";
+  const userEmail = auth.user ? auth.user.email : "N/A";
   const handleSignOut = () => {
     setAuth({ token: null, user: null });
-    localStorage.removeItem('token');
-    navigate('/signin');
+    localStorage.removeItem("token");
+    navigate("/signin");
   };
   useEffect(() => {
     // Function to get the user's location
@@ -38,11 +42,11 @@ function PatientNavBar() {
             fetchCityName(latitude, longitude);
           },
           () => {
-            setUserLocation('Location access denied');
+            setUserLocation("Location access denied");
           }
         );
       } else {
-        setUserLocation('Geolocation not supported');
+        setUserLocation("Geolocation not supported");
       }
     };
 
@@ -52,17 +56,22 @@ function PatientNavBar() {
   // Function to fetch city name from OpenCage API
   const fetchCityName = async (latitude, longitude) => {
     try {
-      const response = await fetch(`https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=${API_KEY}`);
+      const response = await fetch(
+        `https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=${API_KEY}`
+      );
       const data = await response.json();
       if (data.results.length > 0) {
-        const city = data.results[0].components.city || data.results[0].components.town || 'Unknown location';
+        const city =
+          data.results[0].components.city ||
+          data.results[0].components.town ||
+          "Unknown location";
         setCityName(city);
       } else {
-        setCityName('City not found');
+        setCityName("City not found");
       }
     } catch (error) {
-      setCityName('Error fetching city name');
-      console.error('Error fetching city name:', error);
+      setCityName("Error fetching city name");
+      console.error("Error fetching city name:", error);
     }
   };
 
@@ -105,51 +114,88 @@ function PatientNavBar() {
           </NavLink>
         </div>
         <NavLink to="/notifications" className="notification-icon">
-          <img src={notificationIcon} alt="Notifications" className="notification-img" />
+          <img
+            src={notificationIcon}
+            alt="Notifications"
+            className="notification-img"
+          />
         </NavLink>
       </div>
 
       {showModal && (
         <div className="profile-modal">
           <h2>User Profile</h2>
-          <p><strong>Name:</strong> {userName}</p>
-          <p><strong>Phone:</strong> {userPhone}</p>
-          <p><strong>Email:</strong> {userEmail}</p>
-          <button onClick={handleSignOut} className="signout-btn">Sign Out</button>
-          <button onClick={handleProfileClick} className="close-btn">Close</button>
+          <div className="profile-details">
+            <p>
+              <strong>Name:</strong> {userName}
+            </p>
+            <p>
+              <strong>Phone:</strong> {userPhone}
+            </p>
+            <p>
+              <strong>Email:</strong> {userEmail}
+            </p>
+          </div>
+          <button onClick={handleSignOut} className="signout-btn">
+            Sign Out
+          </button>
+          <button onClick={handleProfileClick} className="close-btn">
+            Close
+          </button>
         </div>
       )}
 
       <nav className="navbar">
         <div className="left-item">
-          <img src={locationIcon} alt="Location Icon" className="location-icon" />
-          <span className="location-text">{cityName || userLocation}</span> {/* Display city name */}
+          <img
+            src={locationIcon}
+            alt="Location Icon"
+            className="location-icon"
+          />
+          <span className="location-text">{cityName || userLocation}</span>{" "}
+          {/* Display city name */}
         </div>
         <div className="center-items">
           <ul>
             <li>
-              <NavLink to="/patient-home" activeClassName="active">Home</NavLink>
+              <NavLink to="/patient-home" activeClassName="active">
+                Home
+              </NavLink>
             </li>
             <li>
-              <NavLink to="/treatments" activeClassName="active">Treatments</NavLink>
+              <NavLink to="/treatments" activeClassName="active">
+                Treatments
+              </NavLink>
             </li>
             <li>
-              <NavLink to="/doctors" activeClassName="active">Doctors</NavLink>
+              <NavLink to="/doctors" activeClassName="active">
+                Doctors
+              </NavLink>
             </li>
             <li>
-              <NavLink to="/medicines" activeClassName="active">Medicines</NavLink>
+              <NavLink to="/medicines" activeClassName="active">
+                Medicines
+              </NavLink>
             </li>
             <li>
-              <NavLink to="/diet-yoga" activeClassName="active">Diet and Yoga Plan</NavLink>
+              <NavLink to="/diet-yoga" activeClassName="active">
+                Diet and Yoga Plan
+              </NavLink>
             </li>
             <li>
-              <NavLink to="/blogs-videos" activeClassName="active">Blogs and Videos</NavLink>
+              <NavLink to="/blogs-videos" activeClassName="active">
+                Blogs and Videos
+              </NavLink>
             </li>
             <li>
-              <NavLink to="/cart" activeClassName="active">Cart</NavLink>
+              <NavLink to="/cart" activeClassName="active">
+                Cart
+              </NavLink>
             </li>
             <li>
-              <NavLink to="/orders" activeClassName="active">Orders</NavLink>
+              <NavLink to="/orders" activeClassName="active">
+                Orders
+              </NavLink>
             </li>
           </ul>
         </div>
