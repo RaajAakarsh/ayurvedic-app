@@ -149,7 +149,7 @@ function PatientNavBar() {
               <NavLink to="/cart" activeClassName="active">Cart</NavLink>
             </li>
             <li>
-              <NavLink to="/orders" activeClassName="active">Orders</NavLink>
+              <NavLink to="/order-history" activeClassName="active">Orders</NavLink>
             </li>
           </ul>
         </div>

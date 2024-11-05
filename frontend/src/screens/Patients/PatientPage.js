@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import { Link,useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './PatientPage.css'; // Import the CSS file for styling
 import { AuthContext } from '../../context/AuthContext';
 
@@ -7,12 +7,6 @@ function PatientPage() {
   const { auth,setAuth } = useContext(AuthContext);
   const firstName = auth.user?.firstName || 'Patient'
   const navigate = useNavigate();
-
-  const handleSignOut = () => {
-    setAuth({ token: null, user: null });
-    localStorage.removeItem('token');
-    navigate('/signin');
-  };
 
   const goToAppointedDoctor = () => {
     navigate('/appointed-doctor'); // Navigate to the appointed doctor page

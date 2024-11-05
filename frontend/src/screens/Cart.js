@@ -1,16 +1,42 @@
-import React, { useState, useEffect } from 'react';
+// src/components/CartScreen.js
+import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import './Cart.css';
+import { AuthContext } from '../context/AuthContext'; // Import AuthContext
 
 const CartScreen = () => {
   const [cartItems, setCartItems] = useState(() => {
-    // Retrieve cart items from local storage
     const savedCart = localStorage.getItem('cart');
     return savedCart ? JSON.parse(savedCart) : [];
   });
+  
+  const { auth } = useContext(AuthContext); // Access auth context
+  const userId = auth?.user?.id; // Get userId
+  const userName = auth?.user?.firstName + ' ' + auth?.user?.lastName;
+
+  const handleCheckout = async () => {
+    try {
+      for (let item of cartItems) {
+        const orderData = {
+          medicine: { name: item.name, price: item.price, image: item.image },
+          quantity: item.quantity,
+          totalPrice: item.price * item.quantity,
+          buyer: { userId: userId, firstName: auth.user.firstName, lastName: auth.user.lastName }
+        };
+        await axios.post('http://localhost:8080/api/orders', orderData, {
+          headers: { Authorization: `Bearer ${auth.token}` } // Include token in headers
+        });
+      }
+      setCartItems([]);
+      localStorage.removeItem('cart');
+      alert("Order placed successfully!");
+    } catch (error) {
+      console.error('Error placing order:', error);
+    }
+  };
 
   useEffect(() => {
-    // Update local storage whenever cart items change
     localStorage.setItem('cart', JSON.stringify(cartItems));
   }, [cartItems]);
 
@@ -27,7 +53,6 @@ const CartScreen = () => {
     setCartItems((prevItems) => prevItems.filter((item) => item._id !== id));
   };
 
-  // Calculate total price
   const totalPrice = cartItems.reduce(
     (total, item) => total + item.price * item.quantity,
     0
@@ -59,9 +84,7 @@ const CartScreen = () => {
       </div>
       <div className="cart-summary">
         <h2>Total: ₹{totalPrice.toFixed(2)}</h2>
-        <Link to="/payment">
-          <button className="checkout-btn">Proceed to Checkout</button>
-        </Link>
+        <button onClick={handleCheckout} className="checkout-btn">Proceed to Checkout</button>
       </div>
     </div>
   );

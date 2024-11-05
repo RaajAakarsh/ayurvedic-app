@@ -7,6 +7,8 @@ const authRoutes = require("./routes/authRoutes");
 const medicineRoutes = require("./routes/medicineRoutes");
 const doctorRoutes = require("./routes/doctorRoutes");
 const bookingRoutes = require("./routes/bookingRoutes");
+const orderRoutes = require("./routes/orderRoutes")
+
 mongoose.set('debug', true);
 const app = express();
 const PORT = process.env.PORT || 8080;
@@ -28,6 +30,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/medicines", medicineRoutes);
 app.use("/api/doctors", doctorRoutes);
 app.use("/api/bookings", bookingRoutes);
+app.use("/api/orders" , orderRoutes)
 
 // Start the server
 app.listen(PORT, () => {

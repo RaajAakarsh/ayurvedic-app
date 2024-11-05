@@ -24,7 +24,7 @@ import PrakritiDetermination from './screens/PrakritiDetermination';
 import TreatmentsScreen from './screens/Treatments';
 import AppointedDoctor from './screens/Patients/AppointedDoctor';
 import PatientPage from './screens/Patients/PatientPage'
-
+import OrderHistory from './screens/Patients/OrderHistory';
 import DoctorHomeScreen from './screens/Doctors/DoctorHomeScreen';
 import CurrentRequests from './screens/Doctors/CurrentRequests';  
 import AppointmentSlots from './screens/Doctors/AppointmentSlots';  
@@ -91,6 +91,7 @@ function App() {
           <Route path="/retailer-home" element={<RetailerDashboard />} />
           <Route path="/doctor-notifications" element={<DoctorNotification />} />
           <Route path="/manage-products" element={<ManageProducts />} />
+          <Route path="/order-history" element={<OrderHistory />} />
           {/* <Route path="/analytics" element={<Analytics />} /> */}
           <Route path="/my-orders" element={<MyOrders />} />
           {/* <Route path="/customer-support" element={<CustomerSupport />} /> */}
