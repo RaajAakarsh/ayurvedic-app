@@ -10,6 +10,7 @@ function DoctorDetail() {
   const { auth, setAuth } = useContext(AuthContext);
   const patientFirstName = auth.user?.firstName || "Patient";
   const patientLastName = auth.user?.lastName || "";
+  const requestAccept = "o";
 
   const patientName = patientFirstName + " " + patientLastName;
 
@@ -35,6 +36,7 @@ function DoctorDetail() {
         timeSlot: selectedTime,
         email: email,
         patientName: patientName,
+        requestAccept: requestAccept,
       };
 
       // Include email only if the role is 'patient'

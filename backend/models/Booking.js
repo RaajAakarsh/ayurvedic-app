@@ -23,6 +23,10 @@ const bookingSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  requestAccept: {
+    type: String,
+    required: true,
+  },
   createdAt: {
     type: Date,
     default: Date.now,

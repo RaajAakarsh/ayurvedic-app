@@ -10,6 +10,7 @@ exports.createBooking = async (req, res) => {
     timeSlot,
     email,
     patientName,
+    requestAccept,
   } = req.body; // Destructure the request body
 
   if (!doctorName) {
@@ -36,6 +37,7 @@ exports.createBooking = async (req, res) => {
       timeSlot,
       patientEmail: email,
       patientName,
+      requestAccept,
     });
 
     // Save the booking to the database
@@ -98,6 +100,35 @@ exports.getNotifications = async (req, res) => {
     });
   } catch (error) {
     console.error("Error fetching notifications:", error);
+    return res.status(500).json({ error: "Server error" });
+  }
+};
+
+// New controller function to update booking requestAccept status
+exports.updateBookingStatus = async (req, res) => {
+  const { id } = req.params; // Get booking ID from the URL params
+  const { requestAccept } = req.body; // Get the new requestAccept value from the request body
+
+  try {
+    // Find the booking by ID and update the requestAccept field
+    const updatedBooking = await Booking.findByIdAndUpdate(
+      id,
+      { requestAccept },
+      { new: true }
+    );
+
+    if (!updatedBooking) {
+      return res.status(404).json({ error: "Booking not found" });
+    }
+
+    return res.status(200).json({
+      message: `Booking ${
+        requestAccept === "y" ? "accepted" : "denied"
+      } successfully`,
+      booking: updatedBooking,
+    });
+  } catch (error) {
+    console.error("Error updating booking:", error);
     return res.status(500).json({ error: "Server error" });
   }
 };
