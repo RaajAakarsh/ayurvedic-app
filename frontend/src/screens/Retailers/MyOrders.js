@@ -1,64 +1,47 @@
-import React, { useState } from 'react';
-import './MyOrders.css'; // Make sure to link the CSS file
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import './MyOrders.css';
 
 function MyOrders() {
-    const [status, setStatus] = useState('received'); // Default to received
+  const [orders, setOrders] = useState([]);
+  const [status, setStatus] = useState('received');
 
-    const orders = [
-        {
-            id: 1,
-            itemName: "Item Name 1",
-            price: "20",
-            totalValue: "40",
-            buyer: "John Doe",
-            quantity: "2",
-            recommendedBy: "Dr. Smith",
-            image: "/path-to-image-1.jpg"
-        },
-        {
-            id: 2,
-            itemName: "Item Name 2",
-            price: "30",
-            totalValue: "90",
-            buyer: "Jane Roe",
-            quantity: "3",
-            recommendedBy: "Dr. Jones",
-            image: "/path-to-image-2.jpg"
-        },
-        {
-            id: 3,
-            itemName: "Item Name 3",
-            price: "50",
-            totalValue: "150",
-            buyer: "Jim Beam",
-            quantity: "3",
-            recommendedBy: "Dr. Who",
-            image: "/path-to-image-3.jpg"
-        }
-    ];
+  useEffect(() => {
+    const fetchOrders = async () => {
+      try {
+        const response = await axios.get('http://localhost:8080/api/my-orders');
+        setOrders(response.data);
+      } catch (error) {
+        console.error('Error fetching orders:', error);
+      }
+    };
 
-    return (
-        <div className="orders-container">
-            <h1>My Orders</h1>
-            <div className="order-tabs">
-                <button className={status === 'received' ? 'active' : ''} onClick={() => setStatus('received')}>Received (Not Sent)</button>
-                <button className={status === 'sent' ? 'active' : ''} onClick={() => setStatus('sent')}>Sent</button>
+    fetchOrders();
+  }, []);
+
+  return (
+    <div className="orders-container">
+      <h1>My Orders</h1>
+      <div className="order-tabs">
+        <button className={status === 'received' ? 'active' : ''} onClick={() => setStatus('received')}>Received</button>
+        <button className={status === 'sent' ? 'active' : ''} onClick={() => setStatus('sent')}>Sent</button>
+      </div>
+      {orders
+        .filter(order => order.status === status)
+        .map(order => (
+          <div key={order._id} className="order-card">
+            <img src={order.medicine.image} alt={`Order ${order._id}`} />
+            <div className="order-details">
+              <p><strong>Item Name:</strong> {order.medicine.name}</p>
+              <p><strong>Price:</strong> ₹{order.medicine.price}</p>
+              <p><strong>Total Value:</strong> ₹{order.totalPrice}</p>
+              <p><strong>Quantity:</strong> {order.quantity}</p>
+              <p><strong>Buyer:</strong> {order.buyer.firstName} {order.buyer.lastName}</p>
             </div>
-            {orders.map(order => (
-                <div key={order.id} className="order-card">
-                    <img src={order.image} alt={`Order ${order.id}`} />
-                    <div className="order-details">
-                        <p><strong>Item Name:</strong> {order.itemName}</p>
-                        <p><strong>Price:</strong> ${order.price}</p>
-                        <p><strong>Total Value:</strong> ${order.totalValue}</p>
-                        <p><strong>Name of the Buyer:</strong> {order.buyer}</p>
-                        <p><strong>Quantity:</strong> {order.quantity}</p>
-                        <p><strong>Recommended by Dr:</strong> {order.recommendedBy}</p>
-                    </div>
-                </div>
-            ))}
-        </div>
-    );
+          </div>
+        ))}
+    </div>
+  );
 }
 
 export default MyOrders;
