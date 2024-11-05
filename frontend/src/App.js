@@ -63,7 +63,6 @@ function App() {
       <Routes>
         <Route path="/" element={<HomeScreen />} />
         <Route path="/treatments" element={<TreatmentsScreen />} />
-        <Route path="/medicines" element={<MedicinesScreen />} />
         <Route path="/diet-yoga" element={<DietYogaScreen />} />
         <Route path="/blogs-videos" element={<BlogsVideosScreen />} />
         <Route path="/blogs" element={<BlogScreen />} />
@@ -88,6 +87,7 @@ function App() {
           <Route path="/patient-list" element={<PatientList />} />
           <Route path="/health-blogs" element={<HealthBlogs />} />
           <Route path="/notifications" element={<Notification/>} />
+          <Route path="/medicines" element={<MedicinesScreen />} />
           <Route path="/retailer-home" element={<RetailerDashboard />} />
           <Route path="/doctor-notifications" element={<DoctorNotification />} />
           <Route path="/manage-products" element={<ManageProducts />} />
