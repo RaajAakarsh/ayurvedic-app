@@ -1,10 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useLocation } from "react-router-dom";
 import "./DoctorDetailPage.css"; // Ensure this path matches the location of your CSS file
+import { AuthContext } from "../../context/AuthContext";
 
 function DoctorDetail() {
   const location = useLocation();
   const { doctor } = location.state;
+
+  const { auth, setAuth } = useContext(AuthContext);
+  const patientFirstName = auth.user?.firstName || "Patient";
+  const patientLastName = auth.user?.lastName || "";
+
+  const patientName = patientFirstName + " " + patientLastName;
 
   const [selectedTime, setSelectedTime] = useState(null); // Track selected time slot
 
@@ -24,8 +31,10 @@ function DoctorDetail() {
       // Data to be sent to the backend
       let bookingData = {
         doctorName: doctor.name,
+        doctorEmail: doctor.email,
         timeSlot: selectedTime,
         email: email,
+        patientName: patientName,
       };
 
       // Include email only if the role is 'patient'
@@ -68,23 +77,26 @@ function DoctorDetail() {
     <div className="doctor-detail-container">
       <div className="left-section">
         <div className="doctor-info">
+          <h1>Dr. {doctor.name}</h1>
           <div className="doctor-image"></div>
           <div className="text-info">
-            <h1>Dr. {doctor.name}</h1>
             <p>Specialization: {doctor.specialization}</p>
             <p>Experience: {doctor.experience} years</p>
           </div>
         </div>
         <div className="about-doctor">
           <h2>About Doctor</h2>
-          <p>B.A.M.S. Ex. Senior Doctor, Patanjali chikitsalaya Kanker(C.G.)</p>
-          <p>Education: B.A.M.S. & M.D.</p>
+          <p>Education: {doctor.education}</p>
+          <p>Gender: {doctor.gender}</p>
+          <p>Age: {doctor.age}</p>
+          <p>Location: {doctor.location}</p>
+          <p>Price: Rs. {doctor.pricepoint}</p>
           {/* Additional details can be listed here */}
         </div>
       </div>
       <div className="right-section">
         <div className="consultation-info">
-          <h2>Consultation Type:</h2>
+          <h2>Consultation Time:</h2>
           <p>Availability:</p>
           <div className="availability-slots">
             {/* Time slots buttons */}
@@ -101,6 +113,14 @@ function DoctorDetail() {
           <button className="book-appointment" onClick={handleBookAppointment}>
             Book Appointment
           </button>
+        </div>
+        <div>
+          <p>
+            <b>Note: </b> Once, you see the message: "Appointment Booked
+            Successfully!", then checkout the "Your Appointed Doctor" section in
+            the home page to see whether the doctor has approved your request or
+            not.
+          </p>
         </div>
       </div>
     </div>

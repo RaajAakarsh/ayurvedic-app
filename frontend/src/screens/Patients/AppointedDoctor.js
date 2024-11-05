@@ -7,7 +7,6 @@ function AppointedDoctor() {
             <div className="doctor-info">
                 <h1>Your Current Doctor</h1>
                 <h2>with Dr. Sanjay</h2>
-                <button className="appointment-button">Request Intermediate Appointment</button>
                 <ul>
                     <li>Illness: Cure Recommended</li>
                     <li>Recovery Stage</li>

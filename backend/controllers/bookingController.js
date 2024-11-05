@@ -4,7 +4,13 @@ const Booking = require("../models/Booking");
 
 // Controller function to handle booking creation
 exports.createBooking = async (req, res) => {
-  const { doctorName, timeSlot, email } = req.body; // Destructure the request body
+  const {
+    doctorName,
+    doctorEmail,
+    timeSlot,
+    email,
+    patientName,
+  } = req.body; // Destructure the request body
 
   if (!doctorName) {
     return res.status(400).json({ error: "Doctor name are required" });
@@ -26,8 +32,10 @@ exports.createBooking = async (req, res) => {
     // Create a new booking
     const newBooking = new Booking({
       doctorName,
+      doctorEmail,
       timeSlot,
       patientEmail: email,
+      patientName,
     });
 
     // Save the booking to the database
@@ -74,10 +82,12 @@ exports.getNotifications = async (req, res) => {
 
   try {
     // Fetch bookings for the specified user email
-    const bookings = await Booking.find({ patientEmail: email }).sort({ createdAt: -1 });
+    const bookings = await Booking.find({ patientEmail: email }).sort({
+      createdAt: -1,
+    });
 
     // Map bookings to notification-like format
-    const notifications = bookings.map(booking => ({
+    const notifications = bookings.map((booking) => ({
       message: `Your appointment with Dr. ${booking.doctorName} is confirmed for ${booking.timeSlot}.`,
       date: booking.createdAt,
     }));
@@ -90,5 +100,4 @@ exports.getNotifications = async (req, res) => {
     console.error("Error fetching notifications:", error);
     return res.status(500).json({ error: "Server error" });
   }
-};;
-
+};

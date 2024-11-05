@@ -7,11 +7,19 @@ const bookingSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  doctorEmail: {
+    type: String,
+    required: true,
+  },
   timeSlot: {
     type: String,
     required: true,
   },
   patientEmail: {
+    type: String,
+    required: true,
+  },
+  patientName: {
     type: String,
     required: true,
   },

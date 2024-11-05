@@ -6,6 +6,12 @@ function CurrentRequests() {
   const [loading, setLoading] = useState(true); // State to manage loading status
   const [error, setError] = useState(null); // State to manage any potential errors
 
+  const email = localStorage.getItem("email");
+  const role = localStorage.getItem("role");
+
+  console.log(`User Email: ${email}`)
+  console.log(`User Role: ${role}`)
+
   // Fetch data from API when component mounts
   useEffect(() => {
     const fetchRequests = async () => {
@@ -25,7 +31,12 @@ function CurrentRequests() {
         // Ensure that we are accessing the bookings array
         const requestsArray = Array.isArray(data.bookings) ? data.bookings : [];
 
-        setRequests(requestsArray); // Set the fetched requests to state
+        // Filter the requests based on the logged-in doctor's email
+        const filteredRequests = requestsArray.filter(
+          (request) => request.doctorEmail === email // Assuming doctorName is the doctor's email
+        );
+
+        setRequests(filteredRequests); // Set the fetched requests to state
         setLoading(false); // Set loading to false once data is fetched
       } catch (error) {
         setError(error.message); // Capture any error that occurs during the fetch
@@ -50,6 +61,9 @@ function CurrentRequests() {
       {console.log(requests)}
       {requests.map((request) => (
         <div key={request._id} className="request-card">
+          <p>
+            <strong>Patient Name:</strong> {request.patientName}
+          </p>
           <p>
             <strong>Patient Email:</strong> {request.patientEmail}
           </p>
@@ -94,13 +108,3 @@ export default CurrentRequests;
 //     illness: "Common Cold",
 //     note: "First consultation",
 //   },
-//   {
-//     id: 2,
-//     name: "Jane Smith",
-//     age: 29,
-//     gender: "Female",
-//     illness: "Back Pain",
-//     note: "Follow-up after initial treatment",
-//   },
-//   // Additional requests can be added here
-// ];

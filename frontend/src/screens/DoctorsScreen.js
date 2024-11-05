@@ -7,12 +7,16 @@ function DoctorsScreen() {
   const [filters, setFilters] = useState({
     specialization: "",
     experience: "",
+    email: "",
+    education: "",
+    pricepoint: "",
     priceRange: "",
     location: "",
     language: "",
     sort: "",
     rating: "",
     gender: "",
+    age: "",
   });
 
   // State for storing doctors fetched from backend
@@ -28,6 +32,9 @@ function DoctorsScreen() {
           name: `${doctor.firstName} ${doctor.lastName}`,
           specialization: doctor.designation || "N/A",
           experience: `${doctor.experience} years`,
+          email: `${doctor.email}`,
+          education: `${doctor.education}`,
+          pricepoint: `${doctor.price}`,
           priceRange:
             doctor.price < 500
               ? "Low"
@@ -39,7 +46,7 @@ function DoctorsScreen() {
           rating: 4.0,
           gender:
             doctor.gender.charAt(0).toUpperCase() + doctor.gender.slice(1),
-          nextAvailable: "05:30 PM, 10/08/2024",
+          age: `${doctor.age}`,
         }));
         setDoctors(mappedDoctors);
       })
@@ -272,43 +279,3 @@ function DoctorsScreen() {
 }
 
 export default DoctorsScreen;
-
-//const doctors = [
-//  {
-//    id: 1,
-//    name: 'Neelam Sharma',
-//    specialization: 'Skin Diseases',
-//    experience: '6 years',
-//    priceRange: 'High',
-//    location: 'Jamshedpur, Jharkhand',
-//    language: 'English, Hindi',
-//    rating: 4.0,
-//    gender: 'Female',
-//    nextAvailable: '05:30 PM, 10/08/2024',
-//  },
-//  {
-//    id: 2,
-//    name: 'Abc Xyz',
-//    specialization: 'Digestive and Metabolic',
-//    experience: '10 years',
-//    priceRange: 'Medium',
-//    location: 'Gurugram, Haryana',
-//    language: 'English',
-//    rating: 3.5,
-//    gender: 'Male',
-//    nextAvailable: '05:30 PM, 10/08/2024',
-//  },
-//  {
-//    id: 3,
-//    name: 'Priyanshu',
-//    specialization: 'Respiratory Diseases',
-//    experience: '7 years',
-//    priceRange: 'Low',
-//    location: 'Gurugram, Haryana',
-//    language: 'Hindi',
-//    rating: 5.0,
-//    gender: 'Male',
-//    note: 'Dr. Priyanshu is now available for online consultation at the moment',
-//  },
-//  // Add more doctors as needed
-//];
