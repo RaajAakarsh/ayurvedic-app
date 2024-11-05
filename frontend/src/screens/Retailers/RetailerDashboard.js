@@ -8,11 +8,7 @@ function RetailerDashboard() {
   const { auth,setAuth } = useContext(AuthContext);
   const firstName = auth.user?.firstName || 'Doctor'
   const navigate = useNavigate();
-  const handleSignOut = () => {
-    setAuth({ token: null, user: null });
-    localStorage.removeItem('token');
-    navigate('/signin');
-  };
+
   // Fetch retailer data when the component mounts
   useEffect(() => {
     const fetchRetailerData = async () => {
@@ -40,7 +36,6 @@ function RetailerDashboard() {
 
   return (
     <div className="retailer-dashboard">
-      <button onClick={handleSignOut} className="signout-btn">Sign Out</button>
       <h1>Hi {firstName}!</h1>  {/* Dynamically display retailer's first name */}
       <p>Welcome back! Let's showcase your products and connect with potential buyers effortlessly.</p>
 

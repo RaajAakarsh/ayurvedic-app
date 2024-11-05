@@ -121,6 +121,7 @@
   object-fit: cover;
   border: 2px solid #fce1c6; /* Light Beige border */
   background-color: transparent;
+  margin-right: 20px;
 }
 
 .navbar {
