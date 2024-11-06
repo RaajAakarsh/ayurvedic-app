@@ -67,10 +67,14 @@ function AppointmentSlots() {
               </p>
               <p>
                 <strong>Patient Email:</strong>{" "}
-                {appointment.patientEmail || "No notes available"}
+                {appointment.patientEmail || "No email available"}
               </p>
             </div>
-            <div className="appointment-meta"></div>
+            <div className="appointment-actions">
+              <button className="action-button">Send Meet Link</button>
+              <button className="action-button">Suggest Diet and Yoga</button>
+              <button className="action-button">Suggest Medicine</button>
+            </div>
           </div>
         ))
       )}
