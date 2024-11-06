@@ -16,8 +16,6 @@ function Footer() {
             <li><a href="/treatments">Treatments</a></li>
             <li><a href="/doctors">Doctors</a></li>
             <li><a href="/medicines">Medicines</a></li>
-            <li><a href="/blogs">Blogs</a></li>
-            <li><a href="/contact">Contact Us</a></li>
           </ul>
         </div>
         <div className="footer-section">

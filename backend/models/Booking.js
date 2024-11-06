@@ -15,6 +15,10 @@ const bookingSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  dateOfAppointment: {
+    type: Date,
+    required: true,
+  },
   patientEmail: {
     type: String,
     required: true,

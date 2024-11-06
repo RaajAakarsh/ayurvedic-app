@@ -59,7 +59,12 @@ function AppointmentSlots() {
         appointments.map((appointment) => (
           <div key={appointment._id} className="appointment-card">
             <div className="appointment-timing">
-              <h2>{appointment.timeSlot}</h2>
+              <h2 className="date-time">
+                {new Date(appointment.dateOfAppointment).toLocaleDateString(
+                  "en-GB"
+                )}
+              </h2>
+              <h2 className="date-time">{appointment.timeSlot}</h2>
             </div>
             <div className="appointment-details">
               <p>

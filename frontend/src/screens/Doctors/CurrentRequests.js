@@ -129,6 +129,18 @@ function CurrentRequests() {
           <div key={request._id} className="request-card">
             <div className="line">
               <p>
+                <strong>Date:</strong>{" "}
+                {new Date(request.dateOfAppointment).toLocaleDateString(
+                  "en-GB"
+                )}{" "}
+                (dd/mm/yyyy)
+              </p>
+              <p className="centered">
+                <strong>Time Slot:</strong> {request.timeSlot}
+              </p>
+            </div>
+            <div className="line">
+              <p>
                 <strong>Patient Name:</strong> {request.patientName}
               </p>
               <p className="centered">
@@ -136,18 +148,15 @@ function CurrentRequests() {
               </p>
             </div>
             <div className="line">
-            <p>
-              <strong>Patient Gender:</strong> {request.patientGender}
-            </p>
-            <p className="centered">
-              <strong>Patient Age:</strong> {request.patientAge}
-            </p>
+              <p>
+                <strong>Patient Gender:</strong> {request.patientGender}
+              </p>
+              <p className="centered">
+                <strong>Patient Age:</strong> {request.patientAge}
+              </p>
             </div>
             <p>
               <strong>Patient's Illness:</strong> {request.patientIllness}
-            </p>
-            <p>
-              <strong>Time Slot:</strong> {request.timeSlot}
             </p>
             <div className="action-buttons">
               <button onClick={() => acceptRequest(request._id)}>

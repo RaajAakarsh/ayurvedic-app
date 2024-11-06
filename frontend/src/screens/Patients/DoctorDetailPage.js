@@ -18,13 +18,14 @@ function DoctorDetail() {
 
   const [selectedTime, setSelectedTime] = useState(null); // Track selected time slot
   const [patientIllness, setPatientIllness] = useState(""); // Track patient illness
+  const [dateOfAppointment, setDateOfAppointment] = useState(""); // Track the date of appointment
 
   const handleTimeSlotClick = (time) => {
     setSelectedTime(time); // Set the selected time slot
   };
 
   const handleBookAppointment = async () => {
-    if (selectedTime && patientIllness) {
+    if (selectedTime && patientIllness && dateOfAppointment) {
       const email = localStorage.getItem("email");
       const role = localStorage.getItem("role");
 
@@ -38,6 +39,7 @@ function DoctorDetail() {
         doctorName: doctor.name,
         doctorEmail: doctor.email,
         timeSlot: selectedTime,
+        dateOfAppointment: dateOfAppointment,
         email: email,
         patientName: patientName,
         patientGender: patientGender,
@@ -118,6 +120,19 @@ function DoctorDetail() {
                 {time}
               </button>
             ))}
+          </div>
+
+          {/* Input field for date of appointment */}
+          <div className="date-input">
+            <label htmlFor="dateOfAppointment">Date of Appointment: </label>
+            <input
+              type="date"
+              className="dateOfAppointment"
+              value={dateOfAppointment}
+              onChange={(e) => setDateOfAppointment(e.target.value)} // Update date state
+              placeholder="dd/mm/yyyy"
+              required
+            />
           </div>
 
           {/* Input field for patient illness */}

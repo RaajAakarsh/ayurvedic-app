@@ -67,6 +67,14 @@ function AppointedDoctor() {
           <h2>with Dr. {pendingDoctor.doctorName}</h2>
           <ul>
             <li>
+              <strong>Date:</strong>{" "}
+              {new Date(pendingDoctor.dateOfAppointment).toLocaleDateString(
+                "en-GB"
+              )}{" "}
+              (dd/mm/yyyy)
+            </li>
+
+            <li>
               <strong>Timeslot:</strong> {pendingDoctor.timeSlot}
             </li>
             <li>
@@ -89,6 +97,13 @@ function AppointedDoctor() {
           <h1>Your Current Doctor</h1>
           <h2>with Dr. {currentDoctor.doctorName}</h2>
           <ul>
+            <li>
+              <strong>Date:</strong>{" "}
+              {new Date(currentDoctor.dateOfAppointment).toLocaleDateString(
+                "en-GB"
+              )}{" "}
+              (dd/mm/yyyy)
+            </li>
             <li>
               <strong>Timeslot:</strong> {currentDoctor.timeSlot}
             </li>

@@ -92,17 +92,19 @@
 }
 
 .consultation-info p {
-  font-size: 20px;
+  font-size: 17px;
 }
 
-.illness-input label {
-  font-size: 20px;
+.illness-input label,
+.date-input label {
+  font-size: 17px;
   display: block;
   margin-bottom: 8px;
 }
 
-.illness-input input {
-  font-size: 20px;
+.illness-input input,
+.date-input input {
+  font-size: 17px;
   padding: 8px;
   width: 100%;
   box-sizing: border-box;
@@ -119,7 +121,7 @@
 }
 
 .availability-slots button {
-  font-size: 20px;
+  font-size: 19px;
 }
 
 .availability-slots button,
