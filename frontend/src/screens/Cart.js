@@ -18,8 +18,9 @@ const CartScreen = () => {
   const handleCheckout = async () => {
     try {
       for (let item of cartItems) {
+        console.log(item);
         const orderData = {
-          medicine: { name: item.name, price: item.price, image: item.image },
+          medicine: { name: item.name, price: item.price, image: item.image, retailerId: item.retailerId },
           quantity: item.quantity,
           totalPrice: item.price * item.quantity,
           buyer: { userId: userId, firstName: auth.user.firstName, lastName: auth.user.lastName }

@@ -14,14 +14,17 @@ exports.createOrder = async (req, res) => {
 // Updated getOrders function to retrieve orders by userId
 exports.getOrders = async (req, res) => {
   try {
-    const userId = req.query.userId; // Capture userId from the query parameters
+    const { userId, retailerId } = req.query; // Capture both userId and retailerId from query parameters
     let orders;
 
     if (userId) {
-      // Fetch only orders that belong to the specific user
+      // Fetch orders by userId for patient-specific views
       orders = await Order.find({ 'buyer.userId': userId });
+    } else if (retailerId) {
+      // Fetch orders for the specific retailer only
+      orders = await Order.find({ 'medicine.retailerId': retailerId });
     } else {
-      // If no userId is provided, fetch all orders (for admin or retailer views)
+      // Fetch all orders for admin or general views
       orders = await Order.find();
     }
 
@@ -30,6 +33,7 @@ exports.getOrders = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
 
 exports.updateOrderStatus = async (req, res) => {
   try {
