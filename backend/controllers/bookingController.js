@@ -10,6 +10,8 @@ exports.createBooking = async (req, res) => {
     timeSlot,
     email,
     patientName,
+    patientGender,
+    patientAge,
     requestAccept,
   } = req.body; // Destructure the request body
 
@@ -37,6 +39,8 @@ exports.createBooking = async (req, res) => {
       timeSlot,
       patientEmail: email,
       patientName,
+      patientGender,
+      patientAge,
       requestAccept,
     });
 

@@ -70,10 +70,17 @@ function AppointmentSlots() {
                 {appointment.patientEmail || "No email available"}
               </p>
             </div>
+            <div className="appointment-details">
+              <p>
+                <strong>Gender:</strong> {appointment.patientGender}
+              </p>
+              <p>
+                <strong>Age:</strong>{" "}
+                {appointment.patientAge || "No email available"}
+              </p>
+            </div>
             <div className="appointment-actions">
               <button className="action-button">Send Meet Link</button>
-              <button className="action-button">Suggest Diet and Yoga</button>
-              <button className="action-button">Suggest Medicine</button>
             </div>
           </div>
         ))

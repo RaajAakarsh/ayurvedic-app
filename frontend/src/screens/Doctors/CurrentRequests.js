@@ -127,12 +127,22 @@ function CurrentRequests() {
       {requests.length > 0 ? (
         requests.map((request) => (
           <div key={request._id} className="request-card">
+            <div className="line">
+              <p>
+                <strong>Patient Name:</strong> {request.patientName}
+              </p>
+              <p className="centered">
+                <strong>Patient Email:</strong> {request.patientEmail}
+              </p>
+            </div>
+            <div className="line">
             <p>
-              <strong>Patient Name:</strong> {request.patientName}
+              <strong>Patient Gender:</strong> {request.patientGender}
             </p>
-            <p>
-              <strong>Patient Email:</strong> {request.patientEmail}
+            <p className="centered">
+              <strong>Patient Age:</strong> {request.patientAge}
             </p>
+            </div>
             <p>
               <strong>Time Slot:</strong> {request.timeSlot}
             </p>

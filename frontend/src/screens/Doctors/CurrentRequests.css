@@ -19,6 +19,22 @@
   color: #333;
 }
 
+.line {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.line p {
+  margin: 0;
+}
+
+.centered {
+  justify-self: start;
+  margin-left: 50%; /* Start from center of the screen */
+}
+
 button {
   padding: 10px 20px;
   background-color: #007bff;

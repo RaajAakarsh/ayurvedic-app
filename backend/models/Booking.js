@@ -23,6 +23,14 @@ const bookingSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  patientGender: {
+    type: String,
+    required: true,
+  },
+  patientAge: {
+    type: Number,
+    required: true,
+  },
   requestAccept: {
     type: String,
     required: true,

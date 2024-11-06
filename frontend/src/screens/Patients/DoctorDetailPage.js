@@ -10,6 +10,8 @@ function DoctorDetail() {
   const { auth, setAuth } = useContext(AuthContext);
   const patientFirstName = auth.user?.firstName || "Patient";
   const patientLastName = auth.user?.lastName || "";
+  const patientGender = auth.user?.gender;
+  const patientAge = auth.user?.age;
   const requestAccept = "o";
 
   const patientName = patientFirstName + " " + patientLastName;
@@ -36,6 +38,8 @@ function DoctorDetail() {
         timeSlot: selectedTime,
         email: email,
         patientName: patientName,
+        patientGender: patientGender,
+        patientAge: patientAge,
         requestAccept: requestAccept,
       };
 

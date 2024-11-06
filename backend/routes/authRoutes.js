@@ -29,6 +29,8 @@ router.get('/user', auth, async (req, res) => {
         firstName: user.firstName,
         lastName: user.lastName,
         phone: user.phone,
+        age: user.age,
+        gender: user.gender,
         email: user.email,
         role: user.role,
       },
