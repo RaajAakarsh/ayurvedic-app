@@ -7,7 +7,7 @@ function CurrentRequests() {
   const [loading, setLoading] = useState(true); // State to manage loading status
   const [error, setError] = useState(null); // State to manage any potential errors
 
-  const { auth, setAuth } = useContext(AuthContext);
+  const { auth } = useContext(AuthContext);
   const firstName = auth.user?.firstName || "Doctor";
 
   const email = localStorage.getItem("email");
@@ -143,6 +143,9 @@ function CurrentRequests() {
               <strong>Patient Age:</strong> {request.patientAge}
             </p>
             </div>
+            <p>
+              <strong>Patient's Illness:</strong> {request.patientIllness}
+            </p>
             <p>
               <strong>Time Slot:</strong> {request.timeSlot}
             </p>

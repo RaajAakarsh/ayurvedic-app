@@ -7,7 +7,7 @@ function DoctorDetail() {
   const location = useLocation();
   const { doctor } = location.state;
 
-  const { auth, setAuth } = useContext(AuthContext);
+  const { auth } = useContext(AuthContext);
   const patientFirstName = auth.user?.firstName || "Patient";
   const patientLastName = auth.user?.lastName || "";
   const patientGender = auth.user?.gender;
@@ -17,17 +17,19 @@ function DoctorDetail() {
   const patientName = patientFirstName + " " + patientLastName;
 
   const [selectedTime, setSelectedTime] = useState(null); // Track selected time slot
+  const [patientIllness, setPatientIllness] = useState(""); // Track patient illness
 
   const handleTimeSlotClick = (time) => {
     setSelectedTime(time); // Set the selected time slot
   };
 
   const handleBookAppointment = async () => {
-    if (selectedTime) {
+    if (selectedTime && patientIllness) {
       const email = localStorage.getItem("email");
       const role = localStorage.getItem("role");
 
-      console.log(`Selected time: ${selectedTime}`); // Print selected time slot
+      console.log(`Selected time: ${selectedTime}`);
+      console.log(`Patient Illness: ${patientIllness}`);
       console.log(`User Email: ${email}`);
       console.log(`User Role: ${role}`);
 
@@ -40,6 +42,7 @@ function DoctorDetail() {
         patientName: patientName,
         patientGender: patientGender,
         patientAge: patientAge,
+        patientIllness: patientIllness,
         requestAccept: requestAccept,
       };
 
@@ -116,6 +119,20 @@ function DoctorDetail() {
               </button>
             ))}
           </div>
+
+          {/* Input field for patient illness */}
+          <div className="illness-input">
+            <label htmlFor="patientIllness">Describe your illness: </label>
+            <input
+              type="text"
+              className="patientIllness"
+              value={patientIllness}
+              onChange={(e) => setPatientIllness(e.target.value)} // Update illness state
+              placeholder="Enter your illness"
+              required
+            />
+          </div>
+
           <button className="book-appointment" onClick={handleBookAppointment}>
             Book Appointment
           </button>

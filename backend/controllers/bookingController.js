@@ -12,6 +12,7 @@ exports.createBooking = async (req, res) => {
     patientName,
     patientGender,
     patientAge,
+    patientIllness,
     requestAccept,
   } = req.body; // Destructure the request body
 
@@ -41,6 +42,7 @@ exports.createBooking = async (req, res) => {
       patientName,
       patientGender,
       patientAge,
+      patientIllness,
       requestAccept,
     });
 

@@ -69,6 +69,10 @@ function AppointmentSlots() {
                 <strong>Patient Email:</strong>{" "}
                 {appointment.patientEmail || "No email available"}
               </p>
+              <p>
+                <strong>Illness:</strong>{" "}
+                {appointment.patientIllness || "No email available"}
+              </p>
             </div>
             <div className="appointment-details">
               <p>

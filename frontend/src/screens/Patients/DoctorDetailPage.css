@@ -95,6 +95,22 @@
   font-size: 20px;
 }
 
+.illness-input label {
+  font-size: 20px;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.illness-input input {
+  font-size: 20px;
+  padding: 8px;
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
 .availability-slots {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -126,8 +142,6 @@
   font-size: 20px;
 }
 
-/* DoctorDetailPage.css */
-
 .availability-slots button {
   background-color: rgb(117, 255, 117);
   border: 1px solid #ccc;
@@ -138,6 +152,6 @@
 }
 
 .availability-slots button.selected {
-  background-color: #4caf50; /* Change color for selected button */
+  background-color: #4caf50;
   color: white;
 }
