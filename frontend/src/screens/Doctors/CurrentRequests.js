@@ -7,6 +7,9 @@ function CurrentRequests() {
   const [loading, setLoading] = useState(true); // State to manage loading status
   const [error, setError] = useState(null); // State to manage any potential errors
 
+  const [denyingRequest, setDenyingRequest] = useState(null); // Track which request is being denied
+  const [doctorsMessage, setDoctorsMessage] = useState(""); // Track the doctor's message for denial
+
   const { auth } = useContext(AuthContext);
   const firstName = auth.user?.firstName || "Doctor";
 
@@ -82,8 +85,12 @@ function CurrentRequests() {
     }
   };
 
-  // Function to deny request
   const denyRequest = async (id) => {
+    if (!doctorsMessage) {
+      alert("Please provide a reason for denial.");
+      return;
+    }
+
     try {
       const response = await fetch(
         `http://localhost:8080/api/bookings/update/${id}`,
@@ -92,7 +99,7 @@ function CurrentRequests() {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ requestAccept: "n" }),
+          body: JSON.stringify({ requestAccept: "n", doctorsMessage }), // Send doctorsMessage with the denial
         }
       );
 
@@ -104,6 +111,9 @@ function CurrentRequests() {
       setRequests((prevRequests) =>
         prevRequests.filter((request) => request._id !== id)
       );
+
+      setDoctorsMessage(""); // Reset the message
+      setDenyingRequest(null); // Clear the denying state
 
       alert(`Request ${id} denied!`);
     } catch (error) {
@@ -162,13 +172,30 @@ function CurrentRequests() {
               <button onClick={() => acceptRequest(request._id)}>
                 Accept Request
               </button>
+
+              {/* Show the deny button */}
               <button
-                onClick={() => denyRequest(request._id)}
+                onClick={() => setDenyingRequest(request._id)} // Set the denying request state
                 className="deny-button"
               >
                 Deny Request
               </button>
             </div>
+
+            {/* Show the input field if denyingRequest matches this request's ID */}
+            {denyingRequest === request._id && (
+              <div className="denial-reason">
+                <input
+                  type="text"
+                  value={doctorsMessage}
+                  onChange={(e) => setDoctorsMessage(e.target.value)} // Update the doctor's message state
+                  placeholder="Provide reason for denial"
+                />
+                <button onClick={() => denyRequest(request._id)}>
+                  Submit Denial
+                </button>
+              </div>
+            )}
           </div>
         ))
       ) : (
@@ -179,13 +206,3 @@ function CurrentRequests() {
 }
 
 export default CurrentRequests;
-
-// const requests = [
-//   {
-//     id: 1,
-//     name: "John Doe",
-//     age: 34,
-//     gender: "Male",
-//     illness: "Common Cold",
-//     note: "First consultation",
-//   },

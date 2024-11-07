@@ -13,6 +13,7 @@ function DoctorDetail() {
   const patientGender = auth.user?.gender;
   const patientAge = auth.user?.age;
   const requestAccept = "o";
+  const doctorsMessage = "";
 
   const patientName = patientFirstName + " " + patientLastName;
 
@@ -46,6 +47,7 @@ function DoctorDetail() {
         patientAge: patientAge,
         patientIllness: patientIllness,
         requestAccept: requestAccept,
+        doctorsMessage: doctorsMessage,
       };
 
       // Include email only if the role is 'patient'

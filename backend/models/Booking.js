@@ -43,6 +43,10 @@ const bookingSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  doctorsMessage: {
+    type: String,
+    required: false,
+  },
   createdAt: {
     type: Date,
     default: Date.now,

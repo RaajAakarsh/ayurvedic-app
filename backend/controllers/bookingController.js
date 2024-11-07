@@ -15,6 +15,7 @@ exports.createBooking = async (req, res) => {
     patientAge,
     patientIllness,
     requestAccept,
+    doctorsMessage,
   } = req.body; // Destructure the request body
 
   if (!doctorName) {
@@ -27,10 +28,15 @@ exports.createBooking = async (req, res) => {
 
   try {
     // Check if a booking already exists for the doctor and time slot
-    const existingBooking = await Booking.findOne({ doctorName, timeSlot });
+    const existingBooking = await Booking.findOne({
+      doctorName,
+      timeSlot,
+      dateOfAppointment,
+    });
     if (existingBooking) {
       return res.status(400).json({
-        error: "This time slot is already booked for the selected doctor",
+        error:
+          "This time slot is already booked for the selected doctor. Please Choose a different date or time slot.",
       });
     }
 
@@ -46,6 +52,7 @@ exports.createBooking = async (req, res) => {
       patientAge,
       patientIllness,
       requestAccept,
+      doctorsMessage,
     });
 
     // Save the booking to the database
@@ -115,13 +122,13 @@ exports.getNotifications = async (req, res) => {
 // New controller function to update booking requestAccept status
 exports.updateBookingStatus = async (req, res) => {
   const { id } = req.params; // Get booking ID from the URL params
-  const { requestAccept } = req.body; // Get the new requestAccept value from the request body
+  const { requestAccept, doctorsMessage } = req.body; // Get the new requestAccept value and doctors message from the request body
 
   try {
-    // Find the booking by ID and update the requestAccept field
+    // Find the booking by ID and update the requestAccept and doctorsMessage field
     const updatedBooking = await Booking.findByIdAndUpdate(
       id,
-      { requestAccept },
+      { requestAccept, doctorsMessage },
       { new: true }
     );
 
