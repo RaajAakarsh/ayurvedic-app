@@ -7,6 +7,7 @@ const {
   getAllBookings,
   getNotifications,
   updateBookingStatus,
+  updateMeetLink
 } = require("../controllers/bookingController");
 
 // POST route to book an appointment
@@ -19,5 +20,7 @@ router.get("/notifications", getNotifications);
 
 // PUT route to update booking requestAccept status
 router.put("/update/:id", updateBookingStatus);
+
+router.put("/update/meet-link/:id", updateMeetLink);
 
 module.exports = router;

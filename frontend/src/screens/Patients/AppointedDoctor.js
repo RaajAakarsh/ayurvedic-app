@@ -53,6 +53,11 @@ function AppointedDoctor() {
     fetchDoctors();
   }, [email]);
 
+  const handlePayFees = (doctorId) => {
+    // Redirect to the payment page or handle payment logic
+    window.open(`/payment/${doctorId}`, "_blank"); // Replace with actual payment page URL
+  };
+
   if (loading) {
     return <p>Loading...</p>;
   }
@@ -93,7 +98,7 @@ function AppointedDoctor() {
               <>
                 <h1>Your Current Doctors</h1>
                 {currentDoctors.map((currentDoctor) => (
-                  <div key={currentDoctor.id} className="singled-doctor">
+                  <div key={currentDoctor._id} className="singled-doctor">
                     <h2>with Dr. {currentDoctor.doctorName}</h2>
                     <ul>
                       <li>
@@ -111,6 +116,23 @@ function AppointedDoctor() {
                         {currentDoctor.doctorEmail}
                       </li>
                     </ul>
+
+                    {/* Show "Join Meet" button if meetLink is available */}
+                    {currentDoctor.meetLink && currentDoctor.meetLink !== "no" ? (
+                      <button
+                        className="action-button"
+                        onClick={() => window.open(currentDoctor.meetLink, "_blank")}
+                      >
+                        Join Meet
+                      </button>
+                    ) : (
+                      <button
+                        className="action-button pay-fees"
+                        onClick={() => handlePayFees(currentDoctor._id)}
+                      >
+                        Pay Fees
+                      </button>
+                    )}
 
                     {/* Recommended Supplements Section */}
                     <div className="supplements">
@@ -145,7 +167,7 @@ function AppointedDoctor() {
               <>
                 <h1>Your Pending Doctor Requests</h1>
                 {pendingDoctors.map((pendingDoctor) => (
-                  <div key={pendingDoctor.id} className="singled-doctor">
+                  <div key={pendingDoctor._id} className="singled-doctor">
                     <h2>with Dr. {pendingDoctor.doctorName}</h2>
                     <ul>
                       <li>
@@ -183,7 +205,7 @@ function AppointedDoctor() {
               <>
                 <h1>Your Denied Doctor Requests</h1>
                 {deniedDoctors.map((deniedDoctor) => (
-                  <div key={deniedDoctor.id} className="singled-doctor">
+                  <div key={deniedDoctor._id} className="singled-doctor">
                     <h2>with Dr. {deniedDoctor.doctorName}</h2>
                     <ul>
                       <li>

@@ -48,6 +48,7 @@ function DoctorDetail() {
         patientIllness: patientIllness,
         requestAccept: requestAccept,
         doctorsMessage: doctorsMessage,
+        meetLink: "no",
       };
 
       // Include email only if the role is 'patient'

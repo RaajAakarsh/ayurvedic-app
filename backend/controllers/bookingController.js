@@ -16,6 +16,7 @@ exports.createBooking = async (req, res) => {
     patientIllness,
     requestAccept,
     doctorsMessage,
+    meetLink,
   } = req.body; // Destructure the request body
 
   if (!doctorName) {
@@ -53,6 +54,7 @@ exports.createBooking = async (req, res) => {
       patientIllness,
       requestAccept,
       doctorsMessage,
+      meetLink,
     });
 
     // Save the booking to the database
@@ -147,3 +149,37 @@ exports.updateBookingStatus = async (req, res) => {
     return res.status(500).json({ error: "Server error" });
   }
 };
+
+// controllers/bookingController.js
+
+// New controller function to update the meetLink
+exports.updateMeetLink = async (req, res) => {
+  const { id } = req.params; // Get booking ID from the URL params
+  const { meetLink } = req.body; // Get the meetLink from the request body
+  console.log(meetLink);
+  if (!meetLink || meetLink.trim() === "") {
+    return res.status(400).json({ error: "Meet link is required" });
+  }
+
+  try {
+    // Find the booking by ID and update the meetLink field
+    const updatedBooking = await Booking.findByIdAndUpdate(
+      id,
+      { meetLink },
+      { new: true }
+    );
+
+    if (!updatedBooking) {
+      return res.status(404).json({ error: "Booking not found" });
+    }
+
+    return res.status(200).json({
+      message: "Meet link updated successfully",
+      booking: updatedBooking,
+    });
+  } catch (error) {
+    console.error("Error updating meet link:", error);
+    return res.status(500).json({ error: "Server error" });
+  }
+};
+

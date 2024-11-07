@@ -51,6 +51,11 @@ const bookingSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  meetLink: {
+    type: String,
+    required: true,
+    default: "no",
+  }
 });
 
 const Booking = mongoose.model("Booking", bookingSchema);
