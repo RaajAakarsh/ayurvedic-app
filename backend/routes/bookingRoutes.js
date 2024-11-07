@@ -7,7 +7,8 @@ const {
   getAllBookings,
   getNotifications,
   updateBookingStatus,
-  updateMeetLink
+  updateMeetLink,
+  deleteBooking,
 } = require("../controllers/bookingController");
 
 // POST route to book an appointment
@@ -22,5 +23,8 @@ router.get("/notifications", getNotifications);
 router.put("/update/:id", updateBookingStatus);
 
 router.put("/update/meet-link/:id", updateMeetLink);
+
+// DELETE route to delete a booking by ID
+router.delete("/delete/:id", deleteBooking);
 
 module.exports = router;

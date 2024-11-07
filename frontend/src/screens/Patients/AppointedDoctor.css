@@ -10,7 +10,14 @@
 }
 
 .singled-doctor {
-    padding-top: 25px;
+    margin-top: 5px;
+}
+
+.hr {
+    border: none;
+    height: 2px;
+    background: black;
+    margin-bottom: 30px;
 }
 
 .doctor-info h1, .doctor-info h2 {

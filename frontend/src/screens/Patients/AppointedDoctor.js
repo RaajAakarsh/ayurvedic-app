@@ -41,7 +41,7 @@ function AppointedDoctor() {
 
         setPendingDoctors(pendingBookings);
         setCurrentDoctors(acceptedBookings);
-        setDeniedDoctors(deniedBookings); // Set the array of denied bookings
+        setDeniedDoctors(deniedBookings);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching doctor data:", error);
@@ -52,6 +52,36 @@ function AppointedDoctor() {
 
     fetchDoctors();
   }, [email]);
+
+  const handleDeleteRequest = async (bookingId) => {
+    // Ask for confirmation before proceeding
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this request?"
+    );
+
+    if (!confirmed) {
+      return; // If the user clicks "Cancel", do nothing
+    }
+
+    try {
+      const response = await fetch(
+        `http://localhost:8080/api/bookings/delete/${bookingId}`,
+        { method: "DELETE" }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to delete the request");
+      }
+
+      // Remove the deleted request from the deniedDoctors state
+      setDeniedDoctors((prevDeniedDoctors) =>
+        prevDeniedDoctors.filter((doctor) => doctor._id !== bookingId)
+      );
+    } catch (error) {
+      console.error("Error deleting the request:", error);
+      alert("Failed to delete the request");
+    }
+  };
 
   const handlePayFees = (doctorId) => {
     // Redirect to the payment page or handle payment logic
@@ -99,6 +129,7 @@ function AppointedDoctor() {
                 <h1>Your Current Doctors</h1>
                 {currentDoctors.map((currentDoctor) => (
                   <div key={currentDoctor._id} className="singled-doctor">
+                    <hr className="hr"></hr>
                     <h2>with Dr. {currentDoctor.doctorName}</h2>
                     <ul>
                       <li>
@@ -115,13 +146,19 @@ function AppointedDoctor() {
                         <strong>Doctor's Email:</strong>{" "}
                         {currentDoctor.doctorEmail}
                       </li>
+                      <li>
+                        <strong>Illness:</strong> {currentDoctor.patientIllness}
+                      </li>
                     </ul>
 
                     {/* Show "Join Meet" button if meetLink is available */}
-                    {currentDoctor.meetLink && currentDoctor.meetLink !== "no" ? (
+                    {currentDoctor.meetLink &&
+                    currentDoctor.meetLink !== "no" ? (
                       <button
                         className="action-button"
-                        onClick={() => window.open(currentDoctor.meetLink, "_blank")}
+                        onClick={() =>
+                          window.open(currentDoctor.meetLink, "_blank")
+                        }
                       >
                         Join Meet
                       </button>
@@ -168,6 +205,7 @@ function AppointedDoctor() {
                 <h1>Your Pending Doctor Requests</h1>
                 {pendingDoctors.map((pendingDoctor) => (
                   <div key={pendingDoctor._id} className="singled-doctor">
+                    <hr className="hr"></hr>
                     <h2>with Dr. {pendingDoctor.doctorName}</h2>
                     <ul>
                       <li>
@@ -188,6 +226,9 @@ function AppointedDoctor() {
                         <strong>Doctor's Email:</strong>{" "}
                         {pendingDoctor.doctorEmail}
                       </li>
+                      <li>
+                        <strong>Illness:</strong> {pendingDoctor.patientIllness}
+                      </li>
                     </ul>
                   </div>
                 ))}
@@ -206,6 +247,7 @@ function AppointedDoctor() {
                 <h1>Your Denied Doctor Requests</h1>
                 {deniedDoctors.map((deniedDoctor) => (
                   <div key={deniedDoctor._id} className="singled-doctor">
+                    <hr className="hr"></hr>
                     <h2>with Dr. {deniedDoctor.doctorName}</h2>
                     <ul>
                       <li>
@@ -226,10 +268,20 @@ function AppointedDoctor() {
                         {deniedDoctor.doctorEmail}
                       </li>
                       <li>
+                        <strong>Illness:</strong> {deniedDoctor.patientIllness}
+                      </li>
+                      <li>
                         <strong>Doctor's Message:</strong>{" "}
                         {deniedDoctor.doctorsMessage}
                       </li>
                     </ul>
+
+                    <button
+                      className="action-button delete"
+                      onClick={() => handleDeleteRequest(deniedDoctor._id)}
+                    >
+                      Delete Request
+                    </button>
                   </div>
                 ))}
               </>
