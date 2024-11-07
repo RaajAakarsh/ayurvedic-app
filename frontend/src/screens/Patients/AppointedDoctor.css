@@ -9,6 +9,10 @@
     font-family: Arial, sans-serif;
 }
 
+.singled-doctor {
+    padding-top: 25px;
+}
+
 .doctor-info h1, .doctor-info h2 {
     text-align: center;
 }
