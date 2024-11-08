@@ -78,3 +78,18 @@ strong {
     padding-bottom: 10px;
   }
 }
+.appointment-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.button-group {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Space between buttons */
+}
+
+.suggest-button {
+  margin-right: 10px; /* Space to separate from other buttons */
+}

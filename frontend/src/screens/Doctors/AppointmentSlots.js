@@ -2,14 +2,14 @@ import React, { useState, useEffect } from "react";
 import "./AppointmentSlots.css"; // Ensure CSS is correctly linked
 
 function AppointmentSlots() {
-  const [appointments, setAppointments] = useState([]); // State to store the fetched appointments
-  const [loading, setLoading] = useState(true); // State to handle loading status
-  const [error, setError] = useState(null); // State to handle error
-  const [showInput, setShowInput] = useState({}); // State to handle which appointment shows the input field
-  const [meetLink, setMeetLink] = useState({}); // State to store the entered meet link for each appointment
-  const [linkSent, setLinkSent] = useState({}); // State to track if the meet link has been sent
+  const [appointments, setAppointments] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [showInput, setShowInput] = useState({});
+  const [meetLink, setMeetLink] = useState({});
+  const [linkSent, setLinkSent] = useState({});
 
-  const email = localStorage.getItem("email"); // Get the logged-in doctor's email
+  const email = localStorage.getItem("email");
 
   useEffect(() => {
     const fetchAppointments = async () => {
@@ -22,8 +22,6 @@ function AppointmentSlots() {
         }
 
         const data = await response.json();
-        console.log("Fetched data:", data);
-
         const filteredAppointments = data.bookings.filter(
           (appointment) =>
             appointment.doctorEmail === email &&
@@ -33,7 +31,6 @@ function AppointmentSlots() {
         setAppointments(filteredAppointments);
         setLoading(false);
       } catch (error) {
-        console.error("Error fetching appointments:", error);
         setError(error.message);
         setLoading(false);
       }
@@ -43,10 +40,7 @@ function AppointmentSlots() {
   }, [email]);
 
   const handleCreateMeetLink = (id) => {
-    // Open the Meet creation link in a new tab
     window.open("https://meet.google.com", "_blank");
-
-    // Set state to show the input field for the specific appointment
     setShowInput((prev) => ({ ...prev, [id]: true }));
   };
 
@@ -57,32 +51,36 @@ function AppointmentSlots() {
     }
 
     try {
-      // Send the meet link to the backend to update the booking
-      const response = await fetch(`http://localhost:8080/api/bookings/update/meet-link/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ meetLink: meetLink[id] }),
-      });
+      const response = await fetch(
+        `http://localhost:8080/api/bookings/update/meet-link/${id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ meetLink: meetLink[id] }),
+        }
+      );
 
       const data = await response.json();
 
       if (response.ok) {
         alert("Meet link sent successfully!");
-        // Update the linkSent state to show the "Join Meet" button
         setLinkSent((prev) => ({ ...prev, [id]: true }));
       } else {
         alert(`Error: ${data.error}`);
       }
     } catch (error) {
-      console.error("Error sending meet link:", error);
       alert("Failed to send the meet link.");
     }
   };
 
   const handleInputChange = (id, value) => {
     setMeetLink((prev) => ({ ...prev, [id]: value }));
+  };
+
+  const handleSuggestPlan = (id) => {
+    alert("Diet and Yoga Plan suggested for appointment ID: " + id);
   };
 
   if (loading) {
@@ -132,40 +130,48 @@ function AppointmentSlots() {
               </p>
             </div>
             <div className="appointment-actions">
-              {linkSent[appointment._id] ? (
-                // Show "Join Meet" button after the meet link has been sent
+              {/* Button group for left-aligned "Suggest Diet and Yoga Plan" */}
+              <div className="button-group">
                 <button
-                  className="action-button"
-                  onClick={() => window.open(meetLink[appointment._id], "_blank")}
+                  className="action-button suggest-button"
+                  onClick={() => handleSuggestPlan(appointment._id)}
                 >
-                  Join Meet
+                  Suggest Diet and Yoga Plan
                 </button>
-              ) : showInput[appointment._id] ? (
-                <>
-                  <input
-                    type="text"
-                    placeholder="Enter Meet link"
-                    value={meetLink[appointment._id] || ""}
-                    onChange={(e) =>
-                      handleInputChange(appointment._id, e.target.value)
-                    }
-                    className="meet-link-input"
-                  />
+                {linkSent[appointment._id] ? (
                   <button
                     className="action-button"
-                    onClick={() => handleSendMeetLink(appointment._id)}
+                    onClick={() => window.open(meetLink[appointment._id], "_blank")}
                   >
-                    Send Meet Link
+                    Join Meet
                   </button>
-                </>
-              ) : (
-                <button
-                  className="action-button"
-                  onClick={() => handleCreateMeetLink(appointment._id)}
-                >
-                  Create Meet Link
-                </button>
-              )}
+                ) : showInput[appointment._id] ? (
+                  <>
+                    <input
+                      type="text"
+                      placeholder="Enter Meet link"
+                      value={meetLink[appointment._id] || ""}
+                      onChange={(e) =>
+                        handleInputChange(appointment._id, e.target.value)
+                      }
+                      className="meet-link-input"
+                    />
+                    <button
+                      className="action-button"
+                      onClick={() => handleSendMeetLink(appointment._id)}
+                    >
+                      Send Meet Link
+                    </button>
+                  </>
+                ) : (
+                  <button
+                    className="action-button"
+                    onClick={() => handleCreateMeetLink(appointment._id)}
+                  >
+                    Create Meet Link
+                  </button>
+                )}
+              </div>
             </div>
           </div>
         ))

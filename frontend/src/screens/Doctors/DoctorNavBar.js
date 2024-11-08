@@ -180,7 +180,7 @@ function DoctorNavBar() {
               </NavLink>
             </li>
             <li>
-              <NavLink to="/my-health-blogs" activeClassName="active">
+              <NavLink to="/health-blogs" activeClassName="active">
                 My Health Blogs
               </NavLink>
             </li>
