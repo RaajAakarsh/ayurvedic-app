@@ -102,7 +102,7 @@ function DoctorNavBar() {
         </div>
         <div className="auth" onClick={handleProfileClick}>
           {userName} {/* Show doctor's name */}
-          <NavLink to="/doctor-profile" className="signin-btn">
+          <NavLink to="/doctor-home" className="signin-btn">
             <img
               src={profilePic || defaultProfilePic}
               alt="Profile"

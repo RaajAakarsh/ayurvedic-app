@@ -7,11 +7,11 @@ function PrakritiDetermination() {
   const navigate = useNavigate();
 
   const handleNextClick = () => {
-    navigate('/home'); // Navigate to HomeScreen
+    navigate('/patient-home'); // Navigate to HomeScreen
   };
 
   const handleSkipClick = () => {
-    navigate('/home'); // Navigate to HomeScreen
+    navigate('/patient-home'); // Navigate to HomeScreen
   };
 
   return (

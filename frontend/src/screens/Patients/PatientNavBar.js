@@ -1,34 +1,36 @@
 import React, { useContext, useState, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import "../NavBar.css"; // Ensure styles from NavBar are included
-import "./PatientNavBar.css"
+import "../NavBar.css";
+import "./PatientNavBar.css";
 import logo from "../../media/logo.png";
 import locationIcon from "../../media/location.png";
-import defaultProfilePic from "../../media/default-profile.png"; // Default profile picture
+import defaultProfilePic from "../../media/default-profile.png";
 import notificationIcon from "../../media/notifications.png";
-import { AuthContext } from "../../context/AuthContext"; // Import AuthContext
+import { AuthContext } from "../../context/AuthContext";
 
 const API_KEY = "f08bb887cc0d42bb8b9fb21993c3a6d3"; // Replace with your OpenCage API key
 
 function PatientNavBar() {
   const navigate = useNavigate();
-  const { auth, setAuth } = useContext(AuthContext); // Get auth context to access user info
+  const { auth, setAuth } = useContext(AuthContext);
   const [showModal, setShowModal] = useState(false);
   const [userLocation, setUserLocation] = useState("Fetching location...");
   const [cityName, setCityName] = useState(""); // State for city name
+  const [userAddress, setUserAddress] = useState(auth.user?.address || "Not available");
 
-  const profilePic = ""; // Logic to fetch user's profile picture URL
+  const profilePic = "";
   const userFirstName = auth.user ? auth.user.firstName : "Guest";
   const userLastName = auth.user ? auth.user.lastName : "";
-
   const userName = userFirstName + " " + userLastName;
   const userPhone = auth.user ? auth.user.phone : "N/A";
   const userEmail = auth.user ? auth.user.email : "N/A";
+  
   const handleSignOut = () => {
     setAuth({ token: null, user: null });
     localStorage.removeItem("token");
     navigate("/signin");
   };
+
   useEffect(() => {
     // Function to get the user's location
     const fetchLocation = () => {
@@ -37,8 +39,6 @@ function PatientNavBar() {
           (position) => {
             const { latitude, longitude } = position.coords;
             setUserLocation(`Lat: ${latitude}, Lon: ${longitude}`);
-
-            // Fetch city name using OpenCage API
             fetchCityName(latitude, longitude);
           },
           () => {
@@ -53,7 +53,6 @@ function PatientNavBar() {
     fetchLocation();
   }, []);
 
-  // Function to fetch city name from OpenCage API
   const fetchCityName = async (latitude, longitude) => {
     try {
       const response = await fetch(
@@ -76,7 +75,21 @@ function PatientNavBar() {
   };
 
   const handleProfileClick = () => {
-    setShowModal(!showModal); // Toggle modal visibility
+    setShowModal(!showModal);
+  };
+
+  const handleChangeAddress = () => {
+    // Add functionality to update address via a form or API call
+    const newAddress = prompt("Enter new address:", userAddress);
+    if (newAddress && newAddress !== userAddress) {
+      setUserAddress(newAddress);
+      // Call an API to update the user's address in the database
+    }
+  };
+
+  const handleOpenPrakritiForm = () => {
+    // Redirect to Prakriti Determination form page or show modal for the form
+    navigate("/prakritidetermination"); // Assume you have a page for this.
   };
 
   return (
@@ -105,7 +118,7 @@ function PatientNavBar() {
         </div>
         <div className="auth" onClick={handleProfileClick}>
           {userName}
-          <NavLink to="/profile" className="signin-btn">
+          <NavLink to="/patient-home" className="signin-btn">
             <img
               src={profilePic || defaultProfilePic}
               alt="Profile"
@@ -124,24 +137,48 @@ function PatientNavBar() {
 
       {showModal && (
         <div className="profile-modal">
+          <div className="close-modal" onClick={handleProfileClick}>
+            &times;
+          </div>
           <h2>User Profile</h2>
           <div className="profile-details">
             <p>
               <strong>Name:</strong> {userName}
             </p>
             <p>
+              <strong>Email:</strong> {userEmail}
+            </p>
+            <p>
               <strong>Phone:</strong> {userPhone}
             </p>
             <p>
-              <strong>Email:</strong> {userEmail}
+              <strong>Address: </strong> {userAddress}
+              <a
+                href="#"
+                onClick={handleChangeAddress}
+                className="change-address-link"
+              >
+                 Change Address
+              </a>
             </p>
           </div>
-          <button onClick={handleSignOut} className="signout-btn">
-            Sign Out
-          </button>
-          <button onClick={handleProfileClick} className="close-btn">
-            Close
-          </button>
+          <div className="prakriti-link-container">
+            <p>
+              <strong>Prakriti Determination: </strong>
+              <a
+                href="#"
+                onClick={handleOpenPrakritiForm}
+                className="prakriti-form-link"
+              >
+                Open Form
+              </a>
+            </p>
+          </div>
+          <div className="modal-btn-container">
+            <button onClick={handleSignOut} className="signout-btn">
+              Sign Out
+            </button>
+          </div>
         </div>
       )}
 
@@ -152,8 +189,7 @@ function PatientNavBar() {
             alt="Location Icon"
             className="location-icon"
           />
-          <span className="location-text">{cityName || userLocation}</span>{" "}
-          {/* Display city name */}
+          <span className="location-text">{cityName || userLocation}</span>
         </div>
         <div className="center-items">
           <ul>
@@ -193,7 +229,9 @@ function PatientNavBar() {
               </NavLink>
             </li>
             <li>
-              <NavLink to="/order-history" activeClassName="active">Orders</NavLink>
+              <NavLink to="/order-history" activeClassName="active">
+                Orders
+              </NavLink>
             </li>
           </ul>
         </div>
