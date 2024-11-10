@@ -1,17 +1,33 @@
 const Blog = require('../models/Blog');
+const Doctor = require('../models/Doctor');
 
 
 // Create a new blog
-exports.createBlog =  async (req, res) => {
+exports.createBlog = async (req, res) => {
     try {
         const { title, description, date, doctorId } = req.body;
-        const newBlog = new Blog({ title, description, date, doctorId });
+
+        // Find the doctor by ID to get the name
+        const doctor = await Doctor.findById(doctorId);
+        if (!doctor) {
+            return res.status(404).json({ error: 'Doctor not found' });
+        }
+
+        // Create the new blog with the doctor's name
+        const newBlog = new Blog({
+            title,
+            description,
+            date,
+            doctorId,
+            doctorName: `${doctor.firstName} ${doctor.lastName}` // Saving the full name
+        });
+
         const savedBlog = await newBlog.save();
         res.status(201).json(savedBlog);
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
-}
+};
 
 // Get all blogs (for public view)
 exports.getallBlog =  async (req, res) => {

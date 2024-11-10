@@ -17,6 +17,10 @@ const blogSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Doctor', // Assuming you have a Doctor schema/model
         required: true,
+    },
+    doctorName: { // New field to store the doctor's name
+        type: String,
+        required: true,
     }
 });
 
