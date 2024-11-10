@@ -8,6 +8,7 @@ const medicineRoutes = require("./routes/medicineRoutes");
 const doctorRoutes = require("./routes/doctorRoutes");
 const bookingRoutes = require("./routes/bookingRoutes");
 const orderRoutes = require("./routes/orderRoutes")
+const blogRoutes = require("./routes/blogRoutes")
 
 mongoose.set('debug', true);
 const app = express();
@@ -31,6 +32,7 @@ app.use("/api/medicines", medicineRoutes);
 app.use("/api/doctors", doctorRoutes);
 app.use("/api/bookings", bookingRoutes);
 app.use("/api/orders" , orderRoutes)
+app.use("/api/blogs", blogRoutes)
 
 // Start the server
 app.listen(PORT, () => {

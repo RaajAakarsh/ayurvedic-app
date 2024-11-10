@@ -1,56 +1,54 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import './BlogsVideosScreen.css';
-import logo from '../media/logo.png'; // Import the image directly
+import logo from '../media/logo.png'; // Placeholder image if needed
 
 function BlogsVideosScreen() {
-    const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate();
+  const [blogs, setBlogs] = useState([]);
 
-    const blogs = [
-        {
-            title: 'The Benefits of Ayurvedic Medicine',
-            content: 'Ayurveda is an ancient system of medicine with its roots in India...',
-            image: logo, 
-        },
-        {
-            title: 'How to Integrate Ayurveda into Your Daily Life',
-            content: 'Discover simple ways to incorporate Ayurvedic principles...',
-            image: logo, 
-        },
-        // Add more blog objects as needed
-    ];
-
-    // Function to navigate to the Blogs page with the selected blog details
-    const handleBlogClick = (blog) => {
-        navigate('/blogs', { state: { blog } }); // Pass blog data via state
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        const response = await axios.get('http://localhost:8080/api/blogs');
+        setBlogs(response.data);
+      } catch (error) {
+        console.error('Error fetching blogs:', error);
+      }
     };
+    fetchBlogs();
+  }, []);
 
-    return (
-        <div className="blogs-videos">
-            <div className="container">
-                <h1>Blogs and Videos</h1>
+  const handleBlogClick = (blog) => {
+    navigate('/blogs', { state: { blog } });
+  };
 
-                <div className="section">
-                    <h2>Blogs</h2>
-                    <div className="blogs">
-                        {blogs.map((blog, index) => (
-                            <div 
-                                key={index} 
-                                className="blog-card"
-                                onClick={() => handleBlogClick(blog)} // Add click handler
-                            >
-                                <img src={blog.image} alt={blog.title} />
-                                <div className="blog-content">
-                                    <h3>{blog.title}</h3>
-                                    <p>{blog.content}</p>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
+  return (
+    <div className="blogs-videos">
+      <div className="container">
+        <h1>Blogs and Videos</h1>
+        <div className="section">
+          <h2>Blogs</h2>
+          <div className="blogs">
+            {blogs.map((blog, index) => (
+              <div
+                key={index}
+                className="blog-card"
+                onClick={() => handleBlogClick(blog)}
+              >
+                <img src={blog.image || logo} alt={blog.title} />
+                <div className="blog-content">
+                  <h3>{blog.title}</h3>
+                  <p>{blog.description.substring(0, 100)}...</p> {/* Short preview */}
                 </div>
-            </div>
+              </div>
+            ))}
+          </div>
         </div>
-    );
+      </div>
+    </div>
+  );
 }
 
 export default BlogsVideosScreen;
