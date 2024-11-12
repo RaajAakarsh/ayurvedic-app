@@ -14,9 +14,21 @@
 }
 
 .left-title {
-  font-size: 32px;
-  color: #556B2F;
-  margin-bottom: 40px;
+  text-align: center;
+}
+
+h1 {
+  margin: 0;
+  color: #8F9F6D; /* Green color for AYURVEDIC */
+  font-weight: bold;
+  font-family: 'Arbutus Slab', serif;
+  font-size: 4rem; /* Slightly larger for the title */
+}
+
+h2 {
+  color: #333; /* Black color for Consultations */
+  font-family: 'Arbutus Slab', serif;
+  font-size: 2rem; /* Slightly smaller for subheading */
 }
 
 .outbox {

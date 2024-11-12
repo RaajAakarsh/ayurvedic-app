@@ -24,14 +24,13 @@
 h1 {
   margin: 0;
   color: #556b2f;
-  font-weight: normal;
+  font-weight: 3rem;
   font-family: 'Arbutus Slab', serif;
 }
 
 h2 {
   margin: 10px 0 30px;
   color: #556b2f;
-  font-weight: normal;
   font-family: 'Arbutus Slab', serif;
 }
 

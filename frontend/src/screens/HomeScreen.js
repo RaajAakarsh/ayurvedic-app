@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './HomeScreen.css';  // Import the CSS
 import logo from '../media/logo.png';  // Import the logo
 import homebg from '../media/homebg.png';  // Import the background image
@@ -8,6 +9,13 @@ import step3Icon from '../media/step3.png';
 import step4Icon from '../media/step4.png';
 
 function HomeScreen() {
+  const navigate = useNavigate();  // Initialize useNavigate
+
+  // Function to handle button click and navigate to the sign-in page
+  const handleConsultButtonClick = () => {
+    navigate('/signin'); // This will navigate to the "/sign-in" route
+  };
+
   return (
     <div className="homeScreen" style={{ backgroundImage: `url(${homebg})` }}>
       <div className="content">
@@ -17,7 +25,10 @@ function HomeScreen() {
         <h1 className='h'>AYURVEDIC</h1>
         <h2>Consultations</h2>
         <div className='outbox'>
-          <button className="consult-btn">Consult an Ayurvedic Doctor <br /> Book a Session</button>
+        <button 
+            className="consult-btn" 
+            onClick={handleConsultButtonClick}  // Attach the click handler
+          >Consult an Ayurvedic Doctor <br /> Book a Session</button>
         </div>
         <div className='how-we-work'>
           <h2 className='hww-heading'>How We Work?</h2>
