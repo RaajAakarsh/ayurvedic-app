@@ -6,10 +6,13 @@ import step1Icon from '../media/step1.png';  // Import icons for steps
 import step2Icon from '../media/step2.png';
 import step3Icon from '../media/step3.png';
 import step4Icon from '../media/step4.png';
+import QuestionnaireCarousel from './QuestionnaireCarousel';
 
 function HomeScreen() {
   return (
+    
     <div className="homeScreen" style={{ backgroundImage: `url(${homebg})` }}>
+      <QuestionnaireCarousel/>
       <div className="content">
         <div className="logo-image-home">
           <img src={logo} alt="Ayurvedic Logo" />
@@ -52,8 +55,11 @@ function HomeScreen() {
             </div>
           </div>
         </div>
+       
       </div>
+
     </div>
+    
   );
 }
 

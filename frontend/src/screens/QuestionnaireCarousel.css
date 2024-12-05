@@ -1,0 +1,176 @@
+/* Questionnaire Carousel Styles */
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+/* Full Page Styling */
+.questionnaire-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #f0f4f8 0%, #e2ebf2 100%);
+    font-family: 'Arial', sans-serif;
+    position: relative;
+    padding: 20px;
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .top-bar {
+    position: absolute;
+    top: 20px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    gap: 20px;
+  }
+  
+  .store-badge {
+    width: 130px;
+    height: auto;
+  }
+
+  .questionnaire-card {
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 800px;
+    height: 500px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 20px;
+    flex-direction: row;
+  }
+  
+  .questionnaire-content {
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .questionnaire-header {
+    font-size: 1.5em;
+    color: #333;
+    margin-bottom: 20px;
+    font-weight: bold;
+  }
+  
+  .options-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    width: 100%;
+  }
+  
+  .option-button {
+    padding: 15px;
+    border: none;
+    border-radius: 12px;
+    background-color: #f0f0f0;
+    color: #333;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .option-button:hover {
+    background-color: #e0e0e0;
+    transform: scale(1.05);
+  }
+  
+  .option-button.selected {
+    background-color: #4a90e2;
+    color: white;
+    box-shadow: 0 5px 15px rgba(74,144,226,0.4);
+  }
+
+  .navigation-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+    font-size: 2rem;
+  }
+  
+  .left-arrow {
+    left: 10px;
+  }
+  
+  .right-arrow {
+    right: 10px;
+  }
+  
+  .navigation-arrow:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+
+  .submit-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 20px;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+  }
+
+  .submit-button:disabled {
+    background-color: #95a5a6;
+    cursor: not-allowed;
+  }
+
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
+  .questionnaire-card {
+    height: auto;
+    flex-direction: column;
+    max-width: 90%;
+  }
+
+  .navigation-arrow {
+    font-size: 1.5rem;
+  }
+
+  .option-button {
+    font-size: 0.9rem;
+    padding: 10px;
+  }
+
+  .submit-button {
+    font-size: 0.9rem;
+    padding: 8px 15px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .questionnaire-header {
+    font-size: 1.2em;
+  }
+
+  .options-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .store-badge {
+    width: 100px;
+  }
+}
