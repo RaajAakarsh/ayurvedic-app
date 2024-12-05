@@ -62,6 +62,8 @@ function App() {
       {renderNavBar()} 
       <Routes>
         <Route path="/" element={<HomeScreen />} />
+        <Route path="/signin" element={<SignInScreen />} />
+        <Route path="/signup" element={<SignUpScreen />} />
         <Route path="/treatments" element={<TreatmentsScreen />} />
         <Route path="/diet-yoga" element={<DietYogaScreen />} />
         <Route path="/blogs-videos" element={<BlogsVideosScreen />} />
@@ -70,8 +72,7 @@ function App() {
         <Route path="/payment" element={<PaymentScreen />} />
         <Route path="/doctors" element={<DoctorsScreen />} />
         <Route path="/doctor-detail" element={<DoctorDetailPage />} />
-        <Route path="/signin" element={<SignInScreen />} />
-        <Route path="/signup" element={<SignUpScreen />} />
+        
         <Route path="/signup-patient" element={<SignUpPatientScreen />} />
         <Route path="/signup-doctor" element={<SignUpDoctorScreen />} />
         <Route path="/signup-retailer" element={<SignUpRetailerScreen />} />

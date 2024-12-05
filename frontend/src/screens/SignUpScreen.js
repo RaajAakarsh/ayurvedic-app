@@ -23,7 +23,8 @@ function SignUpScreen() {
     <div className="signup-screen-container">
       <div className="signin-left">
         <img src={logo} alt="Ayurvedic Logo" className="ayurvedic-logo" />
-        <h1 className="left-title">AYURVEDIC <br /> Consultations</h1>
+        <h1 className="left-title">AYURVEDIC </h1>
+        <h2> Consultations</h2>
         <div className='outbox'>
         <button className="consult-btn">Consult an Ayurvedic Doctor<br />Book a Session</button>
         </div>
