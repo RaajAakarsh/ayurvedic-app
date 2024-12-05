@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { ChevronLeft, ChevronRight, CheckCircle2 } from 'lucide-react';
+import { TiChevronLeftOutline, TiChevronRightOutline } from 'react-icons/ti';
 import './QuestionnaireCarousel.css';
+import { FcPrevious } from 'react-icons/fc';
 
 const QuestionnaireCarousel = () => {
   const questions = [
@@ -40,75 +41,66 @@ const QuestionnaireCarousel = () => {
   const [selectedAnswers, setSelectedAnswers] = useState({});
 
   const handleAnswerSelect = (answer) => {
-    setSelectedAnswers(prev => ({
+    setSelectedAnswers((prev) => ({
       ...prev,
       [currentQuestion]: answer
     }));
+  };
 
+  const handleNext = () => {
     if (currentQuestion < questions.length - 1) {
-      setTimeout(() => {
-        setCurrentQuestion(prev => prev + 1);
-      }, 500);
+      setCurrentQuestion((prev) => prev + 1);
+    } else {
+      console.log('Final Answers:', selectedAnswers);
+      alert('Thank you for completing the questionnaire!');
     }
-  };
-
-  const movePrevious = () => {
-    if (currentQuestion > 0) {
-      setCurrentQuestion(prev => prev - 1);
-    }
-  };
-
-  const moveNext = () => {
-    if (currentQuestion < questions.length - 1) {
-      setCurrentQuestion(prev => prev + 1);
-    }
-  };
-
-  const submitQuestionnaire = () => {
-    console.log('Final Answers:', selectedAnswers);
   };
 
   return (
-    <div className="questionnaire-container">
-      <div className="top-bar">
-        <img src="/path/to/google-play-badge.png" alt="Get it on Google Play" className="store-badge" />
-        <img src="/path/to/app-store-badge.png" alt="Download on the App Store" className="store-badge" />
-      </div>
-      <div className="questionnaire-card">
-        <div className="navigation-arrow left-arrow" onClick={movePrevious} disabled={currentQuestion === 0}>
-          <ChevronLeft />
-        </div>
-        
-        <div className="questionnaire-content">
-          <div className="questionnaire-header">
-            {questions[currentQuestion].text}
-          </div>
-          
-          <div className="options-grid">
-            {questions[currentQuestion].options.map((option, index) => (
-              <button
-                key={index}
-                className={`option-button ${selectedAnswers[currentQuestion] === option ? 'selected' : ''}`}
-                onClick={() => handleAnswerSelect(option)}
-              >
-                {option}
-              </button>
-            ))}
+    <div className="carousel-container">
+      <div className="carousel">
+        {currentQuestion > 0 && (
+          <button
+            className="nav left"
+            onClick={() => setCurrentQuestion((prev) => prev - 1)}
+          > <TiChevronLeftOutline /> Previous
+          </button>
+        )}
+
+        <div
+          className="card-container"
+          style={{
+            '--active': 1,
+            '--offset': 0,
+            '--abs-offset': 0,
+          }}
+        >
+          <div className="card">
+            <h2>{questions[currentQuestion].text}</h2>
+            <div className="options-grid">
+              {questions[currentQuestion].options.map((option, index) => (
+                <button
+                  key={index}
+                  className={`option-button ${
+                    selectedAnswers[currentQuestion] === option ? 'selected' : ''
+                  }`}
+                  onClick={() => handleAnswerSelect(option)}
+                >
+                  {option}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
 
-        <div className="navigation-arrow right-arrow" onClick={moveNext} disabled={currentQuestion === questions.length - 1}>
-          <ChevronRight />
-        </div>
-
-        {currentQuestion === questions.length - 1 && (
-          <button 
-            className="submit-button"
-            onClick={submitQuestionnaire}
-            disabled={Object.keys(selectedAnswers).length !== questions.length}
+        {currentQuestion < questions.length && (
+          <button
+            className="nav right"
+            onClick={handleNext}
+            disabled={!selectedAnswers[currentQuestion]}
           >
-            <CheckCircle2 />
-            Submit
+            {currentQuestion === questions.length - 1 ? 'Submit' : 'Next'}
+            <TiChevronRightOutline />
           </button>
         )}
       </div>
