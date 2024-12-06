@@ -1,0 +1,142 @@
+.talk-of-the-town {
+    padding: 20px;
+    background-color: #f4f4f4;
+    margin:20px;
+  }
+  
+  .header1 {
+    text-align: center;
+    margin-bottom: 20px;
+    justify-content: center;
+  }
+  
+  .title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+  }
+  
+  .gradient-border {
+    height: 4px;
+    background: linear-gradient(to right, #ff7a00, #ffdb00, #ff7a00);
+    width: 100%;
+    margin: 10px 0;
+  }
+  
+  .slider-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    margin:20px;
+  }
+  
+  .slick-slider1 {
+    display: flex;
+    transition: transform 0.3s ease;
+  }
+  
+  .slick-slide1 {
+    width: 28%; /* Adjust the width of each card */
+    flex-shrink: 0;
+    margin-right: 20px;
+  }
+  
+  .video-card1 {
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+  }
+  
+  .video-thumbnail {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+  }
+  
+  .thumbnail-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .content {
+    padding: 15px;
+  }
+  
+  .influencer-name {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  .video-title {
+    font-size: 1rem;
+    color: #666;
+    margin-top: 5px;
+  }
+  
+  .separator {
+    height: 1px;
+    background-color: #ddd;
+    margin: 10px 0;
+  }
+  
+  .social-stats {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    color: #333;
+  }
+  
+  .stat {
+    display: flex;
+    align-items: center;
+  }
+  
+  .social-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+  }
+  
+  .followers {
+    margin: 0;
+  }
+  
+  .arrow-button {
+    position: absolute;
+    top: 50%;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 10;
+    transform: translateY(-50%);
+    transition: background-color 0.3s;
+  }
+  
+  .arrow-button:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+  
+  .left {
+    left: 10px;
+  }
+  
+  .right {
+    right: 10px;
+  }
+  
+  /* Ensure that only 3 cards are visible at once */
+  @media (max-width: 768px) {
+    .slick-slider1 {
+      width: calc(300px * 3 + 20px * 2); /* 3 cards + spacing */
+    }
+  }
+  

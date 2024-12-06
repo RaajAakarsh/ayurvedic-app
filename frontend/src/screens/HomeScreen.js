@@ -4,6 +4,7 @@ import './HomeScreen.css'; // Import the CSS
 import logo from '../media/logo.png'; // Import the logo
 import homebg from '../media/homebg.png'; // Import the background image
 import QuestionnaireCarousel from './QuestionnaireCarousel';
+import TalkOfTheTown from './TalkOfTheTown';
 
 function HomeScreen() {
   const navigate = useNavigate();
@@ -43,7 +44,7 @@ function HomeScreen() {
       </div>
       <section class="concave-section bottomSection">
         <div class="content">
-        <QuestionnaireCarousel />
+          <QuestionnaireCarousel />
         </div>
       </section>
 
@@ -169,7 +170,7 @@ function HomeScreen() {
                 <ul className="slick-dots">
                   {carouselItems.map((_, index) => (
                     <li key={index} className={index === activeSlide ? 'slick-active' : ''}>
-                      <button onClick={() => handleDotClick(index)}>{index + 1}</button>
+                      <button onClick={() => handleDotClick(index)}> </button>
                     </li>
                   ))}
                 </ul>
@@ -177,6 +178,9 @@ function HomeScreen() {
             </div>
           </div>
         </div>
+      </section>
+      <section>
+        <TalkOfTheTown />
       </section>
     </div>
   );
