@@ -7,7 +7,7 @@
 }
 
 .topSection {
-  flex: 0.3; /* Occupies 30% of the screen height */
+  flex: 0.3;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -15,12 +15,6 @@
   text-align: center;
   padding: 20px;
   box-sizing: border-box;
-}
-
-.logo-image-home img {
-  width: 150px;
-  height: auto;
-  margin-bottom: 20px;
 }
 
 .h {
@@ -31,26 +25,18 @@
   letter-spacing: 0.05em;
 }
 
-h2 {
-  font-family: 'Arbutus Slab', serif;
-  font-size: 1.8rem;
-  margin-bottom: 20px;
-  color: #555;
-}
-
 .consult-btn {
-  background-color: #8F9F6D;
+  background-color: #8f9f6d;
   color: #fff;
   border: none;
-  padding: 8px 16px; /* Reduced padding */
-  font-size: 0.9rem; /* Smaller font size */
+  padding: 8px 16px;
+  font-size: 0.9rem;
   cursor: pointer;
   border-radius: 5px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  width: auto; /* Adjusts to content width */
-  max-width: 300px; /* Optional: Limit the button width */
+  width: auto;
+  max-width: 300px;
   text-align: center;
-  height:10vh;
 }
 
 .consult-btn:hover {
@@ -58,31 +44,367 @@ h2 {
 }
 
 .bottomSection {
-  flex: 0.7; /* Occupies 70% of the screen height */
+  flex: 0.7;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 20px;
-  background: rgba(255, 255, 255, 0.5); /* Slightly translucent background */
+  background: rgba(255, 255, 255, 0.5);
   box-sizing: border-box;
-  overflow-y: auto; /* Enables scrolling if content overflows */
+}
+
+.productSection {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  background-color: #fff;
+}
+
+.productCard {
+  display: flex;
+  width: 70%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.productCard:hover {
+  transform: scale(1.05);
+}
+
+.productCardContent {
+  flex: 1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.productLabel {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #8f9f6d;
+}
+
+.productTitle {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 10px 0;
+}
+
+.productSubTitle {
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: #555;
+}
+
+.productRating {
+  display: flex;
+  align-items: center;
+}
+
+.rating {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.ratingText {
+  font-size: 1rem;
+  color: #777;
+  margin-left: 10px;
+}
+
+.productPrice {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.discountedPrice {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #8f9f6d;
+}
+
+.basePrice {
+  text-decoration: line-through;
+  font-size: 1.2rem;
+  color: #777;
+  margin-left: 10px;
+}
+
+.discount {
+  font-size: 1rem;
+  color: #f00;
+  margin-left: 10px;
+}
+
+.emiAvailable {
+  font-size: 1rem;
+  color: #555;
+  margin-top: 10px;
+}
+
+.productFeatures {
+  margin-top: 20px;
+}
+
+.featureItem {
+  margin-bottom: 10px;
+}
+
+.featureTitle {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.exploreButton {
+  background-color: #8f9f6d;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+
+.exploreButton:hover {
+  background-color: #7d8c55;
+}
+
+.productImage {
+  position: relative;
+  width: 40%;
+}
+
+.productImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.benefitsSection {
+  padding: 40px 20px;
+  background-color: #fff;
+}
+
+.benefitsHeader {
+  text-align: center;
+}
+
+.benefitsTitle {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.highlightedText {
+  color: #8f9f6d;
+}
+
+.gradientBottomBorder {
+  width: 50px;
+  height: 2px;
+  margin: 20px auto;
+  background: linear-gradient(to right, #8f9f6d, #555);
+}
+
+.benefitsList {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.benefitItem {
+  display: flex;
+  flex-direction: column;
+  width: 30%; /* For larger screens */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.benefitItem:hover {
+  transform: scale(1.05);
+}
+
+.benefitImage {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.benefitDetail {
+  padding: 20px;
+  text-align: center;
+  background-color: #fff;
+}
+
+.benefitTitle {
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+.benefitDescription {
+  font-size: 1rem;
+  color: #777;
 }
 
 @media (max-width: 768px) {
-  .h {
-    font-size: 2rem;
+  .benefitItem {
+    width: 100%; /* Make the benefit items stack vertically on smaller screens */
   }
 
-  h2 {
-    font-size: 1.5rem;
+  .benefitTitle {
+    font-size: 1.2rem; /* Adjust font size for better readability */
   }
 
-  .consult-btn {
-    font-size: 0.9rem;
-    padding: 10px 20px;
+  .benefitDescription {
+    font-size: 0.9rem; /* Adjust description font size */
   }
 
-  .logo-image-home img {
-    width: 120px;
+  .benefitsList {
+    gap: 10px; /* Reduce gap on smaller screens */
+  }
+
+  .benefitsTitle {
+    font-size: 1.6rem; /* Adjust the title font size for smaller screens */
+  }
+
+  .gradientBottomBorder {
+    width: 30px; /* Make the gradient line smaller on mobile */
+  }
+}
+
+@media (max-width: 768px) {
+  .productCard {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .productImage {
+    height: 100%;
+  }
+}
+
+/* Container for the entire carousel section */
+.NewUserHomePage_skinCarouselSection__NAw7l {
+  padding: 20px;
+  background-color: #f4f4f4;
+}
+
+.SkinCarousel_skinHealth__APvJ6 {
+  text-align: center;
+}
+
+.SkinCarousel_heading__LxBzL {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.SkinCarousel_heading__LxBzL span {
+  color: #ff5722; /* Accent color */
+}
+
+.SkinProductsCarousel_skinProductsCarousel__7voFv {
+  position: relative;
+  width: 100%;
+}
+
+.CustomSlick_sliderContainer__fY_xB {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.slick-slider {
+  position: relative;
+  width: 100%;
+}
+
+.slick-list {
+  overflow: hidden;
+  position: relative;
+}
+
+.slick-track {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.slick-slide {
+  min-width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.5s ease;
+}
+
+.SkinProductsCarousel_skinProductsCarouselCard__EWrON {
+  position: relative;
+  width: 70%;
+  height: auto;
+}
+
+.Image_wrapper__bkC8Y {
+  width: 100%;
+  position: relative;
+}
+
+.Image_wrapper__bkC8Y img {
+  width: 100%;
+  object-fit: cover;
+}
+
+.slick-dots {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  list-style: none;
+  padding: 0;
+}
+
+.slick-dots li {
+  margin: 0 5px;
+}
+
+.slick-dots button {
+  background-color: transparent;
+  border: none;
+  padding: 5px;
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+  background-color: #fff;
+  transition: background-color 0.3s ease;
+}
+
+.slick-dots button:hover {
+  background-color: #ff5722; /* Accent color on hover */
+}
+
+.slick-dots .slick-active button {
+  background-color: #ff5722; /* Accent color for active dot */
+}
+
+/* Responsive styles for smaller screens */
+@media (max-width: 768px) {
+  .SkinCarousel_heading__LxBzL {
+    font-size: 24px;
+  }
+
+  .slick-dots {
+    margin-top: 15px;
+  }
+
+  .slick-dots button {
+    width: 10px;
+    height: 10px;
   }
 }
