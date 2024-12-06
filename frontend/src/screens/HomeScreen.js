@@ -5,6 +5,7 @@ import logo from '../media/logo.png'; // Import the logo
 import homebg from '../media/homebg.png'; // Import the background image
 import QuestionnaireCarousel from './QuestionnaireCarousel';
 import TalkOfTheTown from './TalkOfTheTown';
+import FitBot from './FitBot';
 
 function HomeScreen() {
   const navigate = useNavigate();
@@ -179,9 +180,12 @@ function HomeScreen() {
           </div>
         </div>
       </section>
+
       <section>
         <TalkOfTheTown />
+        <FitBot />
       </section>
+
     </div>
   );
 }
