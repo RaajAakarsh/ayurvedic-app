@@ -45,10 +45,7 @@ const QuestionnaireCarousel = () => {
   return (
     <div className="carousel-container">
       <div className={`carousel ${isTransitioning ? 'transitioning' : ''}`}>
-        <div
-          className="card-container"
-          style={{ transform: `translateX(-${currentQuestion * 100}%)` }}
-        >
+        <div className="card-container" style={{ transform: `translateX(-${currentQuestion * 100}%)` }}>
           {questions.map((question, index) => (
             <div key={index} className="card">
               <h2>{question.text}</h2>
