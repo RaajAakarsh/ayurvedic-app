@@ -1,26 +1,30 @@
-/* Overall HomeScreen */
 .homeScreen {
+  display: flex;
+  flex-direction: column;
   background-color: #f5f5f5;
   background-size: cover;
   background-position: center;
+}
+
+.topSection {
+  flex: 0.3; /* Occupies 30% of the screen height */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-}
-
-/* Centered content */
-.content {
   text-align: center;
-  max-width: 100%; /* Ensure it doesn't exceed screen width */
-  width: 90vw; /* Make sure it takes 90% of the screen width for better responsiveness */
-  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
-/* Title and Subtitle */
+.logo-image-home img {
+  width: 150px;
+  height: auto;
+  margin-bottom: 20px;
+}
+
 .h {
-  text-align: center;
-  font-size: 4rem; /* Decrease size to avoid overlap on small screens */
+  font-size: 2.5rem;
   font-family: 'Arbutus Slab', serif;
   color: #333;
   margin-bottom: 0.5rem;
@@ -29,155 +33,56 @@
 
 h2 {
   font-family: 'Arbutus Slab', serif;
-  font-size: 3rem;
-  margin: 10px 0 30px 0;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
   color: #555;
 }
 
-/* Logo Section */
-.logo-image-home img {
-  width: 250px;
-  height: auto;
-  margin: 30px auto;
-}
-
-/* Consultation Button */
-.outbox {
-  display: flex;
-  justify-content: center; /* Centers the button horizontally */
-  align-items: center; /* Centers the button vertically */
-}
-
-/* Consult Button Styling */
 .consult-btn {
-  background-color: #8F9F6D; /* Color matching the theme */
+  background-color: #8F9F6D;
   color: #fff;
   border: none;
-  padding: 15px 30px;
-  font-size: 1.2rem;
+  padding: 8px 16px; /* Reduced padding */
+  font-size: 0.9rem; /* Smaller font size */
   cursor: pointer;
   border-radius: 5px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  width: 100%; /* Make the button take the full width */
-  max-width: 400px; /* Limit the width on larger screens */
+  width: auto; /* Adjusts to content width */
+  max-width: 300px; /* Optional: Limit the button width */
   text-align: center;
+  height:10vh;
 }
 
 .consult-btn:hover {
-  background-color: #8a9d66; /* Darker shade for hover effect */
+  background-color: #8a9d66;
 }
 
-/* How We Work Section */
-.how-we-work {
-  margin: 130px;
+.bottomSection {
+  flex: 0.7; /* Occupies 70% of the screen height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 20px;
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  max-width: 1200px; /* Limit the width on larger screens */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  background: rgba(255, 255, 255, 0.5); /* Slightly translucent background */
+  box-sizing: border-box;
+  overflow-y: auto; /* Enables scrolling if content overflows */
 }
 
-/* Heading for How We Work */
-.hww-heading {
-  font-size: 2.5rem;
-  margin-bottom: 20px;
-  color: #333;
-}
-
-/* Step Content */
-.hww-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-}
-
-/* Individual Steps */
-.hww-step {
-  display: flex;
-  align-items: center;
-  margin-bottom: 30px;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  width: 100%; /* Make sure steps take full width */
-  max-width: 800px; /* Limit step box size */
-  box-sizing: border-box; /* Ensure padding doesn't affect width */
-  justify-content: center;
-  text-align: left;
-}
-
-.hww-icon {
-  width: 60px;
-  height: 60px;
-  margin-right: 20px;
-}
-
-.hww-step-text {
-  max-width: 500px;
-  text-align: left;
-}
-
-.hww-step-text h3 {
-  font-size: 1.5rem;
-  margin-bottom: 10px;
-  color: #333;
-}
-
-.hww-step-text p {
-  font-size: 1rem;
-  color: #666;
-  line-height: 1.6;
-}
-
-/* Media Queries for Responsiveness */
 @media (max-width: 768px) {
   .h {
-    font-size: 4rem; /* Reduce size on smaller screens */
+    font-size: 2rem;
   }
 
   h2 {
-    font-size: 1.5rem; /* Smaller subtitle */
-  }
-
-  .logo-image-home img {
-    width: 200px; /* Resize logo on mobile */
+    font-size: 1.5rem;
   }
 
   .consult-btn {
-    padding: 12px 25px;
-    font-size: 1rem;
-  }
-
-  .how-we-work {
-    padding: 10px; /* Reduce padding on smaller screens */
-    width: 95%; /* Make it take more width on small screens */
-  }
-
-  .hww-heading {
-    font-size: 2rem; /* Smaller heading on mobile */
-  }
-
-  .hww-step {
-    flex-direction: column; /* Stack steps vertically */
-    width: 90%;
-    margin: 20px auto; /* Center and give space between steps */
-  }
-
-  .hww-icon {
-    margin-bottom: 10px; /* Space between icon and text */
-  }
-
-  .hww-step-text h3 {
-    font-size: 1.3rem;
-  }
-
-  .hww-step-text p {
     font-size: 0.9rem;
+    padding: 10px 20px;
+  }
+
+  .logo-image-home img {
+    width: 120px;
   }
 }
