@@ -41,9 +41,12 @@ function HomeScreen() {
           Consult an Ayurvedic Doctor <br /> Book a Session
         </button>
       </div>
-      <div className="bottomSection">
+      <section class="concave-section bottomSection">
+        <div class="content">
         <QuestionnaireCarousel />
-      </div>
+        </div>
+      </section>
+
       <div className="productSection">
         <div className="productCard">
           <div className="productCardContent">
