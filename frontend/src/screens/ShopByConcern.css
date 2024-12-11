@@ -1,0 +1,171 @@
+/* ShopByConcern.css */
+
+/* Base Styles */
+body {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f7f7f7;
+}
+
+/* Wrapper for the skin concern section */
+.SkinHealth_skinConcernWrapper__4RStK {
+    padding: 40px 120px;
+    background-color: #ffffff;
+}
+
+/* Section header style */
+.ComponentHeader_componentHeaderDesktop__sNo2H {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.ComponentHeader_headerTitle__oeo_k h2 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #333333;
+    margin: 0;
+}
+
+.icon-info {
+    font-size: 20px;
+    color: #aaa;
+    cursor: pointer;
+}
+
+/* Skin concern card container (grid layout) */
+.ShopByConcern_container__ZcaN3 {
+    display: grid;
+    gap: 20px;
+    margin: 20px;
+}
+
+/* Top section with 4 cards */
+.ShopByConcern_container__ZcaN3.top-section {
+    grid-template-columns: repeat(4, 1fr); /* 4 cards in the top row */
+}
+
+/* Bottom section with 3 cards */
+.ShopByConcern_container__ZcaN3.bottom-section {
+    grid-template-columns: repeat(3, 1fr); /* 3 cards in the bottom row */
+}
+
+/* Card container for each concern */
+.ShopByConcern_cardContainer__Y1toh {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease-in-out;
+    text-decoration: none;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column; /* Align content vertically */
+}
+
+/* Card hover effect */
+.ShopByConcern_cardContainer__Y1toh:hover {
+    transform: translateY(-5px);
+}
+
+/* Text content in the concern card (Title and Description) */
+.ShopByConcern_textContainer__i6UMp {
+    padding: 20px;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    z-index: 10; /* Ensure text is above the background image */
+}
+
+/* Title styling */
+.ShopByConcern_title__aV3sc {
+    font-size: 18px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+/* Description styling */
+.ShopByConcern_description {
+    font-size: 14px;
+    color: #777;
+    line-height: 1.5;
+    margin-bottom: 20px; /* Space between description and image */
+}
+
+/* Image inside the card (background image) */
+.ShopByConcern_imageWrapper__pz_iH {
+    width: 100%;
+    height: 200px; /* Adjust height as needed */
+    background-size: cover;
+    background-position: center;
+}
+
+/* Small cards with compact text (for smaller concern cards) */
+.ShopByConcern_shortCard__AphEq {
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease-in-out;
+    text-decoration: none;
+}
+
+/* Small card hover effect */
+.ShopByConcern_shortCard__AphEq:hover {
+    transform: translateY(-5px);
+}
+
+/* Compact small card image size */
+.ShopByConcern_shortCard__AphEq .ShopByConcern_imageWrapper__pz_iH img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+/* Compact title for small cards */
+.ShopByConcern_shortCard__AphEq .ShopByConcern_title__aV3sc {
+    font-size: 16px;
+    font-weight: 700;
+    color: #333;
+    text-align: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .ShopByConcern_container__ZcaN3.top-section {
+        grid-template-columns: 1fr 1fr; /* 2 cards per row on medium screens */
+    }
+
+    .ShopByConcern_container__ZcaN3.bottom-section {
+        grid-template-columns: 1fr 1fr; /* 2 cards per row on medium screens */
+    }
+
+    .ShopByConcern_textContainer__i6UMp {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .ShopByConcern_container__ZcaN3.top-section {
+        grid-template-columns: 1fr; /* 1 card per row for small screens */
+    }
+
+    .ShopByConcern_container__ZcaN3.bottom-section {
+        grid-template-columns: 1fr; /* 1 card per row for small screens */
+    }
+
+    .ShopByConcern_shortCard__AphEq {
+        padding: 15px;
+    }
+
+    .ShopByConcern_shortCard__AphEq .ShopByConcern_title__aV3sc {
+        font-size: 14px;
+    }
+}

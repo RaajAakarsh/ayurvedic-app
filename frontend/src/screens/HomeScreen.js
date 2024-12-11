@@ -5,6 +5,8 @@ import logo from '../media/logo.png'; // Import the logo
 import homebg from '../media/homebg.png'; // Import the background image
 import QuestionnaireCarousel from './QuestionnaireCarousel';
 import ProductSection from './productsection';
+import ShopBySkinType from './ShopBySkinType'; // import Shop by Skin Type component
+import ShopByConcern from './ShopByConcern'; // import Shop by Concern component
 import TreatmentSection from './treatmentsection';
 import TalkOfTheTown from './TalkOfTheTown';
 import FitBot from './FitBot';
@@ -53,6 +55,13 @@ function HomeScreen() {
 
       {/* product section */}
       <ProductSection />
+
+      {/* pas section */}
+      <ShopByConcern />
+      
+      {/* Benefits section */}
+      <ShopBySkinType />
+      
 
       {/* New treatments Section treatment section*/}
       <TreatmentSection />

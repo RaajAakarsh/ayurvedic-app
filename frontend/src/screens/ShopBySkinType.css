@@ -1,0 +1,133 @@
+/* ShopBySkinType.css */
+
+/* Base styles */
+body {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f7f7f7;
+  }
+  
+  /* Wrapper for the skin type section */
+  .SkinHealth_skinTypeWrapper__InDhG {
+    padding: 40px 20px;
+    background-color: #ffffff;
+  }
+  
+  /* Section header style */
+  .ComponentHeader_componentHeaderDesktop__sNo2H {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+  }
+  
+  .ComponentHeader_headerTitle__oeo_k h2 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #333333;
+    margin: 0;
+  }
+  
+  .icon-info {
+    font-size: 20px;
+    color: #aaa;
+    cursor: pointer;
+  }
+  
+  .ComponentHeader_headerTitle__oeo_k span {
+    font-size: 16px;
+    color: #777;
+  }
+  
+  /* Skin type card container (grid layout) */
+  .ShopBySkinType_container__cvZMd {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  
+  /* Card container for each skin type */
+  .ShopBySkinType_cardContainer__r93Qr {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease-in-out;
+    text-decoration: none;
+    overflow: hidden;
+  }
+  
+  .ShopBySkinType_cardContainer__r93Qr:hover {
+    transform: translateY(-5px);
+  }
+  
+  /* Image inside the card */
+  .ShopBySkinType_imageWrapper__AZriZ img {
+    width: 100%;
+    height: 230px;
+    object-fit: cover;
+    border-bottom: 2px solid #f0f0f0;
+  }
+  
+  /* Card text content */
+  .ShopBySkinType_textContainer__fXBb0 {
+    padding: 20px;
+    color: #333;
+  }
+  
+  .ShopBySkinType_title__lstmx {
+    font-size: 18px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 8px;
+  }
+  
+  .ShopBySkinType_description__ltIg9 {
+    font-size: 14px;
+    color: #777;
+    line-height: 1.5;
+    margin-bottom: 15px;
+  }
+  
+  .ShopBySkinType_rightArrow__1dKY3 {
+    position: absolute;
+    right: 15px;
+    bottom: 15px;
+    color: #007bff;
+    font-size: 18px;
+  }
+  
+  .ShopBySkinType_rightArrow__1dKY3 i {
+    transition: transform 0.3s ease;
+  }
+  
+  /* Hover effect on right arrow */
+  .ShopBySkinType_cardContainer__r93Qr:hover .ShopBySkinType_rightArrow__1dKY3 i {
+    transform: translateX(5px);
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .ShopBySkinType_container__cvZMd {
+      grid-template-columns: 1fr 1fr;
+    }
+  
+    .ShopBySkinType_textContainer__fXBb0 {
+      padding: 15px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .ShopBySkinType_container__cvZMd {
+      grid-template-columns: 1fr;
+    }
+  
+    .ShopBySkinType_textContainer__fXBb0 {
+      padding: 12px;
+    }
+  
+    .ShopBySkinType_title__lstmx {
+      font-size: 16px;
+    }
+  }
+  
