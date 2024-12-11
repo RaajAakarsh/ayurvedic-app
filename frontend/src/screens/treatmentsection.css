@@ -1,0 +1,140 @@
+.treatmentsSection {
+    padding: 40px 40px;
+    background-color: #fff;
+}
+
+.treatmentsHeader {
+    text-align: center;
+}
+
+.treatmentsTitle {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.highlightedText {
+    color: #8f9f6d;
+}
+
+.gradientBottomBorder {
+    width: 50px;
+    height: 2px;
+    margin: 20px auto;
+    background: linear-gradient(to right, #8f9f6d, #555);
+}
+
+.treatmentsList {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+.treatmentItem {
+    display: flex;
+    flex-direction: column;
+    width: 31.5%; /* For larger screens */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    border-radius: 8px; /* Rounded corners for the treatment card */
+    background: linear-gradient(to bottom, #f0f9f1, #8f9f6d); /* Gradient from top to bottom */
+}
+
+.treatmentItem:hover {
+    transform: scale(1.03);
+}
+
+.treatmentImage {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-bottom: 2px solid #f2f2f2; /* A subtle border between the image and text */
+}
+
+.treatmentDetail {
+    padding: 20px;
+    text-align: center;
+    flex: 1; /* Ensures text content is the same height as image */
+}
+
+.treatmentTitle {
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.treatmentDescription {
+    font-size: 1rem;
+    color: #777;
+    margin-bottom: 20px;
+}
+
+.benefitsTitle, .procedureTitle {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #444;
+    margin-top: 15px;
+}
+
+.benefitsList {
+    list-style: none;
+    padding: 0;
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.benefitsList li {
+    margin-bottom: 8px;
+    text-align: left;
+    padding-left: 20px;
+    position: relative;
+}
+
+.benefitsList li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #8f9f6d; /* Green bullets */
+}
+
+.procedureDescription {
+    font-size: 0.95rem;
+    color: #777;
+    text-align: left;
+}
+
+@media (max-width: 768px) {
+    .treatmentItem {
+        width: 100%; /* Make the treatment items stack vertically on smaller screens */
+    }
+
+    .treatmentTitle {
+        font-size: 1.2rem; /* Adjust font size for better readability */
+    }
+
+    .treatmentDescription {
+        font-size: 0.9rem; /* Adjust description font size */
+    }
+
+    .treatmentsList {
+        gap: 10px; /* Reduce gap on smaller screens */
+    }
+
+    .treatmentsTitle {
+        font-size: 1.6rem; /* Adjust the title font size for smaller screens */
+    }
+
+    .gradientBottomBorder {
+        width: 30px; /* Make the gradient line smaller on mobile */
+    }
+
+    .benefitsList li {
+        font-size: 0.85rem; /* Slightly smaller text on mobile */
+    }
+
+    .procedureDescription {
+        font-size: 0.9rem; /* Adjust procedure description font size */
+    }
+}

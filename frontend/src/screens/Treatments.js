@@ -30,7 +30,7 @@ function TreatmentsScreen() {
               <h2>{treatment.category}</h2>
               <ul>
                 {treatment.items.map((item, i) => (
-                  <li key={i}>{item}</li>
+                  <li className="l" key={i}>{item}</li>
                 ))}
               </ul>
             </div>
