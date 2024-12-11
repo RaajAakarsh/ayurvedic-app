@@ -1,70 +1,87 @@
 // ShopBySkinType.js
 import React from 'react';
-import './ShopBySkinType.css'; // Import the specific CSS file for the Shop by Skin Type
+import './ShopBySkinType.css'; // Import the specific CSS file for Shop by Skin Type
 
 const ShopBySkinType = () => {
   return (
     <div className="SkinHealth_skinTypeWrapper__InDhG">
+      {/* Section Header */}
       <div className="ComponentHeader_componentHeaderDesktop__sNo2H ShopBySkinType_sectionHeader__4dj9l">
         <div className="ComponentHeader_headerTitle__oeo_k">
-          <h2 className="title3-bold-d title3-bold-m">Shop by skin type</h2>
+          <h2 className="title3-bold-d title3-bold-m">Why Choose Us for Piles, Fistula & Hemorrhoids Treatment?</h2>
         </div>
-        <i className="icon-info ShopBySkinType_infoIcon__g6QLZ body1-regular-m"></i>
       </div>
-      <div className="ShopBySkinType_container__cvZMd">
-        {/* Oily Skin Card */}
-        <a className="ShopBySkinType_cardContainer__r93Qr ShopBySkinType_longCard__JuzwU" href="/skin/products?skinType=Oily%20skin">
-          <div className="Image_wrapper__bkC8Y ShopBySkinType_imageWrapper__AZriZ">
-            <img alt="Oily Skin" className="ShopBySkinType_img__SJV_O" src="https://res.cloudinary.com/dmezmffej/image/upload/v1690959928/SkincareAssets/SkinType/Oily_skin.avif" />
+
+      {/* Top section (Benefit Cards) */}
+      <div className="ShopBySkinType_container__cvZMd top-section">
+        {/* Expert Care Card */}
+        <div className="ShopBySkinType_cardContainer__r93Qr ShopBySkinType_shortCard__d3YWU">
+          <div className="ShopBySkinType_imageWrapper__AZriZ">
+            <img alt="Expert Care" className="ShopBySkinType_img__SJV_O" src="https://source.unsplash.com/1600x900/?doctor" />
           </div>
           <div className="ShopBySkinType_textContainer__fXBb0">
-            <div className="ShopBySkinType_title__lstmx body3-semibold-m body1-bold-d">Oily skin</div>
-            <div className="ShopBySkinType_description__ltIg9 label3-regular-m body1-regular-d">Greasy with enlarged pores, blackheads, and blemishes</div>
-            <div className="ShopBySkinType_rightArrow__1dKY3 fw-8">
-              <i className="icon-arrow-right"></i>
-            </div>
+            <div className="ShopBySkinType_title__lstmx">Expert Care</div>
+            <div className="ShopBySkinType_description__ltIg9">World-renowned doctors with years of experience</div>
+          </div>
+        </div>
+
+        {/* Quick Relief Card */}
+        <div className="ShopBySkinType_cardContainer__r93Qr ShopBySkinType_shortCard__d3YWU">
+          <div className="ShopBySkinType_imageWrapper__AZriZ">
+            <img alt="Quick Relief" className="ShopBySkinType_img__SJV_O" src="https://source.unsplash.com/1600x900/?relief" />
+          </div>
+          <div className="ShopBySkinType_textContainer__fXBb0">
+            <div className="ShopBySkinType_title__lstmx">Quick Relief</div>
+            <div className="ShopBySkinType_description__ltIg9">Pain and bleeding relief within 3 days</div>
+          </div>
+        </div>
+
+        {/* Advanced Technology Card */}
+        <div className="ShopBySkinType_cardContainer__r93Qr ShopBySkinType_shortCard__d3YWU">
+          <div className="ShopBySkinType_imageWrapper__AZriZ">
+            <img alt="Advanced Technology" className="ShopBySkinType_img__SJV_O" src="https://source.unsplash.com/1600x900/?technology,healthcare" />
+          </div>
+          <div className="ShopBySkinType_textContainer__fXBb0">
+            <div className="ShopBySkinType_title__lstmx">Advanced Technology</div>
+            <div className="ShopBySkinType_description__ltIg9">Vision AI-powered diagnosis for accurate results</div>
+          </div>
+        </div>
+
+        {/* Cost-Effective Card */}
+        <div className="ShopBySkinType_cardContainer__r93Qr ShopBySkinType_shortCard__d3YWU">
+          <div className="ShopBySkinType_imageWrapper__AZriZ">
+            <img alt="Cost-Effective" className="ShopBySkinType_img__SJV_O" src="https://source.unsplash.com/1600x900/?affordable,healthcare" />
+          </div>
+          <div className="ShopBySkinType_textContainer__fXBb0">
+            <div className="ShopBySkinType_title__lstmx">Cost-Effective</div>
+            <div className="ShopBySkinType_description__ltIg9">Affordable treatment options without compromising on quality</div>
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom Section (Tabbed Navigation) */}
+      <div className="ShopBySkinType_container__cvZMd bottom-section">
+        {/* Our Doctors Tab */}
+        <a className="ShopBySkinType_cardContainer__r93Qr ShopBySkinType_longCard__JuzwU" href="/skin/products?tab=our-doctors">
+          <div className="ShopBySkinType_imageWrapper__AZriZ" style={{ backgroundImage: 'url(https://source.unsplash.com/1600x900/?doctor,health)', backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
+          <div className="ShopBySkinType_textContainer__fXBb0">
+            <div className="ShopBySkinType_title__lstmx">Our Doctors</div>
           </div>
         </a>
 
-        {/* Combination Skin Card */}
-        <a className="ShopBySkinType_cardContainer__r93Qr ShopBySkinType_shortCard__d3YWU" href="/skin/products?skinType=Combination%20skin">
-          <div className="Image_wrapper__bkC8Y ShopBySkinType_imageWrapper__AZriZ">
-            <img alt="Combination Skin" className="ShopBySkinType_img__SJV_O" src="https://res.cloudinary.com/dmezmffej/image/upload/v1690959928/SkincareAssets/SkinType/Combination_skin.avif" />
-          </div>
+        {/* Our Technology Tab */}
+        <a className="ShopBySkinType_cardContainer__r93Qr ShopBySkinType_longCard__JuzwU" href="/skin/products?tab=our-technology">
+          <div className="ShopBySkinType_imageWrapper__AZriZ" style={{ backgroundImage: 'url(https://source.unsplash.com/1600x900/?technology,healthcare)', backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
           <div className="ShopBySkinType_textContainer__fXBb0">
-            <div className="ShopBySkinType_title__lstmx body3-semibold-m body1-bold-d">Combination skin</div>
-            <div className="ShopBySkinType_description__ltIg9 label3-regular-m body1-regular-d">Oily forehead, nose, and chin but drier around the cheeks</div>
-            <div className="ShopBySkinType_rightArrow__1dKY3 fw-8">
-              <i className="icon-arrow-right"></i>
-            </div>
+            <div className="ShopBySkinType_title__lstmx">Our Technology</div>
           </div>
         </a>
 
-        {/* Normal Skin Card */}
-        <a className="ShopBySkinType_cardContainer__r93Qr ShopBySkinType_shortCard__d3YWU" href="/skin/products?skinType=Normal%20skin">
-          <div className="Image_wrapper__bkC8Y ShopBySkinType_imageWrapper__AZriZ">
-            <img alt="Normal Skin" className="ShopBySkinType_img__SJV_O" src="https://res.cloudinary.com/dmezmffej/image/upload/v1690959928/SkincareAssets/SkinType/Normal_skin.avif" />
-          </div>
+        {/* Our Success Stories Tab */}
+        <a className="ShopBySkinType_cardContainer__r93Qr ShopBySkinType_longCard__JuzwU" href="/skin/products?tab=our-success-stories">
+          <div className="ShopBySkinType_imageWrapper__AZriZ" style={{ backgroundImage: 'url(https://source.unsplash.com/1600x900/?success,healthcare)', backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
           <div className="ShopBySkinType_textContainer__fXBb0">
-            <div className="ShopBySkinType_title__lstmx body3-semibold-m body1-bold-d">Normal skin</div>
-            <div className="ShopBySkinType_description__ltIg9 label3-regular-m body1-regular-d">Neither too dry, nor too oily, with even tone and smooth texture</div>
-            <div className="ShopBySkinType_rightArrow__1dKY3 fw-8">
-              <i className="icon-arrow-right"></i>
-            </div>
-          </div>
-        </a>
-
-        {/* Dry Skin Card */}
-        <a className="ShopBySkinType_cardContainer__r93Qr ShopBySkinType_longCard__JuzwU" href="/skin/products?skinType=Dry%20skin">
-          <div className="Image_wrapper__bkC8Y ShopBySkinType_imageWrapper__AZriZ">
-            <img alt="Dry Skin" className="ShopBySkinType_img__SJV_O" src="https://res.cloudinary.com/dmezmffej/image/upload/v1690959927/SkincareAssets/SkinType/Dry_skin.avif" />
-          </div>
-          <div className="ShopBySkinType_textContainer__fXBb0">
-            <div className="ShopBySkinType_title__lstmx body3-semibold-m body1-bold-d">Dry skin</div>
-            <div className="ShopBySkinType_description__ltIg9 label3-regular-m body1-regular-d">Dull, dehydrated, almost invisible pores, and unable to retain moisture</div>
-            <div className="ShopBySkinType_rightArrow__1dKY3 fw-8">
-              <i className="icon-arrow-right"></i>
-            </div>
+            <div className="ShopBySkinType_title__lstmx">Our Success Stories</div>
           </div>
         </a>
       </div>
