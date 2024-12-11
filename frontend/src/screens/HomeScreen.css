@@ -49,14 +49,14 @@
   align-items: center;
   justify-content: center;
   padding: 20px;
-  background: rgba(255, 255, 255, 0.5);
   box-sizing: border-box;
+  height: 600px;
 }
 
 .concave-section {
   position: relative;
-  background-color: #8F9F6D; /* Background color of the section */
-  padding: 50px 0;
+  background-color: #8F9F6D;
+  padding: 60px 0;
   overflow: hidden;
   align-items: center;
 }
@@ -67,8 +67,8 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 50px; /* Adjust height for the depth of the curve */
-  background: rgba(255, 255, 255, 0.5); /* The background color below the curve */
+  height: 70px; /* Adjust height for the depth of the curve */
+  background-color: #8F9F6D;
   border-radius: 0 0 50% 50%;
   transform: translateY(-50%);
   z-index: 1;
@@ -81,19 +81,20 @@
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 50px; /* Adjust height for the depth of the curve */
-  background: rgba(255, 255, 255, 0.5); /* The background color below the curve */
+  height: 70px; /* Adjust height for the depth of the curve */
+  background-color: #8F9F6D;
   border-radius: 50% 50% 0 0;
   transform: translateY(50%);
   z-index: 1;
   align-items: center;
 }
 
-.content {
+.hcontent {
   position: relative;
-  z-index: 2; /* Ensures content is above the pseudo-element */
   text-align: center;
-  color: #fff;
+  height:500px;
+  margin: -60px;
+
 }
 
 .productSection {

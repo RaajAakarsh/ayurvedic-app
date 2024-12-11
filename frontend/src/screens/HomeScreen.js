@@ -44,7 +44,7 @@ function HomeScreen() {
         </button>
       </div>
       <section class="concave-section bottomSection">
-        <div class="content">
+        <div class="hcontent">
           <QuestionnaireCarousel />
         </div>
       </section>

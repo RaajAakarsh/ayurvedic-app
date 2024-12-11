@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./fitbot.css";
+import "./FitBot.css";
 
 // Circular Progress Bar Component
 const CircularProgressBar = ({ degree, value, label }) => (

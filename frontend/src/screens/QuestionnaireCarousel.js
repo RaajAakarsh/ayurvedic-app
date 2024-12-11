@@ -29,16 +29,28 @@ const QuestionnaireCarousel = () => {
       ...prev,
       [currentQuestion]: answer,
     }));
+  };
 
+  const handleNext = () => {
     if (currentQuestion < questions.length - 1) {
       setIsTransitioning(true);
       setTimeout(() => {
         setIsTransitioning(false);
         setCurrentQuestion((prev) => prev + 1);
-      }, 500); // Delay for smooth transition
+      }, 500);
     } else {
       alert('Thank you for completing the questionnaire!');
       console.log('Final Answers:', selectedAnswers);
+    }
+  };
+
+  const handlePrevious = () => {
+    if (currentQuestion > 0) {
+      setIsTransitioning(true);
+      setTimeout(() => {
+        setIsTransitioning(false);
+        setCurrentQuestion((prev) => prev - 1);
+      }, 500);
     }
   };
 
@@ -64,6 +76,22 @@ const QuestionnaireCarousel = () => {
                     {option}
                   </button>
                 ))}
+              </div>
+              <div className="navigation-buttons">
+                <button
+                  className="prev-button"
+                  onClick={handlePrevious}
+                  disabled={currentQuestion === 0}
+                >
+                  Previous
+                </button>
+                <button
+                  className="next-button"
+                  onClick={handleNext}
+                  disabled={currentQuestion === questions.length - 1}
+                >
+                  Next
+                </button>
               </div>
             </div>
           ))}
