@@ -9,6 +9,11 @@ import ShopBySkinType from './ShopBySkinType'; // import Shop by Skin Type compo
 import ShopByConcern from './ShopByConcern'; // import Shop by Concern component
 import TreatmentSection from './treatmentsection';
 import TalkOfTheTown from './TalkOfTheTown';
+import SuccessRate from './SuccessRate';
+import PlansSection from './PlansSection';
+import RequestCallback from './RequestCallback';
+import WhatToAchieve from './WhatToAchieve';
+// import Promise from './Promise';
 import FitBot from './FitBot';
 
 function HomeScreen() {
@@ -58,13 +63,16 @@ function HomeScreen() {
 
       {/* pas section */}
       <ShopByConcern />
-      
+
       {/* Benefits section */}
       <ShopBySkinType />
-      
+
 
       {/* New treatments Section treatment section*/}
       <TreatmentSection />
+
+      {/* talk of the town doctor section */}
+      <TalkOfTheTown />
 
       {/* whats hot in gabit.................................................................................... */}
       <section className="NewUserHomePage_skinCarouselSection__NAw7l">
@@ -111,10 +119,15 @@ function HomeScreen() {
         </div>
       </section>
 
-      <section>
-        <TalkOfTheTown />
-        <FitBot />
-      </section>
+      <SuccessRate />
+
+      <PlansSection />
+
+      <RequestCallback />
+
+      <WhatToAchieve /> 
+
+      {/* <Promise /> */}
 
     </div>
   );

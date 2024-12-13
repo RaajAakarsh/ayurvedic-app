@@ -1,142 +1,189 @@
 .talk-of-the-town {
-    padding: 20px;
-    background-color: #f4f4f4;
-    margin:20px;
-  }
-  
-  .header1 {
-    text-align: center;
-    margin-bottom: 20px;
-    justify-content: center;
-  }
-  
-  .title {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #333;
-    text-align: center;
-  }
-  
-  .gradient-border {
-    height: 4px;
-    background: linear-gradient(to right, #ff7a00, #ffdb00, #ff7a00);
-    width: 100%;
-    margin: 10px 0;
-  }
-  
-  .slider-container {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    overflow: hidden;
-    margin:20px;
-  }
-  
+  padding: 40px 20px;
+  background-color: #f9f9f9;
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+.header1 {
+  text-align: center;
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.title {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: #2a2a2a;
+  letter-spacing: 0.5px;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.gradient-border {
+  height: 3px;
+  background: linear-gradient(to right, #ff6a00, #ffcc00, #ff6a00);
+  width: 100%;
+  margin-top: 10px;
+}
+
+.slider-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.slick-slider1 {
+  display: flex;
+  transition: transform 0.3s ease;
+  width: calc(31% * 3 ); /* 3 cards + 2 gaps of 30px */
+}
+
+.slick-slide1 {
+  width: 30%; /* Ensure each card occupies 28% width */
+  flex-shrink: 0;
+  margin-right: 30px; /* Space between cards */
+}
+
+.video-card1 {
+  background-color: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+  transition: transform 0.3s ease-in-out;
+}
+
+.video-card1:hover {
+  transform: translateY(-10px);
+}
+
+.video-thumbnail {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+}
+
+.thumbnail-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.3s ease;
+}
+
+.content {
+  padding: 20px;
+}
+
+.influencer-name {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+.video-title {
+  font-size: 1rem;
+  color: #777;
+  margin-top: 8px;
+}
+
+.separator {
+  height: 1px;
+  background-color: #eee;
+  margin: 15px 0;
+}
+
+.social-stats {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1rem;
+  color: #333;
+  margin-top: 10px;
+}
+
+.stat {
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+}
+
+.social-icon {
+  width: 22px;
+  height: 22px;
+  margin-right: 8px;
+  opacity: 0.8;
+  transition: opacity 0.3s;
+}
+
+.social-icon:hover {
+  opacity: 1;
+}
+
+.followers {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.arrow-button {
+  position: absolute;
+  top: 50%;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: none;
+  padding: 15px;
+  font-size: 1.6rem;
+  cursor: pointer;
+  z-index: 10;
+  transform: translateY(-50%);
+  transition: background-color 0.3s ease;
+  border-radius: 50%;
+}
+
+.arrow-button:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.left {
+  left: 10px;
+}
+
+.right {
+  right: 10px;
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
   .slick-slider1 {
-    display: flex;
-    transition: transform 0.3s ease;
+    width: calc(45% * 3 + 20px * 2); /* 3 cards + 2 gaps of 20px */
   }
-  
+
   .slick-slide1 {
-    width: 28%; /* Adjust the width of each card */
-    flex-shrink: 0;
+    width: 45%; /* Adjust for smaller screen sizes */
+    margin-right: 20px; /* Reduce space between cards */
+  }
+
+  .video-card1 {
+    margin-right: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .slick-slider1 {
+    width: 100%; /* Ensure full width on smaller screens */
+  }
+
+  .slick-slide1 {
+    width: 80%; /* Adjust for very small screen sizes */
     margin-right: 20px;
   }
-  
-  .video-card1 {
-    background-color: white;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    position: relative;
-  }
-  
-  .video-thumbnail {
-    width: 100%;
-    height: 200px;
-    overflow: hidden;
-  }
-  
-  .thumbnail-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  
-  .content {
-    padding: 15px;
-  }
-  
-  .influencer-name {
-    font-size: 1.2rem;
-    font-weight: bold;
-    margin: 0;
-  }
-  
-  .video-title {
-    font-size: 1rem;
-    color: #666;
-    margin-top: 5px;
-  }
-  
-  .separator {
-    height: 1px;
-    background-color: #ddd;
-    margin: 10px 0;
-  }
-  
-  .social-stats {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.9rem;
-    color: #333;
-  }
-  
-  .stat {
-    display: flex;
-    align-items: center;
-  }
-  
-  .social-icon {
-    width: 20px;
-    height: 20px;
-    margin-right: 5px;
-  }
-  
-  .followers {
-    margin: 0;
-  }
-  
+
   .arrow-button {
-    position: absolute;
-    top: 50%;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
     padding: 10px;
-    font-size: 1.5rem;
-    cursor: pointer;
-    z-index: 10;
-    transform: translateY(-50%);
-    transition: background-color 0.3s;
+    font-size: 1.2rem;
   }
-  
-  .arrow-button:hover {
-    background-color: rgba(0, 0, 0, 0.8);
-  }
-  
-  .left {
-    left: 10px;
-  }
-  
-  .right {
-    right: 10px;
-  }
-  
-  /* Ensure that only 3 cards are visible at once */
-  @media (max-width: 768px) {
-    .slick-slider1 {
-      width: calc(300px * 3 + 20px * 2); /* 3 cards + spacing */
-    }
-  }
-  
+}

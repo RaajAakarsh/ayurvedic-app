@@ -1,0 +1,119 @@
+/* Base styles for the component */
+.new-user-homepage-gabit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+    background-color: #f5f5f5; /* Light background for the section */
+  }
+  
+  .what-to-achieve-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1200px;
+    width: 100%;
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.1);
+  }
+  
+  .vector-component-header {
+    text-align: center;
+  }
+  
+  .subtitle {
+    font-size: 28px;
+    font-weight: 700;
+    color: #333;
+    line-height: 1.4;
+  }
+  
+  .highlight {
+    color: #007bff;
+  }
+  
+  .gradient-bottom-border {
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, #007bff, #00b0ff);
+    margin: 20px auto 30px;
+  }
+  
+  .what-to-achieve-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    flex-wrap: wrap;
+    text-align: center;
+  }
+  
+  .example-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 45%;
+    margin-bottom: 30px;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .example-container:hover {
+    transform: scale(1.05);
+  }
+  
+  .gabit-image {
+    width: 100%;
+    height: auto;
+    max-width: 500px;
+    border-radius: 12px;
+    object-fit: cover;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .example-container:hover .gabit-image {
+    transform: scale(1.05);
+  }
+  
+  .content {
+    padding-top: 15px;
+  }
+  
+  .heading {
+    font-size: 24px;
+    font-weight: 700;
+    color: #333;
+  }
+  
+  .text {
+    font-size: 16px;
+    color: #777;
+    line-height: 1.6;
+    margin-top: 10px;
+    max-width: 300px;
+  }
+  
+  @media (max-width: 768px) {
+    .what-to-achieve-container {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .example-container {
+      width: 80%;
+      margin-bottom: 20px;
+    }
+  
+    .gabit-image {
+      max-width: 100%;
+    }
+  
+    .heading {
+      font-size: 20px;
+    }
+  
+    .text {
+      font-size: 14px;
+    }
+  }
+  
