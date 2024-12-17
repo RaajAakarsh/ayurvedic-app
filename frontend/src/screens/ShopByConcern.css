@@ -83,7 +83,7 @@ body {
     font-size: 18px;
     font-weight: 700;
     color: #333;
-    margin-bottom: 8px;
+    margin: -8px;
 }
 
 /* Description styling */
@@ -136,6 +136,7 @@ body {
     color: #333;
     text-align: center;
 }
+
 
 /* Responsive adjustments */
 @media (max-width: 768px) {

@@ -2,6 +2,15 @@
 import React from 'react';
 import './ShopBySkinType.css'; // Import the specific CSS file for Shop by Skin Type
 
+// Import local images
+import expertCareImage from '../media/ec.jpg';
+import quickReliefImage from '../media/qr.png';
+import advancedTechnologyImage from '../media/at.jpg';
+import costEffectiveImage from '../media/ce.png';
+import doctorsImage from '../media/od.png';
+import technologyImage from '../media/ot.png';
+import successStoriesImage from '../media/oss.png';
+
 const ShopBySkinType = () => {
   return (
     <div className="SkinHealth_skinTypeWrapper__InDhG">
@@ -17,7 +26,11 @@ const ShopBySkinType = () => {
         {/* Expert Care Card */}
         <div className="ShopBySkinType_cardContainer__r93Qr ShopBySkinType_shortCard__d3YWU">
           <div className="ShopBySkinType_imageWrapper__AZriZ">
-            <img alt="Expert Care" className="ShopBySkinType_img__SJV_O" src="https://source.unsplash.com/1600x900/?doctor" />
+            <img
+              alt="Expert Care"
+              className="ShopBySkinType_img__SJV_O"
+              src={expertCareImage}
+            />
           </div>
           <div className="ShopBySkinType_textContainer__fXBb0">
             <div className="ShopBySkinType_title__lstmx">Expert Care</div>
@@ -28,7 +41,11 @@ const ShopBySkinType = () => {
         {/* Quick Relief Card */}
         <div className="ShopBySkinType_cardContainer__r93Qr ShopBySkinType_shortCard__d3YWU">
           <div className="ShopBySkinType_imageWrapper__AZriZ">
-            <img alt="Quick Relief" className="ShopBySkinType_img__SJV_O" src="https://source.unsplash.com/1600x900/?relief" />
+            <img
+              alt="Quick Relief"
+              className="ShopBySkinType_img__SJV_O"
+              src={quickReliefImage}
+            />
           </div>
           <div className="ShopBySkinType_textContainer__fXBb0">
             <div className="ShopBySkinType_title__lstmx">Quick Relief</div>
@@ -39,7 +56,11 @@ const ShopBySkinType = () => {
         {/* Advanced Technology Card */}
         <div className="ShopBySkinType_cardContainer__r93Qr ShopBySkinType_shortCard__d3YWU">
           <div className="ShopBySkinType_imageWrapper__AZriZ">
-            <img alt="Advanced Technology" className="ShopBySkinType_img__SJV_O" src="https://source.unsplash.com/1600x900/?technology,healthcare" />
+            <img
+              alt="Advanced Technology"
+              className="ShopBySkinType_img__SJV_O"
+              src={advancedTechnologyImage}
+            />
           </div>
           <div className="ShopBySkinType_textContainer__fXBb0">
             <div className="ShopBySkinType_title__lstmx">Advanced Technology</div>
@@ -50,7 +71,11 @@ const ShopBySkinType = () => {
         {/* Cost-Effective Card */}
         <div className="ShopBySkinType_cardContainer__r93Qr ShopBySkinType_shortCard__d3YWU">
           <div className="ShopBySkinType_imageWrapper__AZriZ">
-            <img alt="Cost-Effective" className="ShopBySkinType_img__SJV_O" src="https://source.unsplash.com/1600x900/?affordable,healthcare" />
+            <img
+              alt="Cost-Effective"
+              className="ShopBySkinType_img__SJV_O"
+              src={costEffectiveImage}
+            />
           </div>
           <div className="ShopBySkinType_textContainer__fXBb0">
             <div className="ShopBySkinType_title__lstmx">Cost-Effective</div>
@@ -62,24 +87,54 @@ const ShopBySkinType = () => {
       {/* Bottom Section (Tabbed Navigation) */}
       <div className="ShopBySkinType_container__cvZMd bottom-section">
         {/* Our Doctors Tab */}
-        <a className="ShopBySkinType_cardContainer__r93Qr ShopBySkinType_longCard__JuzwU" href="/skin/products?tab=our-doctors">
-          <div className="ShopBySkinType_imageWrapper__AZriZ" style={{ backgroundImage: 'url(https://source.unsplash.com/1600x900/?doctor,health)', backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
+        <a
+          className="ShopBySkinType_cardContainer__r93Qr ShopBySkinType_longCard__JuzwU"
+          href="/skin/products?tab=our-doctors"
+        >
+          <div
+            className="ShopBySkinType_imageWrapper__AZriZ"
+            style={{
+              backgroundImage: `url(${doctorsImage})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+            }}
+          ></div>
           <div className="ShopBySkinType_textContainer__fXBb0">
             <div className="ShopBySkinType_title__lstmx">Our Doctors</div>
           </div>
         </a>
 
         {/* Our Technology Tab */}
-        <a className="ShopBySkinType_cardContainer__r93Qr ShopBySkinType_longCard__JuzwU" href="/skin/products?tab=our-technology">
-          <div className="ShopBySkinType_imageWrapper__AZriZ" style={{ backgroundImage: 'url(https://source.unsplash.com/1600x900/?technology,healthcare)', backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
+        <a
+          className="ShopBySkinType_cardContainer__r93Qr ShopBySkinType_longCard__JuzwU"
+          href="/skin/products?tab=our-technology"
+        >
+          <div
+            className="ShopBySkinType_imageWrapper__AZriZ"
+            style={{
+              backgroundImage: `url(${technologyImage})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+            }}
+          ></div>
           <div className="ShopBySkinType_textContainer__fXBb0">
             <div className="ShopBySkinType_title__lstmx">Our Technology</div>
           </div>
         </a>
 
         {/* Our Success Stories Tab */}
-        <a className="ShopBySkinType_cardContainer__r93Qr ShopBySkinType_longCard__JuzwU" href="/skin/products?tab=our-success-stories">
-          <div className="ShopBySkinType_imageWrapper__AZriZ" style={{ backgroundImage: 'url(https://source.unsplash.com/1600x900/?success,healthcare)', backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
+        <a
+          className="ShopBySkinType_cardContainer__r93Qr ShopBySkinType_longCard__JuzwU"
+          href="/skin/products?tab=our-success-stories"
+        >
+          <div
+            className="ShopBySkinType_imageWrapper__AZriZ"
+            style={{
+              backgroundImage: `url(${successStoriesImage})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+            }}
+          ></div>
           <div className="ShopBySkinType_textContainer__fXBb0">
             <div className="ShopBySkinType_title__lstmx">Our Success Stories</div>
           </div>

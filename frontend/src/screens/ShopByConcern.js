@@ -2,13 +2,19 @@
 import React from 'react';
 import './ShopByConcern.css'; // Import the specific CSS file for Shop by Concern
 
+// Import images from the media folder
+import painfulBowelImage from '../media/bowel.jpg';
+import bleedingItchingImage from '../media/bleeding.jpg';
+import difficultyWalkingImage from '../media/sitting.jpg';
+import emotionalDistressImage from '../media/stress.jpg';
+
 const ShopByConcern = () => {
   return (
     <div className="SkinHealth_skinConcernWrapper__4RStK">
       <div className="ComponentHeader_componentHeaderDesktop__sNo2H ShopByConcern_sectionHeader__CLeME">
         <div className="ComponentHeader_headerTitle__oeo_k">
-          <h2 className="title3-bold-d title3-bold-m">"Are You Suffering from Piles, Fistula or Hemorrhoids?</h2>
-          <h4> Chronic pain, discomfort, and embarrassment can affect your daily life. Our expert doctors provide personalized treatment solutions.</h4>
+          <h2 className="title3-bold-d title3-bold-m">Are You Suffering from Piles, Fistula or Hemorrhoids?</h2>
+          <h4>Chronic pain, discomfort, and embarrassment can affect your daily life. Our expert doctors provide personalized treatment solutions.</h4>
         </div>
         <i className="icon-info ShopByConcern_infoIcon__dnCMm body1-regular-m"></i>
       </div>
@@ -20,7 +26,14 @@ const ShopByConcern = () => {
           <div className="ShopByConcern_textContainer__i6UMp">
             <h4 className="ShopByConcern_title__aV3sc">Painful bowel movements</h4>
           </div>
-          <div className="ShopByConcern_imageWrapper__pz_iH" style={{ backgroundImage: 'url(https://source.unsplash.com/1600x900/?stomach,health)', backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
+          <div
+            className="ShopByConcern_imageWrapper__pz_iH"
+            style={{
+              backgroundImage: `url(${painfulBowelImage})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+            }}
+          ></div>
         </a>
 
         {/* Bleeding or Itching Card */}
@@ -28,7 +41,14 @@ const ShopByConcern = () => {
           <div className="ShopByConcern_textContainer__i6UMp">
             <h4 className="ShopByConcern_title__aV3sc">Bleeding or itching</h4>
           </div>
-          <div className="ShopByConcern_imageWrapper__pz_iH" style={{ backgroundImage: 'url(https://source.unsplash.com/1600x900/?dermatology,skin)', backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
+          <div
+            className="ShopByConcern_imageWrapper__pz_iH"
+            style={{
+              backgroundImage: `url(${bleedingItchingImage})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+            }}
+          ></div>
         </a>
 
         {/* Difficulty Sitting or Walking Card */}
@@ -36,7 +56,14 @@ const ShopByConcern = () => {
           <div className="ShopByConcern_textContainer__i6UMp">
             <h4 className="ShopByConcern_title__aV3sc">Difficulty sitting or walking</h4>
           </div>
-          <div className="ShopByConcern_imageWrapper__pz_iH" style={{ backgroundImage: 'url(https://source.unsplash.com/1600x900/?arthritis,body)', backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
+          <div
+            className="ShopByConcern_imageWrapper__pz_iH"
+            style={{
+              backgroundImage: `url(${difficultyWalkingImage})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+            }}
+          ></div>
         </a>
 
         {/* Emotional Distress Card */}
@@ -44,31 +71,38 @@ const ShopByConcern = () => {
           <div className="ShopByConcern_textContainer__i6UMp">
             <h4 className="ShopByConcern_title__aV3sc">Emotional distress</h4>
           </div>
-          <div className="ShopByConcern_imageWrapper__pz_iH" style={{ backgroundImage: 'url(https://source.unsplash.com/1600x900/?stress,mental-health)', backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
+          <div
+            className="ShopByConcern_imageWrapper__pz_iH"
+            style={{
+              backgroundImage: `url(${emotionalDistressImage})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+            }}
+          ></div>
         </a>
       </div>
 
-      {/* Bottom section (3 cards with titles and background images) */}
+      {/* Bottom section (3 cards without images) */}
       <div className="ShopByConcern_container__ZcaN3 bottom-section">
-        {/* Skin Ageing Concern Card */}
-        <a className="ShopByConcern_cardContainer__Y1toh" href="/skin/products?skinConcern=Skin%20ageing">
+        {/* Piles Symptoms Card */}
+        <a className="ShopByConcern_cardContainer__Y1toh" href="/skin/products?skinConcern=Piles%20symptoms">
           <div className="ShopByConcern_imageWrapper__pz_iH" style={{ backgroundImage: 'url(https://source.unsplash.com/1600x900/?ageing,skin)', backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
           <div className="ShopByConcern_textContainer__i6UMp">
             <h4 className="ShopByConcern_title__aV3sc">Piles Symptoms</h4>
           </div>
         </a>
 
-        {/* Dryness Concern Card */}
-        <a className="ShopByConcern_cardContainer__Y1toh" href="/skin/products?skinConcern=Dryness">
-          <div className="ShopByConcern_imageWrapper__pz_iH" style={{ backgroundImage: 'url(https://source.unsplash.com/1600x900/?dry,skin)', backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
+        {/* Fistula Symptoms Card */}
+        <a className="ShopByConcern_cardContainer__Y1toh" href="/skin/products?skinConcern=Fistula%20symptoms">
+          <div className="ShopByConcern_imageWrapper__pz_iH" style={{ backgroundImage: 'url(https://source.unsplash.com/1600x900/?ageing,skin)', backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
           <div className="ShopByConcern_textContainer__i6UMp">
             <h4 className="ShopByConcern_title__aV3sc">Fistula Symptoms</h4>
           </div>
         </a>
 
-        {/* Dullness Concern Card */}
-        <a className="ShopByConcern_cardContainer__Y1toh" href="/skin/products?skinConcern=Dullness">
-          <div className="ShopByConcern_imageWrapper__pz_iH" style={{ backgroundImage: 'url(https://source.unsplash.com/1600x900/?dullness,skin)', backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
+        {/* Hemorrhoids Symptoms Card */}
+        <a className="ShopByConcern_cardContainer__Y1toh" href="/skin/products?skinConcern=Hemorrhoids%20symptoms">
+          <div className="ShopByConcern_imageWrapper__pz_iH" style={{ backgroundImage: 'url(https://source.unsplash.com/1600x900/?ageing,skin)', backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
           <div className="ShopByConcern_textContainer__i6UMp">
             <h4 className="ShopByConcern_title__aV3sc">Hemorrhoids Symptoms</h4>
           </div>

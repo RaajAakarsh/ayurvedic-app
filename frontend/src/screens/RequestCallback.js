@@ -1,5 +1,6 @@
 import React from 'react';
 import './RequestCallback.css';
+import call from '../media/call.png';
 
 const RequestCallback = () => {
   return (
@@ -12,6 +13,9 @@ const RequestCallback = () => {
             <i className="icon-arrow-right"></i>
           </div>
           <button className="request-callback-btn">Request Callback</button>
+          <a href="tel:+91999999999" className="call-us-link">
+            Or call us on +91 99999 99999
+          </a>
         </div>
         <div className="image-wrapper">
           <img
@@ -19,7 +23,7 @@ const RequestCallback = () => {
             className="callback-image"
             loading="lazy"
             decoding="async"
-            src="https://res.cloudinary.com/dmezmffej/image/upload/v1732510727/static/other/request-callback-illustration.avif"
+            src={call}
           />
         </div>
       </div>
