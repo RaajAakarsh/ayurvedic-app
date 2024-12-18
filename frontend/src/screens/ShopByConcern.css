@@ -44,12 +44,14 @@ body {
 
 /* Top section with 4 cards */
 .ShopByConcern_container__ZcaN3.top-section {
-    grid-template-columns: repeat(4, 1fr); /* 4 cards in the top row */
+    grid-template-columns: repeat(4, 1fr);
+    /* 4 cards in the top row */
 }
 
 /* Bottom section with 3 cards */
 .ShopByConcern_container__ZcaN3.bottom-section {
-    grid-template-columns: repeat(3, 1fr); /* 3 cards in the bottom row */
+    grid-template-columns: repeat(3, 1fr);
+    /* 3 cards in the bottom row */
 }
 
 /* Card container for each concern */
@@ -61,7 +63,8 @@ body {
     text-decoration: none;
     overflow: hidden;
     display: flex;
-    flex-direction: column; /* Align content vertically */
+    flex-direction: column;
+    /* Align content vertically */
 }
 
 /* Card hover effect */
@@ -75,7 +78,8 @@ body {
     color: #333;
     display: flex;
     flex-direction: column;
-    z-index: 10; /* Ensure text is above the background image */
+    z-index: 10;
+    /* Ensure text is above the background image */
 }
 
 /* Title styling */
@@ -91,15 +95,17 @@ body {
     font-size: 14px;
     color: #777;
     line-height: 1.5;
-    margin-bottom: 20px; /* Space between description and image */
+    margin-bottom: 20px;
+    /* Space between description and image */
 }
 
 /* Image inside the card (background image) */
 .ShopByConcern_imageWrapper__pz_iH {
     width: 100%;
-    height: 200px; /* Adjust height as needed */
+    height: 200px;
+    /* Adjust height as needed */
     background-size: cover;
-    background-position: center;
+    background-position: center bottom;
 }
 
 /* Small cards with compact text (for smaller concern cards) */
@@ -124,7 +130,7 @@ body {
 /* Compact small card image size */
 .ShopByConcern_shortCard__AphEq .ShopByConcern_imageWrapper__pz_iH img {
     width: 100%;
-    height: 180px;
+    height: 200px;
     object-fit: cover;
     margin-bottom: 10px;
 }
@@ -137,15 +143,60 @@ body {
     text-align: center;
 }
 
+.scard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 0;
+    background: linear-gradient(to bottom, #97a082, #8F9F6D);
+}
+
+.scard:before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    top: -16px;
+    right: -16px;
+    background: linear-gradient(150deg, #5e6e40, #556B2F);
+    height: 40px;
+    width: 40px;
+    border-radius: 25px;
+    transform: scale(1);
+    transform-origin: 50% 50%;
+    transition: transform 0.35s ease-out;
+}
+
+.scard:hover:before {
+    transform: scale(28);
+}
+
+.scard:hover {
+    transition: all 0.5s ease-out;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.scard:hover .symptoms {
+    transition: all 0.5s ease-out;
+    color: #ffffff;
+}
+
+.symptoms {
+    position: relative;
+    font-weight: 1000;
+    font-size: 1.5rem;
+    text-align: center;
+}
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .ShopByConcern_container__ZcaN3.top-section {
-        grid-template-columns: 1fr 1fr; /* 2 cards per row on medium screens */
+        grid-template-columns: 1fr 1fr;
+        /* 2 cards per row on medium screens */
     }
 
     .ShopByConcern_container__ZcaN3.bottom-section {
-        grid-template-columns: 1fr 1fr; /* 2 cards per row on medium screens */
+        grid-template-columns: 1fr 1fr;
+        /* 2 cards per row on medium screens */
     }
 
     .ShopByConcern_textContainer__i6UMp {
@@ -155,11 +206,13 @@ body {
 
 @media (max-width: 480px) {
     .ShopByConcern_container__ZcaN3.top-section {
-        grid-template-columns: 1fr; /* 1 card per row for small screens */
+        grid-template-columns: 1fr;
+        /* 1 card per row for small screens */
     }
 
     .ShopByConcern_container__ZcaN3.bottom-section {
-        grid-template-columns: 1fr; /* 1 card per row for small screens */
+        grid-template-columns: 1fr;
+        /* 1 card per row for small screens */
     }
 
     .ShopByConcern_shortCard__AphEq {

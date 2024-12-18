@@ -1,6 +1,7 @@
 // ShopBySkinType.js
 import React from 'react';
 import './ShopBySkinType.css'; // Import the specific CSS file for Shop by Skin Type
+import homebg from '../media/homebg.png';
 
 // Import local images
 import expertCareImage from '../media/ec.jpg';

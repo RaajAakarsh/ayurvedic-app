@@ -44,9 +44,7 @@ const ShopByConcern = () => {
           <div
             className="ShopByConcern_imageWrapper__pz_iH"
             style={{
-              backgroundImage: `url(${bleedingItchingImage})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
+              backgroundImage: `url(${bleedingItchingImage})`
             }}
           ></div>
         </a>
@@ -59,9 +57,7 @@ const ShopByConcern = () => {
           <div
             className="ShopByConcern_imageWrapper__pz_iH"
             style={{
-              backgroundImage: `url(${difficultyWalkingImage})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
+              backgroundImage: `url(${difficultyWalkingImage})`
             }}
           ></div>
         </a>
@@ -74,9 +70,7 @@ const ShopByConcern = () => {
           <div
             className="ShopByConcern_imageWrapper__pz_iH"
             style={{
-              backgroundImage: `url(${emotionalDistressImage})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
+              backgroundImage: `url(${emotionalDistressImage})`
             }}
           ></div>
         </a>
@@ -86,25 +80,22 @@ const ShopByConcern = () => {
       <div className="ShopByConcern_container__ZcaN3 bottom-section">
         {/* Piles Symptoms Card */}
         <a className="ShopByConcern_cardContainer__Y1toh" href="/skin/products?skinConcern=Piles%20symptoms">
-          <div className="ShopByConcern_imageWrapper__pz_iH" style={{ backgroundImage: 'url(https://source.unsplash.com/1600x900/?ageing,skin)', backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
-          <div className="ShopByConcern_textContainer__i6UMp">
-            <h4 className="ShopByConcern_title__aV3sc">Piles Symptoms</h4>
+          <div className="ShopByConcern_imageWrapper__pz_iH scard">
+            <h4 className="ShopByConcern_title__aV3sc symptoms">Piles Symptoms</h4>
           </div>
         </a>
 
         {/* Fistula Symptoms Card */}
         <a className="ShopByConcern_cardContainer__Y1toh" href="/skin/products?skinConcern=Fistula%20symptoms">
-          <div className="ShopByConcern_imageWrapper__pz_iH" style={{ backgroundImage: 'url(https://source.unsplash.com/1600x900/?ageing,skin)', backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
-          <div className="ShopByConcern_textContainer__i6UMp">
-            <h4 className="ShopByConcern_title__aV3sc">Fistula Symptoms</h4>
+          <div className="ShopByConcern_imageWrapper__pz_iH scard" >
+          <h4 className="ShopByConcern_title__aV3sc symptoms">Fistula Symptoms</h4>
           </div>
         </a>
 
         {/* Hemorrhoids Symptoms Card */}
         <a className="ShopByConcern_cardContainer__Y1toh" href="/skin/products?skinConcern=Hemorrhoids%20symptoms">
-          <div className="ShopByConcern_imageWrapper__pz_iH" style={{ backgroundImage: 'url(https://source.unsplash.com/1600x900/?ageing,skin)', backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
-          <div className="ShopByConcern_textContainer__i6UMp">
-            <h4 className="ShopByConcern_title__aV3sc">Hemorrhoids Symptoms</h4>
+          <div className="ShopByConcern_imageWrapper__pz_iH scard" >
+          <h4 className="ShopByConcern_title__aV3sc symptoms">Hemorrhoids Symptoms</h4>
           </div>
         </a>
       </div>
