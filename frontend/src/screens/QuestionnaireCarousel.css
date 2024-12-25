@@ -74,6 +74,9 @@
   background-color: var(--color-option-normal);
   color: #fff;
   transition: background-color 0.3s ease, color 0.3s ease;
+  display: flex;
+  justify-content: space-between; /* Distribute text and checkbox */
+  align-items: center;
 }
 
 .option-button:hover {
@@ -83,6 +86,37 @@
 .option-button.selected {
   background-color: var(--color-selected);
   color: #fff;
+}
+
+.checkbox {
+  margin-left: 10px; /* Space between text and checkbox */
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  appearance: none; /* Remove default styling */
+  border: 2px solid var(--color-border);
+  border-radius: 4px;
+  position: relative;
+  background-color: #fff;
+}
+
+.checkbox:checked {
+  background-color: #748556; /* Green background when checked */
+  border-color: #748556; /* Green border when checked */
+}
+
+.checkbox:checked::before {
+  content: '\2713'; /* Unicode checkmark */
+  position: absolute;
+  top: 0;
+  left: 4px;
+  font-size: 16px;
+  color: white; /* Green checkmark color */
+}
+
+.checkbox:focus {
+  outline: none;
+  border-color: #748556;
 }
 
 .navigation-buttons {

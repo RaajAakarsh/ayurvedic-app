@@ -84,10 +84,11 @@ const CarouselSection = ({ items, sectionType }) => {
 
   const goToPrevious = () => {
     setCurrentIndex((prevIndex) =>
-    (prevIndex - 1 + items.length) % items.length
+      (prevIndex - 1 + items.length) % items.length
     );
   };
 
+  // Create a smooth "infinite" scroll by wrapping around the display items
   const handleVideoClick = (videoElement) => {
     if (videoElement.paused || videoElement.ended) {
       videoElement.play();
@@ -95,7 +96,6 @@ const CarouselSection = ({ items, sectionType }) => {
       videoElement.pause();
     }
   };
-
   const displayItems = [
     ...items.slice(currentIndex, currentIndex + itemsToShow),
     ...items.slice(0, Math.max(0, currentIndex + itemsToShow - items.length)),
@@ -104,7 +104,7 @@ const CarouselSection = ({ items, sectionType }) => {
   return (
     <div className="carousel-section">
       <h2>{sectionType} Carousel</h2>
-      <div className="carousel-container">
+      <div className="tcarousel-container">
         <button className="carousel-arrow left" onClick={goToPrevious}>
           ←
         </button>

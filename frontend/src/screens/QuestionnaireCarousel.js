@@ -25,10 +25,22 @@ const QuestionnaireCarousel = () => {
   const [isTransitioning, setIsTransitioning] = useState(false);
 
   const handleAnswerSelect = (answer) => {
-    setSelectedAnswers((prev) => ({
-      ...prev,
-      [currentQuestion]: answer,
-    }));
+    setSelectedAnswers((prev) => {
+      const newAnswers = { ...prev };
+      if (!newAnswers[currentQuestion]) {
+        newAnswers[currentQuestion] = [];
+      }
+      
+      // Add or remove the answer from the array
+      const selectedAnswersForCurrentQuestion = newAnswers[currentQuestion];
+      if (selectedAnswersForCurrentQuestion.includes(answer)) {
+        newAnswers[currentQuestion] = selectedAnswersForCurrentQuestion.filter(item => item !== answer);  // Remove the answer
+      } else {
+        newAnswers[currentQuestion] = [...selectedAnswersForCurrentQuestion, answer];  // Add the answer
+      }
+      
+      return newAnswers;
+    });
   };
 
   const handleNext = () => {
@@ -66,11 +78,18 @@ const QuestionnaireCarousel = () => {
                   <button
                     key={idx}
                     className={`option-button ${
-                      selectedAnswers[currentQuestion] === option ? 'selected' : ''
+                      selectedAnswers[currentQuestion]?.includes(option) ? 'selected' : ''
                     }`}
                     onClick={() => handleAnswerSelect(option)}
                   >
                     {option}
+                    <input
+                      type="checkbox"
+                      checked={selectedAnswers[currentQuestion]?.includes(option)}
+                      onChange={() => handleAnswerSelect(option)}
+                      onClick={() => handleAnswerSelect(option)}
+                      className="checkbox"
+                    />
                   </button>
                 ))}
               </div>

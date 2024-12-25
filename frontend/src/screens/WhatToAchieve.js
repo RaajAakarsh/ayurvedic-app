@@ -1,5 +1,6 @@
 import React from 'react';
 import './WhatToAchieve.css';
+import logo from '../media/logo.png'
 
 const WhatToAchieve = () => {
   return (
@@ -17,7 +18,7 @@ const WhatToAchieve = () => {
               alt="Fitness"
               loading="eager"
               className="gabit-image"
-              src="https://assets.prod.gabit.com/2024-12-13-6f29653/_next/static/media/whatToAchieve-1.75aef25a.webp"
+              src={logo}
             />
             <div className="content">
               <p className="heading">Fitness</p>
@@ -32,7 +33,7 @@ const WhatToAchieve = () => {
               alt="Nutrition"
               loading="eager"
               className="gabit-image"
-              src="https://assets.prod.gabit.com/2024-12-13-6f29653/_next/static/media/whatToAchieve-2.8c556057.webp"
+              src={logo}
             />
             <div className="content">
               <p className="heading">Nutrition</p>

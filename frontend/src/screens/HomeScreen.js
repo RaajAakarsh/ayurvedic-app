@@ -128,7 +128,7 @@ function HomeScreen() {
 
       <RequestCallback />
 
-      <WhatToAchieve /> 
+      {/* <WhatToAchieve />  */}
 
       {/* <Promise /> */}
 

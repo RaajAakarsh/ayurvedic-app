@@ -1,338 +1,157 @@
 /* General Section Styling */
 .top-transformation {
-    padding: 40px 20px;
-    background-color: #f8f8f8;
-  }
-  
-  .carousel-section {
-    margin-bottom: 50px;
-    text-align: center;
-  }
-  
-  .carousel-section h2 {
-    font-size: 2.5rem;
-    font-weight: 600;
-    margin-bottom: 30px;
-    color: #333;
-  }
-  
-  /* Carousel Container */
-  .carousel-container {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-  }
-  
-  .stories-container {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-  }
-  
-  /* Individual Carousel Card */
+  padding: 40px 20px;
+  background-color: #f8f8f8;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center horizontally */
+  justify-content: center;
+}
+
+.carousel-section {
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+.carousel-section h2 {
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+/* Carousel Container */
+.tcarousel-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.stories-container {
+  display: flex;
+  transition: transform 0.3s ease;
+  will-change: transform;
+}
+
+/* Individual Carousel Card */
+.carousel-card {
+  background-color: #fff;
+  border-radius: 12px;
+  width: 280px;
+  margin: 10px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: auto;
+  cursor: pointer;
+}
+
+.carousel-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Carousel Image */
+.carousel-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+/* Carousel Title */
+.carousel-title {
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: #333;
+  margin: 20px;
+  flex-grow: 0;
+}
+
+/* Carousel Description for Blog Section */
+.carousel-description {
+  font-size: 1.1rem;
+  color: #666;
+  margin: 0 20px 20px;
+  line-height: 1.5;
+  flex-grow: 1;
+}
+
+/* Carousel Video */
+.carousel-video {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+/* Video Placeholder */
+.video-placeholder {
+  background-color: #f0f0f0;
+  height: 180px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+  font-size: 1.2rem;
+  color: #333;
+  cursor: pointer;
+}
+
+/* Carousel Arrows */
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 10px;
+  font-size: 2rem;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.left {
+  left: 0;
+}
+
+.right {
+  right: 0;
+}
+
+.carousel-arrow:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
   .carousel-card {
-    background-color: #fff;
-    border-radius: 12px;
-    width: 280px;
-    margin: 10px;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 380px; /* Set a fixed height to prevent cards from resizing */
-    cursor: pointer;
-  }
-  
-  .carousel-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-  }
-  
-  /* Carousel Image */
-  .carousel-image {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-    border-top-left-radius: 12px;
-    border-top-right-radius: 12px;
-  }
-  
-  /* Carousel Title */
-  .carousel-title {
-    font-size: 1.6rem;
-    font-weight: 500;
-    color: #333;
-    margin: 20px;
-    flex-grow: 0;
-  }
-  
-  /* Carousel Description for Blog Section */
-  .carousel-description {
-    font-size: 1.1rem;
-    color: #666;
-    margin: 0 20px 20px;
-    line-height: 1.5;
-    flex-grow: 1;
-  }
-  
-  /* Carousel Arrows */
-  .carousel-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    padding: 10px;
-    font-size: 2rem;
-    cursor: pointer;
-    z-index: 10;
-  }
-  
-  .left {
-    left: 0;
-  }
-  
-  .right {
-    right: 0;
-  }
-  
-  .carousel-arrow:hover {
-    background-color: rgba(0, 0, 0, 0.7);
-  }
-  
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .carousel-card {
       width: 100%;
       height: auto; /* Let the height adjust for small screens */
-    }
-  
-    .stories-container {
-      flex-direction: column;
-      gap: 10px;
-    }
   }
-  
-  @media (min-width: 768px) {
-    .carousel-card {
-      width: 30%;
-    }
-  }
-  
-  @media (min-width: 1200px) {
-    .carousel-card {
-      width: 30%;
-    }
-  }
-  
-  /* Video Styling */
-  .carousel-video-card {
-    cursor: pointer;
-  }
-  
-  .carousel-video-card:hover .carousel-title {
-    text-decoration: underline;
-  }
-  
-  /* Carousel Video */
-  .carousel-video {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-    border-radius: 12px;
-    margin-top: 20px;
-  }
-  
-  /* Add a placeholder for the video card when the video is not playing */
-  .video-placeholder {
-    background-color: #f0f0f0;
-    height: 180px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 12px;
-    font-size: 1.2rem;
-    color: #333;
-    cursor: pointer;
-  }
-  
-  /* Modal Styling */
-  .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.7);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-  }
-  
-  .modal-content {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    max-width: 800px;
-    width: 90%;
-    position: relative;
-  }
-  
-  .close-modal {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 1.5rem;
-    background: none;
-    border: none;
-    color: #333;
-    cursor: pointer;
-  }
-  
-  .video-modal {
-    max-width: 800px;
-    width: 100%;
-  }
-  
-  .video-modal video {
-    width: 100%;
-    border-radius: 8px;
-  }
-  
-  /* General Section Styling */
-.top-transformation {
-    padding: 40px 20px;
-    background-color: #f8f8f8;
-  }
-  
-  .carousel-section {
-    margin-bottom: 50px;
-    text-align: center;
-  }
-  
-  .carousel-section h2 {
-    font-size: 2.5rem;
-    font-weight: 600;
-    margin-bottom: 30px;
-    color: #333;
-  }
-  
-  /* Carousel Container */
-  .carousel-container {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    width:80%;
-    height:80%;
-  }
-  
+
   .stories-container {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-    will-change: transform;
-  }
-  
-  /* Individual Carousel Card */
-  .carousel-card {
-    background-color: #fff;
-    border-radius: 12px;
-    width: 280px;
-    margin: 10px;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 380px;
-  }
-  
-  .carousel-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-  }
-  
-  /* Video Styling */
-  .carousel-video {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-    border-top-left-radius: 12px;
-    border-top-right-radius: 12px;
-    cursor: pointer;
-  }
-  
-  /* Carousel Title */
-  .carousel-title {
-    font-size: 1.6rem;
-    font-weight: 500;
-    color: #333;
-    margin: 20px;
-    flex-grow: 0;
-  }
-  
-  /* Carousel Description for Blog Section */
-  .carousel-description {
-    font-size: 1.1rem;
-    color: #666;
-    margin: 0 20px 20px;
-    line-height: 1.5;
-    flex-grow: 1;
-  }
-  
-  /* Carousel Arrows */
-  .carousel-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    padding: 10px;
-    font-size: 2rem;
-    cursor: pointer;
-    z-index: 10;
-  }
-  
-  .left {
-    left: 0;
-  }
-  
-  .right {
-    right: 0;
-  }
-  
-  .carousel-arrow:hover {
-    background-color: rgba(0, 0, 0, 0.7);
-  }
-  
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .carousel-card {
-      width: 100%;
-      height: auto;
-    }
-  
-    .stories-container {
       flex-direction: column;
       gap: 10px;
-    }
   }
-  
-  @media (min-width: 768px) {
-    .carousel-card {
+}
+
+@media (min-width: 768px) {
+  .carousel-card {
       width: 30%;
-    }
   }
-  
-  @media (min-width: 1200px) {
-    .carousel-card {
+}
+
+@media (min-width: 1200px) {
+  .carousel-card {
       width: 30%;
-    }
   }
-  
+}

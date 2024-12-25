@@ -2,40 +2,19 @@
 .plans-section {
   padding: 40px 20px;
   text-align: center;
+  background-color: #f3f4ef; /* Light complementary shade */
 }
 
 .plans-title {
   font-size: 2.5rem;
   margin-bottom: 20px;
+  color: #556B2F;
 }
 
 h3 {
   font-size: 1.8rem;
   margin-top: 20px;
-}
-
-.option-selector {
-  margin-bottom: 30px;
-}
-
-.option-button {
-  border: 2px solid #ddd;
-  padding: 10px 20px;
-  font-size: 1.2rem;
-  margin: 0 10px;
-  cursor: pointer;
-  border-radius: 25px;
-  transition: background-color 0.3s ease;
-}
-
-.option-button:hover {
-  background-color: #e0e0e0;
-}
-
-.option-button.active {
-  background-color: #00bcd4;
-  color: white;
-  border-color: #00bcd4;
+  color: #8F9F6D;
 }
 
 .lite-plans, .pro-plans {
@@ -43,31 +22,32 @@ h3 {
 }
 
 .plans-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  display: flex;
+  align-items: center;
+  justify-content: center;
   gap: 20px;
-  justify-items: center;
 }
 
 .plan {
   border-radius: 16px;
-  box-shadow: 0 30px 30px -25px rgba(0, 38, 255, 0.205);
+  box-shadow: 0 30px 30px -25px rgba(143, 159, 109, 0.8);
   padding: 10px;
   background-color: #fff;
-  color: #697e91;
-  max-width: 300px;
+  color: #425475; /* Text color for good contrast */
+  width: 20%;
+  height: auto;
 }
 
 .plan strong {
   font-weight: 600;
-  color: #425275;
+  color: rgba(0, 0, 0, 0.719);
 }
 
 .plan .inner {
   align-items: center;
   padding: 20px;
   padding-top: 40px;
-  background-color: #ecf0ff;
+  background-color: #c7d1a7; /* Softer background shade */
   border-radius: 12px;
   position: relative;
 }
@@ -76,18 +56,18 @@ h3 {
   position: absolute;
   top: 0;
   right: 0;
-  background-color: #bed6fb;
+  background-color: #8F9F6D;
   border-radius: 99em 0 0 99em;
   display: flex;
   align-items: center;
-  padding: 0.625em 0.75em;
+  padding: 0.12em 0.75em;
   font-size: 1.25rem;
   font-weight: 600;
-  color: #425475;
+  color: #fff;
 }
 
 .plan .pricing small {
-  color: #707a91;
+  color: #e6ead5; /* Lighter text color for subtlety */
   font-size: 0.75em;
   margin-left: 0.25em;
 }
@@ -95,7 +75,7 @@ h3 {
 .plan .title {
   font-weight: 600;
   font-size: 1.25rem;
-  color: #425675;
+  color: #556B2F;
 }
 
 .plan .title + * {
@@ -115,6 +95,7 @@ h3 {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  color: #425475; /* Maintain readability */
 }
 
 .plan .features li + * {
@@ -122,7 +103,7 @@ h3 {
 }
 
 .plan .features .icon {
-  background-color: #1FCAC5;
+  background-color: #8F9F6D;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -130,11 +111,6 @@ h3 {
   border-radius: 50%;
   width: 20px;
   height: 20px;
-}
-
-.plan .features .icon svg {
-  width: 14px;
-  height: 14px;
 }
 
 .plan .features + * {
@@ -149,7 +125,7 @@ h3 {
 }
 
 .plan .button {
-  background-color: #6558d3;
+  background-color: #8F9F6D;
   border-radius: 6px;
   color: #fff;
   font-weight: 500;
@@ -163,7 +139,7 @@ h3 {
 }
 
 .plan .button:hover, .plan .button:focus {
-  background-color: #4133B7;
+  background-color: #6f8154; /* Darker shade for hover */
 }
 
 @media (max-width: 768px) {
@@ -173,11 +149,6 @@ h3 {
 
   h3 {
     font-size: 1.5rem;
-  }
-
-  .option-button {
-    font-size: 1.1rem;
-    padding: 8px 16px;
   }
 
   .plan-title {
