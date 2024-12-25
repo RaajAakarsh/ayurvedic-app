@@ -9,6 +9,7 @@ import ShopBySkinType from './ShopBySkinType'; // import Shop by Skin Type compo
 import ShopByConcern from './ShopByConcern'; // import Shop by Concern component
 import TreatmentSection from './treatmentsection';
 import TalkOfTheTown from './TalkOfTheTown';
+import TopTransformationStories from './TopTransformationStories';
 import SuccessRate from './SuccessRate';
 import PlansSection from './PlansSection';
 import RequestCallback from './RequestCallback';
@@ -118,6 +119,8 @@ function HomeScreen() {
           </div>
         </div>
       </section>
+
+      <TopTransformationStories />
 
       <SuccessRate />
 

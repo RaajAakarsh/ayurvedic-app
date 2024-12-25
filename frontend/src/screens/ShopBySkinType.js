@@ -9,8 +9,8 @@ import quickReliefImage from '../media/qr.png';
 import advancedTechnologyImage from '../media/at.jpg';
 import costEffectiveImage from '../media/ce.png';
 import doctorsImage from '../media/od.png';
-import technologyImage from '../media/ot.png';
-import successStoriesImage from '../media/oss.png';
+import technologyImage from '../media/ot.jpg';
+import successStoriesImage from '../media/cs.jpg';
 
 const ShopBySkinType = () => {
   return (
@@ -64,8 +64,8 @@ const ShopBySkinType = () => {
             />
           </div>
           <div className="ShopBySkinType_textContainer__fXBb0">
-            <div className="ShopBySkinType_title__lstmx">Advanced Technology</div>
-            <div className="ShopBySkinType_description__ltIg9">Vision AI-powered diagnosis for accurate results</div>
+            <div className="ShopBySkinType_title__lstmx">Reliable Treatment</div>
+            <div className="ShopBySkinType_description__ltIg9">Highly reliable diagnosis for accurate results</div>
           </div>
         </div>
 
@@ -119,7 +119,7 @@ const ShopBySkinType = () => {
             }}
           ></div>
           <div className="ShopBySkinType_textContainer__fXBb0">
-            <div className="ShopBySkinType_title__lstmx">Our Technology</div>
+            <div className="ShopBySkinType_title__lstmx">Our Treatment</div>
           </div>
         </a>
 
@@ -137,7 +137,7 @@ const ShopBySkinType = () => {
             }}
           ></div>
           <div className="ShopBySkinType_textContainer__fXBb0">
-            <div className="ShopBySkinType_title__lstmx">Our Success Stories</div>
+            <div className="ShopBySkinType_title__lstmx">Case Studies</div>
           </div>
         </a>
       </div>

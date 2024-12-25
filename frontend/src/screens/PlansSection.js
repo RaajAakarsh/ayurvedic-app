@@ -16,7 +16,7 @@ const PlansSection = () => {
     { title: 'Lite Plan D1', description: 'Description for A1', price: '9.99', features: ['Feature 1', 'Feature 2', 'Feature 3'] },
     { title: 'Lite Plan D2', description: 'Description for A2', price: '14.99', features: ['Feature 1', 'Feature 2', 'Feature 3'] },
     { title: 'Lite Plan D3', description: 'Description for A1', price: '9.99', features: ['Feature 1', 'Feature 2', 'Feature 3'] },
-    // Add all other lite plans similarly...
+    
   ];
 
   const proPlans = [
