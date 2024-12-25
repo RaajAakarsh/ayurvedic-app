@@ -148,3 +148,35 @@ button:hover:not(:disabled) {
 .transitioning .card-container {
   transition: transform 0.5s ease-in-out;
 }
+
+.fact-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  z-index: 1000; /* Make sure it appears on top */
+  width: 80%;
+  max-width: 400px;
+  border-radius: 8px;
+}
+
+.continue-button {
+  padding: 10px 20px;
+  background-color: var(--color-primary);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.continue-button:hover {
+  background-color: var(--color-button-hover);
+}
+
