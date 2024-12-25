@@ -228,11 +228,14 @@
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    width:80%;
+    height:80%;
   }
   
   .stories-container {
     display: flex;
     transition: transform 0.5s ease-in-out;
+    will-change: transform;
   }
   
   /* Individual Carousel Card */

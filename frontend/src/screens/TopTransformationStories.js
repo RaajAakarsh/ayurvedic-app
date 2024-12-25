@@ -1,37 +1,38 @@
 import React, { useState } from 'react';
 import './TopTransformationStories.css';
 import logo from '../media/logo.png';
+import v from '../media/mov_bbb.mp4';
 
 const videos = [
   {
     id: 1,
     title: 'Video 1: Fitness Transformation',
     description: 'Watch how this individual transformed their fitness journey.',
-    videoUrl: 'https://www.w3schools.com/html/mov_bbb.mp4',
+    videoUrl: v,
   },
   {
     id: 2,
     title: 'Video 2: Weight Loss Success',
     description: 'A story of a dramatic weight loss transformation.',
-    videoUrl: 'https://www.w3schools.com/html/mov_bbb.mp4',
+    videoUrl: v,
   },
   {
     id: 3,
     title: 'Video 3: Health Transformation',
     description: 'See how someone changed their life through a health-focused approach.',
-    videoUrl: 'https://www.w3schools.com/html/mov_bbb.mp4',
+    videoUrl: v,
   },
   {
     id: 4,
     title: 'Video 4: Bodybuilding Journey',
     description: 'A bodybuilding transformation story that will inspire you.',
-    videoUrl: 'https://www.w3schools.com/html/mov_bbb.mp4',
+    videoUrl: v,
   },
   {
     id: 5,
     title: 'Video 5: Overcoming Adversity',
     description: 'A powerful story of overcoming challenges through fitness.',
-    videoUrl: 'https://www.w3schools.com/html/mov_bbb.mp4',
+    videoUrl: v,
   },
 ];
 
@@ -75,6 +76,7 @@ const blogs = [
 
 const CarouselSection = ({ items, sectionType }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const itemsToShow = 3;
 
   const goToNext = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % items.length);
@@ -82,7 +84,7 @@ const CarouselSection = ({ items, sectionType }) => {
 
   const goToPrevious = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? items.length - 1 : prevIndex - 1
+    (prevIndex - 1 + items.length) % items.length
     );
   };
 
@@ -94,6 +96,11 @@ const CarouselSection = ({ items, sectionType }) => {
     }
   };
 
+  const displayItems = [
+    ...items.slice(currentIndex, currentIndex + itemsToShow),
+    ...items.slice(0, Math.max(0, currentIndex + itemsToShow - items.length)),
+  ];
+
   return (
     <div className="carousel-section">
       <h2>{sectionType} Carousel</h2>
@@ -101,8 +108,8 @@ const CarouselSection = ({ items, sectionType }) => {
         <button className="carousel-arrow left" onClick={goToPrevious}>
           ←
         </button>
-        <div className="stories-container">
-          {items.slice(currentIndex, currentIndex + 3).map((item) => (
+        <div className="stories-container" >
+          {displayItems.map((item) => (
             <div key={item.id} className="carousel-card">
               <div className="carousel-card-inner">
                 {sectionType === 'Video' ? (
@@ -112,6 +119,7 @@ const CarouselSection = ({ items, sectionType }) => {
                     preload="metadata"
                     onClick={(e) => handleVideoClick(e.target)}
                     controls={false}
+                    style={{ width: '100%', height: 'auto' }}
                   />
                 ) : (
                   <a href={item.link} target="_blank" rel="noopener noreferrer">
@@ -123,7 +131,6 @@ const CarouselSection = ({ items, sectionType }) => {
                   </a>
                 )}
                 <h3 className="carousel-title">{item.title}</h3>
-                <p className="carousel-description">{item.description}</p>
               </div>
             </div>
           ))}
