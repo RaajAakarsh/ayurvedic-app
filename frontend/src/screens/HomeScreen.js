@@ -56,7 +56,7 @@ function HomeScreen() {
       </div> */}
 
       <HeroSection />
-      
+
       {/* pas section */}
       <ShopByConcern />
 
@@ -69,14 +69,14 @@ function HomeScreen() {
       {/* product section */}
       <ProductSection />
 
-      
+      {/* New treatments Section treatment section*/}
+      <TreatmentSection />
 
       {/* Benefits section */}
       <ShopBySkinType />
 
 
-      {/* New treatments Section treatment section*/}
-      <TreatmentSection />
+      
 
       {/* talk of the town doctor section */}
       <TalkOfTheTown />

@@ -5,18 +5,23 @@ const QuestionnaireCarousel = () => {
   const questions = [
     {
       id: 1,
-      text: "What's your primary goal?",
-      options: ["Career Growth", "Personal Development", "Financial Success", "Work-Life Balance"],
+      text: "Do you experience painful bowel movements?",
+      options: ["Yes", "No"],
     },
     {
       id: 2,
-      text: "How do you prefer to learn?",
-      options: ["Reading", "Watching Videos", "Hands-on Practice", "Group Discussions"],
+      text: "Have you noticed bleeding or itching?",
+      options: ["Yes", "No"],
     },
     {
       id: 3,
-      text: "What motivates you most?",
-      options: ["Recognition", "Personal Satisfaction", "Financial Rewards", "Making a Difference"],
+      text: "Do you have difficulty sitting or walking?",
+      options: ["Yes", "No"],
+    },
+    {
+      id: 4,
+      text: "Have you experienced emotional distress?",
+      options: ["Yes", "No"],
     },
   ];
 
