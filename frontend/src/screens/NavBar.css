@@ -189,3 +189,45 @@
   text-decoration: underline;
   font-size: 18px;
 }
+
+@media (max-width: 768px) {
+  .search-bar {
+    width: 300px;
+  }
+
+  .auth {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo-text {
+    font-size: 24px;
+  }
+
+  .consultations-text {
+    font-size: 14px;
+  }
+
+  .search-input {
+    font-size: 14px;
+  }
+
+  .auth .profile-pic {
+    width: 35px;
+    height: 35px;
+  }
+
+  .location-text {
+    font-size: 14px;
+  }
+
+  .navbar ul li a {
+    font-size: 16px;
+  }
+
+  .navbar ul li a.active {
+    font-size: 16px;
+  }
+}

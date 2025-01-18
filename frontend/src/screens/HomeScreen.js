@@ -14,6 +14,7 @@ import SuccessRate from './SuccessRate';
 import PlansSection from './PlansSection';
 import RequestCallback from './RequestCallback';
 import WhatToAchieve from './WhatToAchieve';
+import HeroSection from './HeroSection'
 // import Promise from './Promise';
 import FitBot from './FitBot';
 
@@ -47,12 +48,18 @@ function HomeScreen() {
 
   return (
     <div className="homeScreen" style={{ backgroundImage: `url(${homebg})` }}>
-      <div className="topSection">
+      {/* <div className="topSection">
         <h1 className="h">AYURVEDIC CONSULTATIONS</h1>
         <button className="consult-btn" onClick={handleConsultButtonClick}>
           Consult an Ayurvedic Doctor <br /> Book a Session
         </button>
-      </div>
+      </div> */}
+
+      <HeroSection />
+      
+      {/* pas section */}
+      <ShopByConcern />
+
       <section class="concave-section bottomSection">
         <div class="hcontent">
           <QuestionnaireCarousel />
@@ -62,8 +69,7 @@ function HomeScreen() {
       {/* product section */}
       <ProductSection />
 
-      {/* pas section */}
-      <ShopByConcern />
+      
 
       {/* Benefits section */}
       <ShopBySkinType />

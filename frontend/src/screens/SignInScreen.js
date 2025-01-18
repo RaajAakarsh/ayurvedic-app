@@ -72,7 +72,7 @@ function SignInScreen() {
         <h1>AYURVEDIC</h1>
         <h2>Consultations</h2>
         <div className='outbox'>
-          <button className="consult-btn">
+          <button className="sconsult-btn consult-btn">
             Consult an Ayurvedic Doctor <br /> Book a Session
           </button>
         </div>

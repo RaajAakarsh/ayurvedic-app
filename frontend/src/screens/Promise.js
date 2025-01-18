@@ -1,7 +1,7 @@
 import React from 'react';
 import './Promise.css';
 
-const Promise = () => {
+const PromiseSection = () => {
   return (
     <section className="new-user-homepage-promise">
       <div className="promise-section">
@@ -47,4 +47,4 @@ const Promise = () => {
   );
 };
 
-export default Promise;
+export default PromiseSection;
