@@ -15,6 +15,10 @@ const CartScreen = () => {
   const userId = auth?.user?.id; // Get userId
   const userName = auth?.user?.firstName + ' ' + auth?.user?.lastName;
 
+  useEffect(() => {
+    console.log("Cart Items:", cartItems);
+  }, [cartItems]);
+
   const handleCheckout = async () => {
     try {
       for (let item of cartItems) {

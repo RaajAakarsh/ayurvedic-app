@@ -26,7 +26,7 @@ const OrderHistory = () => {
   }, [userId]);
 
   return (
-    <div className="order-history">
+    <div className="order-history" style={{ marginTop: '160px' }}>
       <h1>Your Order History</h1>
       {orders.length === 0 ? (
         <p>No orders found.</p>
