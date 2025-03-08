@@ -1,7 +1,9 @@
 import React from 'react';
-import './Treatments.css';  // Import the CSS for styling
+import './Treatments.css';  
+import { useNavigate } from 'react-router-dom';
 
 function TreatmentsScreen() {
+  const navigate = useNavigate();
   const treatments = [
     { category: 'Digestive Health', items: ['Acid Reflux', 'Constipation', 'Diarrhea', 'Indigestion', 'Irritable Bowel Syndrome (IBS)'] },
     { category: 'Respiratory Health', items: ['Asthma', 'Bronchitis', 'Common Cold', 'Cough', 'Sinusitis'] },
@@ -26,7 +28,8 @@ function TreatmentsScreen() {
         <h1>Treatments</h1>
         <div className="treatments-list">
           {treatments.map((treatment, index) => (
-            <div key={index} className="treatment-category">
+            <div key={index} className="treatment-category" onClick={() => navigate(`/treatment/${encodeURIComponent(treatment.category)}`)}
+            >
               <h2>{treatment.category}</h2>
               <ul>
                 {treatment.items.map((item, i) => (

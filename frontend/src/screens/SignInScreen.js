@@ -6,7 +6,6 @@ import { AuthContext } from '../context/AuthContext';
 
 function SignInScreen() {
   const { setAuth } = useContext(AuthContext);
-  const [userType, setUserType] = useState('');
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -37,25 +36,34 @@ function SignInScreen() {
         body: JSON.stringify(formData),
       });
 
-      console.log(formData)
+      console.log(formData);
 
       const result = await response.json();
       if (response.ok) {
         localStorage.setItem('token', result.token);
-        
         localStorage.setItem('email', formData.email);
         localStorage.setItem('role', formData.role);
         setAuth({ token: result.token, user: result.user, role: formData.role });
-        
+
         alert('Login successful');
 
-
-        if(formData.role === 'doctor'){
-          navigate('/doctor-home')
-        }else if(formData.role === 'retailer'){
-          navigate('/retailer-home')
-        }else if(formData.role === 'patient'){
-          navigate('/patient-home')
+        // Redirect based on role
+        switch (formData.role) {
+          case 'doctor':
+            navigate('/doctor-home');
+            break;
+          case 'retailer':
+            navigate('/retailer-home');
+            break;
+          case 'patient':
+            navigate('/patient-home');
+            break;
+          case 'admin':
+            navigate('/admin-home');
+            break;
+          default:
+            navigate('/');
+            break;
         }
       } else {
         alert(result.error || 'Invalid credentials');
@@ -87,14 +95,13 @@ function SignInScreen() {
           <input type="password" name="password" value={formData.password} onChange={handleInputChange} placeholder="Password" required />
 
           {/* Role Selection Dropdown */}
-          {/* <div className="form-group"> */}
-            <label htmlFor="role">Select Role:</label>
-            <select name="role" value={formData.role} onChange={handleInputChange} required>
-              <option value="doctor">Doctor</option>
-              <option value="retailer">Retailer</option>
-              <option value="patient">Patient</option>
-            </select>
-          {/* </div> */}
+          <label htmlFor="role">Select Role:</label>
+          <select name="role" value={formData.role} onChange={handleInputChange} required>
+            <option value="doctor">Doctor</option>
+            <option value="retailer">Retailer</option>
+            <option value="patient">Patient</option>
+            <option value="admin">Admin</option> {/* Added Admin Role */}
+          </select>
 
           <a href="#" className="forgot-password">Forgot Password?</a>
           <button type="submit" className="signin-btn">SIGN IN</button> {/* onSubmit handles this */}

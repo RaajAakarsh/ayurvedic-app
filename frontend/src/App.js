@@ -30,6 +30,7 @@ import CurrentRequests from './screens/Doctors/CurrentRequests';
 import AppointmentSlots from './screens/Doctors/AppointmentSlots';  
 import PatientList from './screens/Doctors/PatientList';  
 import HealthBlogs from './screens/Doctors/HealthBlogs';  
+import TreatmentDetailsScreen from './screens/TreatmentDetailsScreen';
 
 import RetailerDashboard from './screens/Retailers/RetailerDashboard';
 import ManageProducts from './screens/Retailers/ManageProducts';
@@ -65,6 +66,7 @@ function App() {
         <Route path="/signin" element={<SignInScreen />} />
         <Route path="/signup" element={<SignUpScreen />} />
         <Route path="/treatments" element={<TreatmentsScreen />} />
+        <Route path="/treatment/:category" element={<TreatmentDetailsScreen />} />
         <Route path="/diet-yoga" element={<DietYogaScreen />} />
         <Route path="/blogs-videos" element={<BlogsVideosScreen />} />
         <Route path="/blogs" element={<BlogScreen />} />

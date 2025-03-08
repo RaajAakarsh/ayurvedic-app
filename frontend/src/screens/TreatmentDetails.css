@@ -1,0 +1,37 @@
+.treatment-details {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    margin-top: 150px;
+  }
+  
+  .treatment-details h1 {
+    color: #2a7a55;
+  }
+  
+  .treatment-details ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .treatment-details ul li {
+    margin: 10px 0;
+  }
+  
+  .back-button {
+    background-color: #2a7a55;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .back-button:hover {
+    background-color: #1e5b3f;
+  }
+  
