@@ -31,6 +31,10 @@ import AppointmentSlots from './screens/Doctors/AppointmentSlots';
 import PatientList from './screens/Doctors/PatientList';  
 import HealthBlogs from './screens/Doctors/HealthBlogs';  
 import TreatmentDetailsScreen from './screens/TreatmentDetailsScreen';
+import AdminPage from './screens/admin/AdminPage';
+import AdminUsers from './screens/admin/AdminUsers';
+import AdminDoctors from './screens/admin/AdminDoctors';
+import AdminRetailers from './screens/admin/AdminRetailers';
 
 import RetailerDashboard from './screens/Retailers/RetailerDashboard';
 import ManageProducts from './screens/Retailers/ManageProducts';
@@ -42,6 +46,7 @@ import Footer from './screens/Footer';
 import Notification from './screens/Patients/Notification'; // Patient notifications
 import DoctorNotification from './screens/Doctors/DoctorNotification'; // Doctor notifications
 import { AuthContext } from './context/AuthContext';
+
 
 function App() {
   const { auth } = useContext(AuthContext);
@@ -81,7 +86,10 @@ function App() {
         <Route path="/prakritidetermination" element={<PrakritiDetermination />} />
         <Route path="/appointed-doctor" element={<AppointedDoctor />} />
         <Route path="/patient-home" element={<PatientPage />} />
-      
+        <Route path="/admin-home" element={<AdminPage />} />
+        <Route path="/admin/users" element={<AdminUsers />} />
+        <Route path="/admin/consultations" element={<AdminDoctors />} />
+        <Route path="/admin/medicine-orders" element={<AdminRetailers />} />
 
         <Route element={<ProtectedRoute />}>
           <Route path="/doctor-home" element={<DoctorHomeScreen />} />

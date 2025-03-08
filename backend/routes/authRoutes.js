@@ -6,6 +6,9 @@ const Admin = require("../models/Admin");
 const { registerDoctor, registerRetailer, registerPatient, loginUser } = require("../controllers/authController");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const Patient = require("../models/Patient"); // Import the Patient model
+const Retailer = require("../models/Retailer"); 
+const Doctor = require("../models/Doctor"); 
 
 // Multer setup for file uploads
 const storage = multer.diskStorage({
@@ -62,6 +65,56 @@ router.get("/user", auth, async (req, res) => {
     });
   } catch (error) {
     console.error("Get User Error:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+// Fetch all patients (Admin only)
+router.get("/users", auth, async (req, res) => {
+  try {
+    // Ensure only admins can access this
+    if (req.user.role !== "admin") {
+      return res.status(403).json({ message: "Access denied. Admins only." });
+    }
+
+    const patients = await Patient.find({});
+    res.status(200).json(patients);
+  } catch (error) {
+    console.error("Error fetching patients:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+router.delete("/users/:id", async (req, res) => {
+  try {
+      const user = await Patient.findByIdAndDelete(req.params.id);
+      if (!user) {
+          return res.status(404).json({ message: "User not found" });
+      }
+      res.json({ message: "User deleted successfully" });
+  } catch (error) {
+      res.status(500).json({ message: "Error deleting user", error });
+  }
+});
+
+// Fetch all retailers
+router.get("/retailers", async (req, res) => {
+  try {
+    const retailers = await Retailer.find({});
+    res.status(200).json(retailers);
+  } catch (error) {
+    console.error("Error fetching retailers:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+// Fetch all doctors
+router.get("/doctors", async (req, res) => {
+  try {
+    const doctors = await Doctor.find({});
+    res.status(200).json(doctors);
+  } catch (error) {
+    console.error("Error fetching doctors:", error);
     res.status(500).json({ message: "Server error" });
   }
 });

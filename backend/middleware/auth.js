@@ -18,13 +18,16 @@ const auth = async (req, res, next) => {
       return res.status(401).json({ message: 'Invalid or expired token.' });
     }
 
-    // Find the user from any model
-    const user = await Promise.any([
+    // Find user in any of the models
+    const users = await Promise.allSettled([
       Admin.findById(decoded.id).then(user => user && { ...user.toObject(), role: 'admin' }),
       Doctor.findById(decoded.id).then(user => user && { ...user.toObject(), role: 'doctor' }),
       Retailer.findById(decoded.id).then(user => user && { ...user.toObject(), role: 'retailer' }),
       Patient.findById(decoded.id).then(user => user && { ...user.toObject(), role: 'patient' }),
-    ]).catch(() => null);
+    ]);
+
+    // Extract the first valid user
+    const user = users.find(result => result.status === 'fulfilled' && result.value)?.value;
 
     if (!user) {
       return res.status(401).json({ message: 'User not found.' });
