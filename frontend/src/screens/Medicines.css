@@ -1,5 +1,6 @@
 .medicines-page {
     display: flex;
+    margin-top:140px;
 }
 
 .medicine-list {
