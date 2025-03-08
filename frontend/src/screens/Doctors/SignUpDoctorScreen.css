@@ -10,6 +10,7 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start; /* Flex items should be stacked from top to bottom */
+  margin-top:150px;
 }
 
 /* Style for the form */

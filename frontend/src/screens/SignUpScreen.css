@@ -1,6 +1,7 @@
 .signup-screen-container {
   display: flex;
   height: 100vh;
+  margin-top:140px;
 }
 
 .signin-left {
