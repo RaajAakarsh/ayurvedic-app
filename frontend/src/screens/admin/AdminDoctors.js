@@ -2,13 +2,16 @@ import React, { useEffect, useState } from "react";
 import * as XLSX from "xlsx";
 
 const AdminDoctors = () => {
+    const [selectedTab, setSelectedTab] = useState("doctors");
     const [doctors, setDoctors] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [bookings, setBookings] = useState([]);
     const [file, setFile] = useState(null);
 
     useEffect(() => {
-        fetchDoctors();
-    }, []);
+        if (selectedTab === "doctors") fetchDoctors();
+        if (selectedTab === "bookings") fetchBookings();
+    }, [selectedTab]);
 
     const fetchDoctors = async () => {
         try {
@@ -37,6 +40,20 @@ const AdminDoctors = () => {
             console.error("Error fetching doctors:", error);
         }
     };
+
+    const fetchBookings = async () => {
+        try {
+            const response = await fetch("http://localhost:8080/api/bookings");
+            if (!response.ok) {
+                throw new Error(`Error fetching bookings: ${response.status}`);
+            }
+            const data = await response.json();
+            setBookings(data);
+        } catch (error) {
+            console.error("Error fetching bookings:", error);
+        }
+    };
+    
 
     const handleDelete = async (doctorId) => {
         if (!doctorId) {
@@ -118,50 +135,71 @@ const AdminDoctors = () => {
         <div style={{ padding: "20px", marginTop: "150px" }}>
             <h2>Manage Doctors</h2>
 
-            {/* Upload Button and File Input */}
-            {/* File Upload Section */}
-            <div style={{ marginBottom: "20px" }}>
-                <input type="file" accept=".xlsx, .xls" onChange={handleFileChange} />
-                <button onClick={handleUpload} style={{ marginLeft: "10px" }}>
-                    Upload Excel
-                </button>
+            <div style={{ display: "flex", gap: "10px", marginBottom: "20px" }}>
+                <button onClick={() => setSelectedTab("doctors")}>Doctors</button>
+                <button onClick={() => setSelectedTab("bookings")}>Bookings</button>
+                <button onClick={() => setSelectedTab("upload")}>Onboard via Excel</button>
             </div>
 
+            {selectedTab === "doctors" && (
+                <div>
+                    <h3>Doctors List</h3>
+                    <table border="1" style={{ width: "100%", textAlign: "left" }}>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {doctors.map((doctor) => (
+                                <tr key={doctor._id}>
+                                    <td>{doctor.firstName} {doctor.lastName}</td>
+                                    <td>{doctor.email}</td>
+                                    <td>{doctor.phone}</td>
+                                    <td><button onClick={() => handleDelete(doctor._id)}>Delete</button></td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            )}
 
-            <table border="1" style={{ width: "100%", textAlign: "left", marginTop: "20px" }}>
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Phone No</th>
-                        <th>Age</th>
-                        <th>Gender</th>
-                        <th>Zip Code</th>
-                        <th>Specialization</th>
-                        <th>Experience</th>
-                        <th>Certificate</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {doctors.map((doctor) => (
-                        <tr key={doctor._id}>
-                            <td>{doctor.firstName} {doctor.lastName}</td>
-                            <td>{doctor.email}</td>
-                            <td>{doctor.phone}</td>
-                            <td>{doctor.age}</td>
-                            <td>{doctor.gender}</td>
-                            <td>{doctor.zipCode}</td>
-                            <td>{doctor.designation}</td>
-                            <td>{doctor.experience}</td>
-                            <td>{doctor.certificate}</td>
-                            <td>
-                                <button onClick={() => handleDelete(doctor._id)} style={{ marginLeft: "10px", color: "red" }}>Delete</button>
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+            {selectedTab === "bookings" && (
+                <div>
+                    <h3>Booking Details</h3>
+                    <table border="1" style={{ width: "100%", textAlign: "left" }}>
+                        <thead>
+                            <tr>
+                                <th>Patient Name</th>
+                                <th>Doctor</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {bookings.map((booking) => (
+                                <tr key={booking._id}>
+                                    <td>{booking.patientName}</td>
+                                    <td>{booking.doctorName}</td>
+                                    <td>{new Date(booking.dateOfAppointment).toLocaleDateString()}</td>
+                            <td>{booking.requestAccept === "o" ? "Pending" : booking.requestAccept}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            )}
+
+            {selectedTab === "upload" && (
+                <div>
+                    <h3>Onboard Doctors via Excel</h3>
+                    <input type="file" accept=".xlsx, .xls" onChange={(e) => setFile(e.target.files[0])} />
+                    <button style={{ marginLeft: "10px" }} onClick={handleUpload} >Upload</button>
+                </div>
+            )}
         </div>
     );
 };
