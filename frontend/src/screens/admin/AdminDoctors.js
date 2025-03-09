@@ -156,7 +156,6 @@ const AdminDoctors = () => {
                             <td>{doctor.experience}</td>
                             <td>{doctor.certificate}</td>
                             <td>
-                                <button onClick={() => alert(`Editing ${doctor.email}`)}>Edit</button>
                                 <button onClick={() => handleDelete(doctor._id)} style={{ marginLeft: "10px", color: "red" }}>Delete</button>
                             </td>
                         </tr>

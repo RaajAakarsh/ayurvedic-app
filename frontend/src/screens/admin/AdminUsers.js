@@ -92,7 +92,6 @@ const AdminUsers = () => {
                             <td>{user.age}</td>
                             <td>{user.zipCode}</td>
                             <td>
-                                <button onClick={() => alert(`Editing ${user.email}`)}>Edit</button>
                                 <button onClick={() => handleDelete(user._id)} style={{ marginLeft: '10px', color: 'red' }}>Delete</button>
                             </td>
                         </tr>

@@ -110,8 +110,8 @@ const AdminRetailers = () => {
     return (
         <div style={{ padding: '20px', marginTop: '150px' }}>
             <h2>Manage Retailers</h2>
-            <div style={{ padding: "20px", marginTop: "150px" }}>
-                <h2>Upload Retailers via Excel</h2>
+            <div>
+                <h3>Upload Retailers via Excel</h3>
                 <input type="file" accept=".xlsx, .xls" onChange={handleFileChange} />
                 <button onClick={handleUpload}>Upload</button>
             </div>
@@ -140,7 +140,7 @@ const AdminRetailers = () => {
                                 <td>{retailer.gender}</td>
                                 <td>{retailer.zipCode}</td>
                                 <td>
-                                    <button onClick={() => alert(`Editing ${retailer.email}`)}>Edit</button>
+                                    
                                     <button 
                                         onClick={() => handleDelete(retailer._id)} 
                                         style={{ marginLeft: '10px', color: 'red' }}
