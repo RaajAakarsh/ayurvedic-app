@@ -157,9 +157,7 @@ function PatientNavBar() {
                 href="#"
                 onClick={handleChangeAddress}
                 className="change-address-link"
-              >
-                 Change Address
-              </a>
+              > (Change) </a>
             </p>
           </div>
           <div className="prakriti-link-container">

@@ -6,7 +6,7 @@
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  margin-top:140px;
+  margin-top: 150px;
 }
 
 .left-section {
@@ -96,6 +96,20 @@
   font-size: 17px;
 }
 
+.patientIllness {
+  font-size: 17px;
+  padding: 8px;
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+  min-height: 80px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
 .illness-input label,
 .date-input label {
   font-size: 17px;
@@ -114,11 +128,16 @@
   margin-bottom: 20px;
 }
 
+.date-input {
+  margin-bottom: 5px;
+}
+
 .availability-slots {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
   margin-bottom: 20px;
+  margin-top: 5px;
 }
 
 .availability-slots button {
@@ -149,7 +168,7 @@
   background-color: rgb(117, 255, 117);
   border: 1px solid #ccc;
   padding: 10px;
-  margin: 5px;
+  margin: 5px 0;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
