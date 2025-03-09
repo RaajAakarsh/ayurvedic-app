@@ -53,13 +53,13 @@ function NavBar() {
   return (
     <header className="navbar-header">
       <div className="top-navbar">
-        <div className="logo-container">
+        <NavLink to="/" className="logo-container">
           <img src={logo} alt="Ayurvedic Logo" className="nav-logo" />
           <div className="text-container">
             <div className="logo-text">AYURVEDIC</div>
             <div className="consultations-text">Consultations</div>
           </div>
-        </div>
+        </NavLink>
         <div className="search-signin">
           <div className="search-bar">
             <div className="dropdown">
@@ -75,7 +75,7 @@ function NavBar() {
           </div>
         </div>
         <div className="auth">
-          Sign In
+        <NavLink to="/signin" className="signin-btn">Sign In</NavLink>
           <NavLink to="/signin" className="signin-btn">
             <img
               src={profilePic || defaultProfilePic}
