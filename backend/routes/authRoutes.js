@@ -9,6 +9,9 @@ const jwt = require("jsonwebtoken");
 const Patient = require("../models/Patient"); // Import the Patient model
 const Retailer = require("../models/Retailer"); 
 const Doctor = require("../models/Doctor"); 
+const xlsx = require("xlsx");
+const fs = require("fs");
+const path = require("path");
 
 // Multer setup for file uploads
 const storage = multer.diskStorage({
@@ -118,5 +121,64 @@ router.get("/doctors", async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 });
+
+// API route to upload Excel file and save retailers
+router.post("/upload-retailers", upload.single("file"), async (req, res) => {
+  try {
+      console.log("File received:", req.file);
+
+      if (!req.file) {
+          return res.status(400).json({ message: "No file uploaded" });
+      }
+
+      //  Read from file instead of buffer
+      const filePath = path.join(__dirname, "..", req.file.path);
+      const workbook = xlsx.readFile(filePath); // ✅ Read the file from disk
+
+      console.log("Workbook loaded:", workbook.SheetNames);
+
+      const sheetName = workbook.SheetNames[0];
+      const sheetData = xlsx.utils.sheet_to_json(workbook.Sheets[sheetName]);
+
+      console.log("Extracted Data:", sheetData);
+
+      if (sheetData.length === 0) {
+          return res.status(400).json({ message: "Empty Excel file" });
+      }
+
+      // Process data
+      for (const row of sheetData) {
+          const { firstName, lastName, email, phone, dob, licenseNumber, age, gender, zipCode, password } = row;
+          console.log("Processing:", row);
+
+          const existingRetailer = await Retailer.findOne({ email });
+          if (!existingRetailer) {
+              const newRetailer = new Retailer({ firstName, lastName, email, phone, dob, licenseNumber, age, gender, zipCode, password });
+              await newRetailer.save();
+          }
+      }
+
+      //  Delete the uploaded file after processing
+      fs.unlinkSync(filePath);
+
+      res.status(201).json({ message: "Retailers uploaded successfully!" });
+  } catch (error) {
+      console.error("Error processing Excel file:", error);
+      res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+router.delete("/retailers/:id", async (req, res) => {
+  try {
+      const deletedRetailer = await Retailer.findByIdAndDelete(req.params.id);
+      if (!deletedRetailer) {
+          return res.status(404).json({ message: "Retailer not found" });
+      }
+      res.json({ message: "Retailer deleted successfully" });
+  } catch (error) {
+      res.status(500).json({ message: "Server error" });
+  }
+});
+
 
 module.exports = router;

@@ -6,7 +6,7 @@ const RetailerSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
   phone: { type: String, required: true },
   dob: { type: Date, required: true },
-  licenseNumber: { type: Number, required: true },
+  licenseNumber: { type: String, required: true },
   age: { type: Number, required: true },
   gender: { type: String, required: true },
   zipCode: { type: String, required: true },
