@@ -111,9 +111,20 @@ function DoctorDetail() {
       <div className="right-section">
         <div className="consultation-info">
           <h2>Consultation Time:</h2>
+          <div className="date-input">
+            <label htmlFor="dateOfAppointment">Date of Appointment: </label>
+            <input
+              type="date"
+              className="dateOfAppointment"
+              value={dateOfAppointment}
+              onChange={(e) => setDateOfAppointment(e.target.value)}
+              placeholder="dd/mm/yyyy"
+              required
+            />
+          </div>
+
           <p>Availability:</p>
           <div className="availability-slots">
-            {/* Time slots buttons */}
             {["09:00 AM", "12:00 PM", "03:00 PM"].map((time) => (
               <button
                 key={time}
@@ -125,28 +136,15 @@ function DoctorDetail() {
             ))}
           </div>
 
-          {/* Input field for date of appointment */}
-          <div className="date-input">
-            <label htmlFor="dateOfAppointment">Date of Appointment: </label>
-            <input
-              type="date"
-              className="dateOfAppointment"
-              value={dateOfAppointment}
-              onChange={(e) => setDateOfAppointment(e.target.value)} // Update date state
-              placeholder="dd/mm/yyyy"
-              required
-            />
-          </div>
-
-          {/* Input field for patient illness */}
           <div className="illness-input">
             <label htmlFor="patientIllness">Describe your illness: </label>
-            <input
-              type="text"
+            <textarea
               className="patientIllness"
               value={patientIllness}
-              onChange={(e) => setPatientIllness(e.target.value)} // Update illness state
-              placeholder="Enter your illness"
+              onChange={(e) => setPatientIllness(e.target.value)}
+              placeholder="Explain in detail about the illness"
+              rows="6"
+              wrap="soft"
               required
             />
           </div>
