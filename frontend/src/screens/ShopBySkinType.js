@@ -2,6 +2,7 @@
 import React from 'react';
 import './ShopBySkinType.css'; // Import the specific CSS file for Shop by Skin Type
 import homebg from '../media/homebg.png';
+import { useNavigate } from 'react-router-dom';
 
 // Import local images
 import expertCareImage from '../media/ec.jpg';
@@ -13,6 +14,8 @@ import technologyImage from '../media/ot.jpg';
 import successStoriesImage from '../media/cs.jpg';
 
 const ShopBySkinType = () => {
+  const navigate = useNavigate();
+  
   return (
     <div className="SkinHealth_skinTypeWrapper__InDhG">
       {/* Section Header */}
@@ -90,7 +93,8 @@ const ShopBySkinType = () => {
         {/* Our Technology Tab */}
         <a
           className="ShopBySkinType_cardContainer__r93Qr ShopBySkinType_longCard__JuzwU"
-          href="/skin/products?tab=our-technology"
+          onClick={() => navigate('/treatments')} // Navigate on click
+          style={{ cursor: 'pointer' }}
         >
           <div
             className="ShopBySkinType_imageWrapper__AZriZ"
@@ -108,7 +112,8 @@ const ShopBySkinType = () => {
         {/* Our Doctors Tab */}
         <a
           className="ShopBySkinType_cardContainer__r93Qr ShopBySkinType_longCard__JuzwU"
-          href="/skin/products?tab=our-doctors"
+          onClick={() => navigate('/doctors')} // Navigate on click
+          style={{ cursor: 'pointer' }}
         >
           <div
             className="ShopBySkinType_imageWrapper__AZriZ"
