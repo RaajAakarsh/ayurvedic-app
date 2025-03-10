@@ -4,6 +4,11 @@ const router = express.Router();
 const XLSX = require("xlsx");
 const Doctor = require("../models/Doctor"); // Import Doctor model
 
+const { getAllDoctors } = require("../controllers/doctorController");
+
+// Public Routes
+router.get("/", getAllDoctors); // Public route to view all Doctors
+
 // Multer setup for file upload
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
