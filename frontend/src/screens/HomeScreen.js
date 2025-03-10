@@ -16,9 +16,10 @@ import RequestCallback from './RequestCallback';
 import WhatToAchieve from './WhatToAchieve';
 import HeroSection from './HeroSection'
 import YogaPositions from './YogaPostions';
-
 // import Promise from './Promise';
 import FitBot from './FitBot';
+
+
 
 function HomeScreen() {
   const navigate = useNavigate();
@@ -133,6 +134,7 @@ function HomeScreen() {
       </section> */}
 
       <TopTransformationStories />
+
 
       <SuccessRate />
 

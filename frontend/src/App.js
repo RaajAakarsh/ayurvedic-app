@@ -49,8 +49,6 @@ import Notification from './screens/Patients/Notification'; // Patient notificat
 import DoctorNotification from './screens/Doctors/DoctorNotification'; // Doctor notifications
 import { AuthContext } from './context/AuthContext';
 
-
-
 function App() {
   const { auth } = useContext(AuthContext);
   const renderNavBar = () => {

@@ -1,7 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import './TopTransformationStories.css';
 import logo from '../media/logo.png';
 import v from '../media/mov_bbb.mp4';
+
+// Import Swiper and required modules
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { EffectCoverflow, Pagination, Keyboard, Mousewheel } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/effect-coverflow';
+import 'swiper/css/pagination';
 
 const videos = [
   {
@@ -39,56 +46,42 @@ const videos = [
 const blogs = [
   {
     id: 1,
-    title: 'Blog 1: Mindset for Transformation',
+    title: 'Mindset for Transformation',
     description: 'How a change in mindset can lead to life transformation.',
     imageUrl: logo,
     link: 'https://bestselfatlanta.com/blog1',
   },
   {
     id: 2,
-    title: 'Blog 2: Healthy Eating Tips',
+    title: 'Healthy Eating Tips',
     description: 'Learn the best eating habits to stay fit and healthy.',
     imageUrl: logo,
     link: 'https://bestselfatlanta.com/blog2',
   },
   {
     id: 3,
-    title: 'Blog 3: Fitness and Mental Health',
+    title: 'Fitness and Mental Health',
     description: 'Explore the connection between fitness and mental well-being.',
     imageUrl: logo,
     link: 'https://bestselfatlanta.com/blog3',
   },
   {
     id: 4,
-    title: 'Blog 4: Overcoming Obstacles',
+    title: 'Overcoming Obstacles',
     description: 'How to push through challenges on your transformation journey.',
     imageUrl: logo,
     link: 'https://bestselfatlanta.com/blog4',
   },
   {
     id: 5,
-    title: 'Blog 5: Importance of Rest',
+    title: 'Importance of Rest',
     description: 'Why rest is essential for your fitness and health transformation.',
     imageUrl: logo,
     link: 'https://bestselfatlanta.com/blog5',
   },
 ];
 
-const CarouselSection = ({ items, sectionType }) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const itemsToShow = 3;
-
-  const goToNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % items.length);
-  };
-
-  const goToPrevious = () => {
-    setCurrentIndex((prevIndex) =>
-      (prevIndex - 1 + items.length) % items.length
-    );
-  };
-
-  // Create a smooth "infinite" scroll by wrapping around the display items
+const SwiperCarouselSection = ({ items, sectionType }) => {
   const handleVideoClick = (videoElement) => {
     if (videoElement.paused || videoElement.ended) {
       videoElement.play();
@@ -96,49 +89,64 @@ const CarouselSection = ({ items, sectionType }) => {
       videoElement.pause();
     }
   };
-  const displayItems = [
-    ...items.slice(currentIndex, currentIndex + itemsToShow),
-    ...items.slice(0, Math.max(0, currentIndex + itemsToShow - items.length)),
-  ];
 
   return (
-    <div className="carousel-section">
-      <h2>{sectionType} Carousel</h2>
-      <div className="tcarousel-container">
-        <button className="carousel-arrow left" onClick={goToPrevious}>
-          ←
-        </button>
-        <div className="stories-container" >
-          {displayItems.map((item) => (
-            <div key={item.id} className="carousel-card">
-              <div className="carousel-card-inner">
-                {sectionType === 'Video' ? (
-                  <video
-                    className="carousel-video"
-                    src={item.videoUrl}
-                    preload="metadata"
-                    onClick={(e) => handleVideoClick(e.target)}
-                    controls={false}
-                    style={{ width: '100%', height: 'auto' }}
-                  />
-                ) : (
-                  <a href={item.link} target="_blank" rel="noopener noreferrer">
-                    <img
-                      className="carousel-image"
-                      src={item.imageUrl}
-                      alt={item.title}
-                    />
-                  </a>
-                )}
-                <h3 className="carousel-title">{item.title}</h3>
+    <div className="swiper-carousel-section">
+      <h2>{sectionType} Highlights</h2>
+      <Swiper
+        effect={'coverflow'}
+        grabCursor={true}
+        centeredSlides={true}
+        slidesPerView={'auto'}
+        spaceBetween={30}
+        coverflowEffect={{
+          rotate: 0,
+          stretch: 0,
+          depth: 100,
+          modifier: 3,
+          slideShadows: true,
+        }}
+        keyboard={{ enabled: true }}
+        mousewheel={{ thresholdDelta: 70 }}
+        loop={true}
+        pagination={{
+          el: `.swiper-pagination-${sectionType.toLowerCase()}`,
+          clickable: true,
+          dynamicBullets: true,
+        }}
+        modules={[EffectCoverflow, Pagination, Keyboard, Mousewheel]}
+        breakpoints={{
+          640: { slidesPerView: 2, spaceBetween: 20 },
+          768: { slidesPerView: 1, spaceBetween: 30 },
+          1024: { slidesPerView: 2, spaceBetween: 30 },
+          1560: { slidesPerView: 3, spaceBetween: 30 },
+        }}
+      >
+        {items.map((item) => (
+          <SwiperSlide key={item.id}>
+            <div className="swiper-slide-content">
+              {sectionType === 'Video' ? (
+                <video
+                  className="swiper-slide-video"
+                  src={item.videoUrl}
+                  preload="metadata"
+                  onClick={(e) => handleVideoClick(e.target)}
+                  controls={false}
+                />
+              ) : (
+                <a href={item.link} target="_blank" rel="noopener noreferrer">
+                  <img className="swiper-slide-image" src={item.imageUrl} alt={item.title} />
+                </a>
+              )}
+              <div className="swiper-slide-text">
+                <h2>{item.title}</h2>
+                <p>{item.description}</p>
               </div>
             </div>
-          ))}
-        </div>
-        <button className="carousel-arrow right" onClick={goToNext}>
-          →
-        </button>
-      </div>
+          </SwiperSlide>
+        ))}
+        <div className={`swiper-pagination swiper-pagination-${sectionType.toLowerCase()}`}></div>
+      </Swiper>
     </div>
   );
 };
@@ -146,8 +154,8 @@ const CarouselSection = ({ items, sectionType }) => {
 const TopTransformation = () => {
   return (
     <div className="top-transformation">
-      <CarouselSection items={videos} sectionType="Video" />
-      <CarouselSection items={blogs} sectionType="Blog" />
+      <SwiperCarouselSection items={videos} sectionType="Video" />
+      <SwiperCarouselSection items={blogs} sectionType="Blog" />
     </div>
   );
 };
