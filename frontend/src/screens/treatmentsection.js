@@ -41,7 +41,11 @@ const Medicines = () => {
         ))}
       </div>
       {visibleCount < medicines.length && (
-        <button className="see-more-btn" onClick={showMore}>See More</button>
+        <div className="see-more-wrapper">
+          <a className="see-more-link" onClick={showMore}>
+            See More <span className="arrow-icon">&#9662;</span>
+          </a>
+        </div>
       )}
     </section>
   );

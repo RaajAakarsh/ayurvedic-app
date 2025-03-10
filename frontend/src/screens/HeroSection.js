@@ -36,7 +36,7 @@ function HeroSection() {
             marginTop: '1.5rem',
             padding: '10px 20px',
             fontSize: '1.2rem',
-            backgroundColor: '#6b8e23',
+            backgroundColor: '#8F9F6D',
             color: '#fff',
             border: 'none',
             borderRadius: '5px',

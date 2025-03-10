@@ -14,15 +14,22 @@ const Treatments = () => {
   return (
     <div className="SkinHealth_skinConcernWrapper__4RStK">
       <div className="ComponentHeader_componentHeaderDesktop__sNo2H ShopByConcern_sectionHeader__CLeME">
-        <div className="ComponentHeader_headerTitle__oeo_k">
-          <h2 className="title3-bold-d title3-bold-m">Explore Ayurvedic Treatments for Various Health Concerns</h2>
-          <h4>Discover holistic solutions curated by expert doctors for optimal well-being.</h4>
-          {/* CTA Section */}
-          <div className="cta-section">
-            <a href="/treatments" className="cta-button">Explore All Treatments</a>
+        <div className="header-content">
+          <div className="ComponentHeader_headerTitle__oeo_k">
+            <h2 className="title3-bold-d title3-bold-m">
+              Explore Ayurvedic Treatments for Various Health Concerns
+            </h2>
+            <h4>
+              Discover holistic solutions curated by expert doctors for optimal well-being.
+            </h4>
+          </div>
+          {/* CTA Section aligned to the right */}
+          <div className="cta-wrapper">
+            <a href="/treatments" className="cta-button">Explore All Treatments <span className="arrow">›</span></a>
           </div>
         </div>
       </div>
+
 
       {/* Top section (Main categories with images) */}
       <div className="ShopByConcern_container__ZcaN3 top-section">

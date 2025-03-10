@@ -60,15 +60,7 @@
     cursor: pointer;
 }
 
-.icon-arrow-right {
-    font-size: 28px;
-    color: #007bff;
-    transition: transform 0.3s ease-in-out;
-}
 
-.icon-arrow-right:hover {
-    transform: translateX(6px);
-}
 
 .request-callback-btn {
     margin-top: 25px;
