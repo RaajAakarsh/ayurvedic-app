@@ -6,7 +6,6 @@ import './SignUpDoctorScreen.css';
 import { AuthContext } from '../../context/AuthContext';
 
 function SignUpDoctorScreen() {
-  
   const { setAuth } = useContext(AuthContext);
   const [formData, setFormData] = useState({
     firstName: '',
@@ -24,6 +23,23 @@ function SignUpDoctorScreen() {
     password: '',
     confirmPassword: '', // Added confirmPassword for validation
   });
+
+  const isFormValid = () => {
+    return (
+      formData.firstName !== "" &&
+      formData.lastName !== "" &&
+      formData.email !== "" &&
+      formData.phone !== "" &&
+      formData.dob !== "" &&
+      formData.age !== "" &&
+      formData.gender !== "" &&
+      formData.zipCode !== "" &&
+      formData.password !== "" &&
+      formData.confirmPassword !== "" &&
+      formData.password === formData.confirmPassword
+    );
+  };
+
   const [certificate, setCertificate] = useState(null);
   const navigate = useNavigate();
 
@@ -176,14 +192,17 @@ function SignUpDoctorScreen() {
         <div className="form-column">
           <div className="form-group">
             <label>Gender</label>
-            <input
-              type="text"
-              name="gender"
-              value={formData.gender}
-              onChange={handleInputChange}
-              placeholder="Male/Female"
+            <select 
+              name="gender" 
+              value={formData.gender} 
+              onChange={handleInputChange} 
               required
-            />
+            >
+              <option value="">Select Gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Others">Others</option>
+            </select>
           </div>
           <div className="form-group">
             <label>Zip Code (Location)</label>
@@ -265,7 +284,12 @@ function SignUpDoctorScreen() {
         </div>
 
         <div className="form-button">
-          <button type="submit" className="next-btn">Next →</button>
+          <button type="submit"
+            className="next-btn"
+            disabled={!isFormValid()}
+          >
+            Next →
+          </button>
         </div>
       </form>
     </div>

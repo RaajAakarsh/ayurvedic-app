@@ -24,6 +24,22 @@ function SignUpPatientScreen() {
     });
   };
 
+  const isFormValid = () => {
+    return (
+      formData.firstName !== "" &&
+      formData.lastName !== "" &&
+      formData.email !== "" &&
+      formData.phone !== "" &&
+      formData.dob !== "" &&
+      formData.age !== "" &&
+      formData.gender !== "" &&
+      formData.zipCode !== "" &&
+      formData.password !== "" &&
+      formData.confirmPassword !== "" &&
+      formData.password === formData.confirmPassword
+    );
+  };
+
   const handleNextClick = async (e) => {
     e.preventDefault(); // Prevents default form submission behavior
 
@@ -132,14 +148,17 @@ function SignUpPatientScreen() {
           </div>
           <div className="form-group">
             <label>Gender</label>
-            <input 
-              type="text" 
+            <select 
               name="gender" 
               value={formData.gender} 
               onChange={handleInputChange} 
-              placeholder="Male/Female" 
-              required 
-            />
+              required
+            >
+              <option value="">Select Gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Others">Others</option>
+            </select>
           </div>
           <div className="form-group">
             <label>Zip Code (Location)</label>
@@ -177,7 +196,12 @@ function SignUpPatientScreen() {
         </div>
 
         <div className="form-button">
-          <button type="submit" className="next-btn">Next →</button>
+          <button type="submit"
+            className="next-btn"
+            disabled={!isFormValid()}
+          >
+            Next →
+          </button>
         </div>
       </form>
     </div>
