@@ -18,7 +18,7 @@ const ShopBySkinType = () => {
       {/* Section Header */}
       <div className="ComponentHeader_componentHeaderDesktop__sNo2H ShopBySkinType_sectionHeader__4dj9l">
         <div className="ComponentHeader_headerTitle__oeo_k">
-          <h2 className="title3-bold-d title3-bold-m">Why Choose Us for Piles, Fistula & Hemorrhoids Treatment?</h2>
+          <h2 className="title3-bold-d title3-bold-m">Why Choose Us for Treatment?</h2>
         </div>
       </div>
 
@@ -87,24 +87,6 @@ const ShopBySkinType = () => {
 
       {/* Bottom Section (Tabbed Navigation) */}
       <div className="ShopBySkinType_container__cvZMd bottom-section">
-        {/* Our Doctors Tab */}
-        <a
-          className="ShopBySkinType_cardContainer__r93Qr ShopBySkinType_longCard__JuzwU"
-          href="/skin/products?tab=our-doctors"
-        >
-          <div
-            className="ShopBySkinType_imageWrapper__AZriZ"
-            style={{
-              backgroundImage: `url(${doctorsImage})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-            }}
-          ></div>
-          <div className="ShopBySkinType_textContainer__fXBb0">
-            <div className="ShopBySkinType_title__lstmx">Our Doctors</div>
-          </div>
-        </a>
-
         {/* Our Technology Tab */}
         <a
           className="ShopBySkinType_cardContainer__r93Qr ShopBySkinType_longCard__JuzwU"
@@ -120,6 +102,24 @@ const ShopBySkinType = () => {
           ></div>
           <div className="ShopBySkinType_textContainer__fXBb0">
             <div className="ShopBySkinType_title__lstmx">Our Treatment</div>
+          </div>
+        </a>
+
+        {/* Our Doctors Tab */}
+        <a
+          className="ShopBySkinType_cardContainer__r93Qr ShopBySkinType_longCard__JuzwU"
+          href="/skin/products?tab=our-doctors"
+        >
+          <div
+            className="ShopBySkinType_imageWrapper__AZriZ"
+            style={{
+              backgroundImage: `url(${doctorsImage})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+            }}
+          ></div>
+          <div className="ShopBySkinType_textContainer__fXBb0">
+            <div className="ShopBySkinType_title__lstmx">Our Doctors</div>
           </div>
         </a>
 

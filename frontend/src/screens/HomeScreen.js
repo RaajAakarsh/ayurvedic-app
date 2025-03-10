@@ -15,6 +15,8 @@ import PlansSection from './PlansSection';
 import RequestCallback from './RequestCallback';
 import WhatToAchieve from './WhatToAchieve';
 import HeroSection from './HeroSection'
+import YogaPositions from './YogaPostions';
+
 // import Promise from './Promise';
 import FitBot from './FitBot';
 
@@ -58,31 +60,35 @@ function HomeScreen() {
       <HeroSection />
 
       {/* pas section */}
-      <ShopByConcern />
+      
 
-      <section class="concave-section bottomSection">
+      {/* <section class="concave-section bottomSection">
         <div class="hcontent">
           <QuestionnaireCarousel />
         </div>
-      </section>
+      </section> */}
 
       {/* product section */}
-      <ProductSection />
+      {/* <ProductSection /> */}
 
-      {/* New treatments Section treatment section*/}
-      <TreatmentSection />
 
       {/* Benefits section */}
       <ShopBySkinType />
 
-
+      {/* treatments */}
+      <ShopByConcern /> 
       
 
       {/* talk of the town doctor section */}
       <TalkOfTheTown />
 
+      {/* New treatments Section treatment section*/}
+      <TreatmentSection />
+
+      <YogaPositions />
+      
       {/* whats hot in gabit.................................................................................... */}
-      <section className="NewUserHomePage_skinCarouselSection__NAw7l">
+      {/* <section className="NewUserHomePage_skinCarouselSection__NAw7l">
         <div className="SkinCarousel_skinHealth__APvJ6">
           <p className="SkinCarousel_heading__LxBzL title1-bold-m heading2-bold-d">
             What's <span> hot </span> at <span> Gabit</span>
@@ -124,7 +130,7 @@ function HomeScreen() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       <TopTransformationStories />
 
