@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import "../NavBar.css"; // Ensure styles from NavBar are included
 import "./DoctorNavbar.css";
@@ -14,6 +14,7 @@ function DoctorNavBar() {
   const { auth, setAuth } = useContext(AuthContext); // Get auth context to access user info
   const [userLocation, setUserLocation] = useState("Fetching location...");
   const [showModal, setShowModal] = useState(false);
+  const modalRef = useRef(null);
   const navigate = useNavigate();
   const profilePic = ""; // Logic to fetch user's profile picture URL
   const userFirstName = auth.user ? auth.user.firstName : "Guest";
@@ -43,6 +44,25 @@ function DoctorNavBar() {
 
     fetchLocation();
   }, []);
+
+  // Close modal when clicking outside of it
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (modalRef.current && !modalRef.current.contains(event.target)) {
+        setShowModal(false);
+      }
+    }
+
+    if (showModal) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showModal]);
 
   // Function to fetch city name from OpenCage API
   const fetchCityName = async (latitude, longitude) => {
@@ -102,13 +122,11 @@ function DoctorNavBar() {
         </div>
         <div className="auth" onClick={handleProfileClick}>
           {userName} {/* Show doctor's name */}
-          <NavLink to="/doctor-home" className="signin-btn">
-            <img
-              src={profilePic || defaultProfilePic}
-              alt="Profile"
-              className="profile-pic"
-            />
-          </NavLink>
+          <img
+            src={profilePic || defaultProfilePic}
+            alt="Profile"
+            className="profile-pic"
+          />
         </div>
         <NavLink to="/doctor-notifications" className="notification-icon">
           <img
@@ -120,7 +138,7 @@ function DoctorNavBar() {
       </div>
 
       {showModal && (
-        <div className="profile-modal">
+        <div className="profile-modal" ref={modalRef}>
           <h2>User Profile</h2>
           <div className="profile-details">
             <p>

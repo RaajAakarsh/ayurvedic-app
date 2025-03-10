@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, useRef } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import "../NavBar.css";
 import "./AdminNavbar.css";
@@ -14,6 +14,7 @@ function AdminNavBar() {
   const navigate = useNavigate();
   const { auth, setAuth } = useContext(AuthContext);
   const [showModal, setShowModal] = useState(false);
+  const modalRef = useRef(null);
   const [userLocation, setUserLocation] = useState("Fetching location...");
   const [cityName, setCityName] = useState(""); // State for city name
   const [userAddress, setUserAddress] = useState(auth.user?.address || "Not available");
@@ -52,6 +53,25 @@ function AdminNavBar() {
 
     fetchLocation();
   }, []);
+
+  // Close modal when clicking outside of it
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (modalRef.current && !modalRef.current.contains(event.target)) {
+        setShowModal(false);
+      }
+    }
+
+    if (showModal) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showModal]);
 
   const fetchCityName = async (latitude, longitude) => {
     try {
@@ -136,7 +156,7 @@ function AdminNavBar() {
       </div>
 
       {showModal && (
-        <div className="profile-modal">
+        <div className="profile-modal" ref={modalRef}>
           <div className="close-modal" onClick={handleProfileClick}>
             &times;
           </div>

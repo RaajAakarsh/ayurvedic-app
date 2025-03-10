@@ -45,8 +45,6 @@ function SignInScreen() {
         localStorage.setItem('role', formData.role);
         setAuth({ token: result.token, user: result.user, role: formData.role });
 
-        alert('Login successful');
-
         // Redirect based on role
         switch (formData.role) {
           case 'doctor':
