@@ -1,38 +1,133 @@
-import React from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import './TreatmentDetails.css';
+import React from "react";
+import { useParams, useNavigate, Link } from "react-router-dom";
+import "./TreatmentDetails.css";
 
 const treatmentData = {
-  'Digestive Health': {
-    description: 'Digestive health focuses on maintaining a healthy digestive system, including the stomach and intestines.',
-    items: {
-      'Acid Reflux': 'Acid reflux is a condition where stomach acid flows back into the esophagus, causing discomfort.',
-      'Constipation': 'A condition in which bowel movements become difficult and less frequent.',
-      'Diarrhea': 'Frequent loose or watery bowel movements, often caused by infections or dietary issues.',
-      'Indigestion': 'A discomfort in the stomach often after eating, causing bloating or nausea.',
-      'Irritable Bowel Syndrome (IBS)': 'A chronic condition affecting bowel movements, often triggered by stress or diet.',
-    },
+  "Digestive Health": {
+    title: "Digestive Health in Ayurveda",
+    description:
+      "Digestion is the foundation of health in Ayurveda. A strong Agni (digestive fire) ensures proper metabolism, while imbalances can lead to Ama (toxins) and digestive disorders.",
+    concerns: [
+      {
+        title: "Acid Reflux & Heartburn (Amla Pitta)",
+        description:
+          "Acid reflux occurs when stomach acid moves up into the esophagus, causing a burning sensation in the chest (heartburn). Ayurveda links this to Pitta Dosha imbalance, aggravated by spicy, oily, and acidic foods.",
+        approach: [
+          "Avoid hot, sour, and fermented foods. Drink cool herbal teas like fennel (Saunf) and licorice (Mulethi).",
+          "Eat meals on time and avoid lying down immediately after eating.",
+          "Herbs: Amla, Guduchi, Yashtimadhu (Licorice) help soothe excess acidity.",
+        ],
+        image: require("../media/hb.png"),
+      },
+      {
+        title: "Constipation & Indigestion (Vibandh & Ajirna)",
+        description:
+          "Constipation refers to infrequent or difficult bowel movements, often caused by Vata imbalance. Indigestion (Ajirna) happens when food isn’t properly broken down, leading to bloating and discomfort.",
+        approach: [
+          "Increase fiber-rich foods like soaked raisins, ghee, and warm fluids.",
+          "Regular meal timings and Abhyanga (self-massage with warm oil) to calm Vata.",
+          "Herbs: Triphala, Isabgol (Psyllium husk), and castor oil for gentle relief.",
+        ],
+        image: "/images/constipation.jpg",
+      },
+      {
+        title: "Diarrhea & Loose Motions (Atisara)",
+        description:
+          "Frequent loose stools indicate an aggravated Pitta Dosha or Kapha Dosha. It can be due to infections, food intolerance, or weak digestion.",
+        approach: [
+          "Light, easy-to-digest foods like moong dal khichdi, buttermilk, and pomegranate juice.",
+          "Rest and hydration are key. Avoid heavy, oily, and dairy-rich foods.",
+          "Herbs: Bilva (Bael fruit), Kutaj (Holarrhena), and Pippali help restore gut balance.",
+        ],
+        image: "/images/diarrhea.jpg",
+      },
+      {
+        title: "Irritable Bowel Syndrome (IBS)",
+        description:
+          "IBS causes alternating constipation, diarrhea, bloating, and stomach cramps. Ayurveda links this to an imbalance in Vata Dosha, often triggered by stress, irregular eating, or improper food combinations.",
+        approach: [
+          "Follow a Satvic (light & fresh) diet with warm, well-cooked foods.",
+          "Stress management through meditation and yoga is crucial.",
+          "Herbs: Ashwagandha for stress, Triphala for digestion, and Brahmi for calming the mind.",
+        ],
+        image: "/images/ibs.jpg",
+      },
+      {
+        title: "Stomach Ulcers (Parinam Shoola)",
+        description:
+          "Ulcers are open sores in the stomach lining, often due to excessive Pitta Dosha, stress, or infection. They cause burning pain, nausea, and acid regurgitation.",
+        approach: [
+          "Cooling foods like coconut water, ghee, and soaked almonds. Avoid spicy, fried, and caffeine-based foods.",
+          "Reduce stress through pranayama and maintain meal discipline.",
+          "Herbs: Yashtimadhu (Licorice), Shatavari, and Aloe Vera help soothe the stomach lining.",
+        ],
+        image: "/images/ulcers.jpg",
+      },
+    ],
   },
-  'Respiratory Health': {
-    description: 'Respiratory health focuses on maintaining healthy lungs and airways.',
-    items: {
-      'Asthma': 'A chronic condition causing airway inflammation and difficulty in breathing.',
-      'Bronchitis': 'Inflammation of the bronchial tubes, leading to cough and mucus production.',
-      'Common Cold': 'A viral infection affecting the nose and throat, causing congestion and sneezing.',
-      'Cough': 'A reflex action to clear the throat and airways of mucus or irritants.',
-      'Sinusitis': 'Inflammation of the sinuses, often caused by infections or allergies.',
-    },
+
+  "Respiratory Health": {
+    title: "Respiratory Health in Ayurveda",
+    description:
+      "The respiratory system is governed by Prana Vayu (life force energy) and influenced by Kapha Dosha (mucus & moisture balance) and Vata Dosha (air & movement). Imbalances in these doshas can lead to chronic respiratory conditions. Ayurveda focuses on herbal remedies, dietary modifications, and lifestyle changes to strengthen the lungs, clear toxins, and restore breath balance.",
+    concerns: [
+      {
+        title: "Asthma & Breathing Problems (Tamaka Shwasa)",
+        description:
+          "Asthma is a chronic lung condition that causes difficulty in breathing due to airway inflammation and mucus buildup. Ayurveda considers it a Kapha-Vata disorder, where excess mucus blocks airflow, and Vata creates spasms in the lungs.",
+        approach: [
+          "Diet: Avoid cold, heavy, and dairy-based foods. Consume warm herbal drinks like ginger-turmeric tea.",
+          "Lifestyle: Steam inhalation with eucalyptus oil and Pranayama (breathing exercises) for lung strength.",
+          "Herbs: Vasaka (Malabar Nut), Yashtimadhu (Licorice), Tulsi (Holy Basil) help open airways.",
+        ],
+        image: "/images/asthma.jpg",
+      },
+      {
+        title: "Chronic Cough & Cold (Kasa & Pratishaya)",
+        description:
+          "Frequent coughs and colds occur due to low immunity, seasonal changes, or Kapha-Vata imbalances. Coughing can be dry (Vata) or mucus-filled (Kapha), requiring different treatments.",
+        approach: [
+          "Diet: Warm, easy-to-digest meals. Avoid cold drinks and excess sweets.",
+          "Lifestyle: Keep the body warm, do oil massage (Abhyanga) to balance Vata.",
+          "Herbs: Sitopaladi Churna, Mulethi (Licorice), and Pippali (Long Pepper) help relieve congestion.",
+        ],
+        image: "/images/cough.jpg",
+      },
+      {
+        title: "Sinusitis & Nasal Congestion (Peenas)",
+        description:
+          "Sinusitis is caused by Kapha imbalance, where mucus gets trapped in the sinuses, leading to headaches, congestion, and difficulty breathing.",
+        approach: [
+          "Diet: Avoid heavy, oily, and dairy-rich foods. Drink warm herbal teas with Tulsi & Ginger.",
+          "Lifestyle: Neti Kriya (nasal cleansing with saline water) and steam inhalation help clear sinuses.",
+          "Herbs: Trikatu (Ginger, Black Pepper, Pippali), Neem, and Dashmool work effectively.",
+        ],
+        image: "/images/sinusitis.jpg",
+      },
+      {
+        title: "Bronchitis & Chest Infections (Kasa Roga)",
+        description:
+          "Bronchitis occurs when the bronchial tubes in the lungs become inflamed, leading to persistent cough, phlegm, and breathing difficulties. It is caused by Kapha accumulation, cold exposure, or viral infections.",
+        approach: [
+          "Diet: Warm, light meals like moong dal soup and herbal tonics. Avoid fried foods and cold beverages.",
+          "Lifestyle: Steam inhalation, chest massage with warm mustard oil, and gargling with turmeric water.",
+          "Herbs: Vasaka, Tulsi, and Licorice help soothe the airways.",
+        ],
+        image: "/images/bronchitis.jpg",
+      },
+    ],
   },
-  'Skin Care': {
-    description: 'Skin care involves maintaining the health of the skin through proper hygiene and treatments.',
-    items: {
-      'Acne': 'A skin condition causing pimples due to blocked hair follicles and oil glands.',
-      'Eczema': 'A condition that causes inflamed, itchy, and red skin.',
-      'Psoriasis': 'A chronic autoimmune condition that results in scaly patches on the skin.',
-      'Rashes': 'Temporary outbreaks of red, itchy, or inflamed skin.',
-      'Skin Allergies': 'Reactions of the skin to allergens, causing redness, swelling, or irritation.',
-    },
-  },
+};
+
+const ayurvedicConsultation = {
+  title: "Why Choose Ayurvedic Consultation?",
+  points: [
+    "Personalized Treatment based on Dosha balance.",
+    "Natural Healing with diet, herbs, and lifestyle changes.",
+    "Long-Term Relief rather than symptomatic suppression.",
+    "Mind-Body Balance for holistic well-being.",
+  ],
+  callToAction: "💬 Not sure where to start? Book an online consultation with our certified Ayurvedic doctors today!",
 };
 
 function TreatmentDetailsScreen() {
@@ -46,15 +141,39 @@ function TreatmentDetailsScreen() {
 
   return (
     <div className="treatment-details">
-      <button className="back-button" onClick={() => navigate(-1)}>← Back</button>
-      <h1>{category}</h1>
+      <Link to="/treatments" className="back-link">← Back</Link>
+      <h1>{details.title}</h1>
       <p>{details.description}</p>
-      <h2>Common Conditions</h2>
-      <ul>
-        {Object.keys(details.items).map((item, index) => (
-          <li key={index}><strong>{item}:</strong> {details.items[item]}</li>
-        ))}
-      </ul>
+      <h2 className="ttitle">Common Concerns & Ayurvedic Approach</h2>
+
+      {details.concerns.map((concern, index) => (
+        <div
+          key={index}
+          className={`concern-row ${index % 2 === 0 ? "row-reverse" : ""}`}
+        >
+          <img src={concern.image} alt={concern.title} className="concern-image" />
+          <div className="concern-content">
+            <h3>{concern.title}</h3>
+            <p>{concern.description}</p>
+            <h4>Ayurvedic Approach:</h4>
+            <ul>
+              {concern.approach.map((step, i) => (
+                <li key={i}>{step}</li>
+              ))}
+            </ul>
+            <p>{concern.callToAction}</p>
+          </div>
+        </div>
+      ))}
+      <div className="consultation-section">
+        <h2>{ayurvedicConsultation.title}</h2>
+        <ul>
+          {ayurvedicConsultation.points.map((point, index) => (
+            <li key={index}>{point}</li>
+          ))}
+        </ul>
+        <p>{ayurvedicConsultation.callToAction}</p>
+      </div>
     </div>
   );
 }

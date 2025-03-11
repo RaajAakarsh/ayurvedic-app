@@ -1,44 +1,42 @@
 import React from 'react';
-import './Treatments.css';  
+import './Treatments.css';
 import { useNavigate } from 'react-router-dom';
 
 function TreatmentsScreen() {
   const navigate = useNavigate();
   const treatments = [
-    { category: 'Digestive Health', items: ['Acid Reflux', 'Constipation', 'Diarrhea', 'Indigestion', 'Irritable Bowel Syndrome (IBS)'] },
-    { category: 'Respiratory Health', items: ['Asthma', 'Bronchitis', 'Common Cold', 'Cough', 'Sinusitis'] },
-    { category: 'Skin Care', items: ['Acne', 'Eczema', 'Psoriasis', 'Rashes', 'Skin Allergies'] },
-    { category: 'Joint and Bone Health', items: ['Arthritis', 'Back Pain', 'Joint Pain', 'Osteoporosis', 'Rheumatism'] },
-    { category: 'Cardiovascular Health', items: ['High Blood Pressure', 'High Cholesterol', 'Heart Health', 'Circulatory Issues'] },
-    { category: 'Mental Health and Wellness', items: ['Anxiety', 'Depression', 'Insomnia', 'Stress', 'Memory Support'] },
-    { category: 'Metabolic and Endocrine Health', items: ['Diabetes', 'Thyroid Disorders', 'Weight Management', 'Metabolism Boosters'] },
-    { category: 'Immune Support', items: ['General Immune Boosters', 'Allergies', 'Autoimmune Support'] },
-    { category: 'Women\'s Health', items: ['Menstrual Disorders', 'Menopause', 'Fertility Support', 'PCOS/PCOD', 'Vaginal Health'] },
-    { category: 'Men\'s Health', items: ['Prostate Health', 'Sexual Health', 'Testosterone Support', 'Hair Loss', 'Erectile Dysfunction'] },
-    { category: 'Liver and Kidney Health', items: ['Liver Detox', 'Kidney Stones', 'Urinary Tract Health', 'Hepatitis'] },
-    { category: 'Eye Health', items: ['Dry Eyes', 'Vision Support', 'Conjunctivitis', 'Glaucoma'] },
-    { category: 'Oral Health', items: ['Gum Disease', 'Tooth Decay', 'Bad Breath', 'Mouth Ulcers'] },
-    { category: 'General Wellness', items: ['Detoxification', 'Anti-Aging', 'Energy Boosters', 'General Weakness', 'Nutritional Supplements'] },
-    { category: 'Infections', items: ['Bacterial Infections', 'Fungal Infections', 'Viral Infections', 'Parasitic Infections'] }
+    { category: 'Digestive Health', image: '/images/digestive.jpg' },
+    { category: 'Respiratory Health', image: '/images/respiratory.jpg' },
+    { category: 'Skin Care', image: '/images/skincare.jpg' },
+    { category: 'Joint and Bone Health', image: '/images/joint.jpg' },
+    { category: 'Cardiovascular Health', image: '/images/heart.jpg' },
+    { category: 'Mental Health and Wellness', image: '/images/mental.jpg' },
+    { category: 'Metabolic and Endocrine Health', image: '/images/metabolism.jpg' },
+    { category: 'Immune Support', image: '/images/immune.jpg' },
+    { category: "Women's Health", image: '/images/women.jpg' },
+    { category: "Men's Health", image: '/images/men.jpg' },
+    { category: 'Liver and Kidney Health', image: '/images/liver.jpg' },
+    { category: 'Eye Health', image: '/images/eye.jpg' },
+    { category: 'Oral Health', image: '/images/oral.jpg' },
+    { category: 'General Wellness', image: '/images/wellness.jpg' },
+    { category: 'Infections', image: '/images/infections.jpg' },
+    { category: 'Pain Management', image: '/images/infections.jpg' },
   ];
 
   return (
     <div className="treatmentsScreen">
-      <div className="content">
-        <h1>Treatments</h1>
-        <div className="treatments-list">
-          {treatments.map((treatment, index) => (
-            <div key={index} className="treatment-category" onClick={() => navigate(`/treatment/${encodeURIComponent(treatment.category)}`)}
-            >
-              <h2>{treatment.category}</h2>
-              <ul>
-                {treatment.items.map((item, i) => (
-                  <li className="l" key={i}>{item}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
+      <h1>Treatments</h1>
+      <div className="grid-container">
+        {treatments.map((treatment, index) => (
+          <div 
+            key={index} 
+            className="grid-item" 
+            onClick={() => navigate(`/treatment/${encodeURIComponent(treatment.category)}`)}
+          >
+            <img src={treatment.image} alt={treatment.category} className="treatment-image"/>
+            <h2>{treatment.category}</h2>
+          </div>
+        ))}
       </div>
     </div>
   );
