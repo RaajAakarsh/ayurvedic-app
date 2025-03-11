@@ -33,28 +33,28 @@ const Treatments = () => {
 
       {/* Top section (Main categories with images) */}
       <div className="ShopByConcern_container__ZcaN3 top-section">
-        <a className="ShopByConcern_cardContainer__Y1toh" href="/treatments?category=Digestive%20Health">
+        <a className="ShopByConcern_cardContainer__Y1toh" href="/treatment/Digestive%20Health">
           <div className="ShopByConcern_textContainer__i6UMp">
             <h4 className="ShopByConcern_title__aV3sc">Digestive Health</h4>
           </div>
           <div className="ShopByConcern_imageWrapper__pz_iH" style={{ backgroundImage: `url(${digestiveHealthImage})` }}></div>
         </a>
 
-        <a className="ShopByConcern_cardContainer__Y1toh" href="/treatments?category=Respiratory%20Health">
+        <a className="ShopByConcern_cardContainer__Y1toh" href="/treatment/Respiratory%20Health">
           <div className="ShopByConcern_textContainer__i6UMp">
             <h4 className="ShopByConcern_title__aV3sc">Respiratory Health</h4>
           </div>
           <div className="ShopByConcern_imageWrapper__pz_iH" style={{ backgroundImage: `url(${respiratoryHealthImage})` }}></div>
         </a>
 
-        <a className="ShopByConcern_cardContainer__Y1toh" href="/treatments?category=Skin%20Care">
+        <a className="ShopByConcern_cardContainer__Y1toh" href="/treatment/Skin%20Care">
           <div className="ShopByConcern_textContainer__i6UMp">
             <h4 className="ShopByConcern_title__aV3sc">Skin Care</h4>
           </div>
           <div className="ShopByConcern_imageWrapper__pz_iH" style={{ backgroundImage: `url(${skinCareImage})` }}></div>
         </a>
 
-        <a className="ShopByConcern_cardContainer__Y1toh" href="/treatments?category=Skin%20Care">
+        <a className="ShopByConcern_cardContainer__Y1toh" href="/treatment/Joint%20and%20Bone%20Health">
           <div className="ShopByConcern_textContainer__i6UMp">
             <h4 className="ShopByConcern_title__aV3sc">Joint And Bone Health</h4>
           </div>
@@ -64,21 +64,21 @@ const Treatments = () => {
 
       {/* Bottom section (More categories without images) */}
       <div className="ShopByConcern_container__ZcaN3 bottom-section">
-        <a className="ShopByConcern_cardContainer__Y1toh" href="/treatments?category=Skin%20Care">
+        <a className="ShopByConcern_cardContainer__Y1toh" href="/treatment/Cardiovascular%20Health">
           <div className="ShopByConcern_imageWrapper__pz_iH" style={{ backgroundImage: `url(${cardiovascularHealthImage})` }}></div>
           <div className="ShopByConcern_textContainer__i6UMp">
             <h4 className="ShopByConcern_title__aV3sc">Cardiovascular Health</h4>
           </div>
         </a>
 
-        <a className="ShopByConcern_cardContainer__Y1toh" href="/treatments?category=Skin%20Care">
+        <a className="ShopByConcern_cardContainer__Y1toh" href="/treatment/Mental%20Health%20and%20Wellness">
           <div className="ShopByConcern_imageWrapper__pz_iH" style={{ backgroundImage: `url(${mentalHealthImage})` }}></div>
           <div className="ShopByConcern_textContainer__i6UMp">
             <h4 className="ShopByConcern_title__aV3sc">Mental Health & Wellness</h4>
           </div>
         </a>
 
-        <a className="ShopByConcern_cardContainer__Y1toh" href="/treatments?category=Skin%20Care">
+        <a className="ShopByConcern_cardContainer__Y1toh" href="/treatment/Metabolic%20and%20Endocrine%20Health">
           <div className="ShopByConcern_imageWrapper__pz_iH" style={{ backgroundImage: `url(${DiabitiesImage})` }}></div>
           <div className="ShopByConcern_textContainer__i6UMp">
             <h4 className="ShopByConcern_title__aV3sc">Metabolic and Endocrine Health</h4>

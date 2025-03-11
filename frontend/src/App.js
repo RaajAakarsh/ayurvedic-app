@@ -16,7 +16,7 @@ import BlogScreen from './screens/Blogs';
 import DoctorsScreen from './screens/DoctorsScreen';
 import DoctorDetailPage from './screens/Patients/DoctorDetailPage';
 import SignInScreen from './screens/SignInScreen';
-import SignUpScreen from './screens/SignUpScreen'; 
+import SignUpScreen from './screens/SignUpScreen';
 import SignUpPatientScreen from './screens/Patients/SignUpPatientScreen';
 import SignUpDoctorScreen from './screens/Doctors/SignUpDoctorScreen';
 import SignUpRetailerScreen from './screens/Retailers/SignUpRetailerScreen';
@@ -26,10 +26,10 @@ import AppointedDoctor from './screens/Patients/AppointedDoctor';
 import PatientPage from './screens/Patients/PatientPage'
 import OrderHistory from './screens/Patients/OrderHistory';
 import DoctorHomeScreen from './screens/Doctors/DoctorHomeScreen';
-import CurrentRequests from './screens/Doctors/CurrentRequests';  
-import AppointmentSlots from './screens/Doctors/AppointmentSlots';  
-import PatientList from './screens/Doctors/PatientList';  
-import HealthBlogs from './screens/Doctors/HealthBlogs';  
+import CurrentRequests from './screens/Doctors/CurrentRequests';
+import AppointmentSlots from './screens/Doctors/AppointmentSlots';
+import PatientList from './screens/Doctors/PatientList';
+import HealthBlogs from './screens/Doctors/HealthBlogs';
 import TreatmentDetailsScreen from './screens/TreatmentDetailsScreen';
 
 import AdminPage from './screens/admin/AdminPage';
@@ -37,6 +37,7 @@ import AdminUsers from './screens/admin/AdminUsers';
 import AdminDoctors from './screens/admin/AdminDoctors';
 import AdminRetailers from './screens/admin/AdminRetailers';
 import AdminNavBar from './screens/admin/AdminNavbar';
+import AdminBlogs from './screens/admin/AdminBlogs';
 
 import RetailerDashboard from './screens/Retailers/RetailerDashboard';
 import ManageProducts from './screens/Retailers/ManageProducts';
@@ -68,7 +69,7 @@ function App() {
 
   return (
     <Router>
-      {renderNavBar()} 
+      {renderNavBar()}
       <Routes>
         <Route path="/" element={<HomeScreen />} />
         <Route path="/signin" element={<SignInScreen />} />
@@ -82,7 +83,7 @@ function App() {
         <Route path="/payment" element={<PaymentScreen />} />
         <Route path="/doctors" element={<DoctorsScreen />} />
         <Route path="/doctor-detail" element={<DoctorDetailPage />} />
-        
+
         <Route path="/signup-patient" element={<SignUpPatientScreen />} />
         <Route path="/signup-doctor" element={<SignUpDoctorScreen />} />
         <Route path="/signup-retailer" element={<SignUpRetailerScreen />} />
@@ -90,10 +91,7 @@ function App() {
         <Route path="/appointed-doctor" element={<AppointedDoctor />} />
         <Route path="/patient-home" element={<PatientPage />} />
 
-        <Route path="/admin-home" element={<AdminPage />} />
-        <Route path="/admin/users" element={<AdminUsers />} />
-        <Route path="/admin/consultations" element={<AdminDoctors />} />
-        <Route path="/admin/medicine-orders" element={<AdminRetailers />} />
+
 
         <Route element={<ProtectedRoute />}>
           <Route path="/doctor-home" element={<DoctorHomeScreen />} />
@@ -101,7 +99,7 @@ function App() {
           <Route path="/appointment-slots" element={<AppointmentSlots />} />
           <Route path="/patient-list" element={<PatientList />} />
           <Route path="/health-blogs" element={<HealthBlogs />} />
-          <Route path="/notifications" element={<Notification/>} />
+          <Route path="/notifications" element={<Notification />} />
           <Route path="/medicines" element={<MedicinesScreen />} />
           <Route path="/retailer-home" element={<RetailerDashboard />} />
           <Route path="/doctor-notifications" element={<DoctorNotification />} />
@@ -110,6 +108,11 @@ function App() {
           {/* <Route path="/analytics" element={<Analytics />} /> */}
           <Route path="/my-orders" element={<MyOrders />} />
           {/* <Route path="/customer-support" element={<CustomerSupport />} /> */}
+          <Route path="/admin-home" element={<AdminPage />} />
+          <Route path="/admin/users" element={<AdminUsers />} />
+          <Route path="/admin/consultations" element={<AdminDoctors />} />
+          <Route path="/admin/medicine-orders" element={<AdminRetailers />} />
+          <Route path="/admin/blogs" element={<AdminBlogs />} />
         </Route>
       </Routes>
       <Footer />
