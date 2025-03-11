@@ -8,6 +8,13 @@ function AppointmentSlots() {
   const [showInput, setShowInput] = useState({});
   const [meetLink, setMeetLink] = useState({});
   const [linkSent, setLinkSent] = useState({});
+  
+  // New state variables for supplements modal
+  const [showSupplementsModal, setShowSupplementsModal] = useState(false);
+  const [currentAppointment, setCurrentAppointment] = useState(null);
+  const [supplements, setSupplements] = useState([]);
+  const [newMedicineName, setNewMedicineName] = useState("");
+  const [newIllness, setNewIllness] = useState("");
 
   const email = localStorage.getItem("email");
 
@@ -28,6 +35,14 @@ function AppointmentSlots() {
             appointment.requestAccept === "y"
         );
 
+        const meetLinks = {};
+        filteredAppointments.forEach(appointment => {
+          if (appointment.meetLink && appointment.meetLink !== "no") {
+            meetLinks[appointment._id] = appointment.meetLink;
+          }
+        });
+
+        setMeetLink(meetLinks);
         setAppointments(filteredAppointments);
         setLoading(false);
       } catch (error) {
@@ -79,8 +94,85 @@ function AppointmentSlots() {
     setMeetLink((prev) => ({ ...prev, [id]: value }));
   };
 
-  const handleSuggestPlan = (id) => {
-    alert("Diet and Yoga Plan suggested for appointment ID: " + id);
+  // New function to open supplements modal
+  const handleSuggestSupplements = async (appointmentId) => {
+    try {
+      // Fetch existing supplements for this appointment
+      const response = await fetch(
+        `http://localhost:8080/api/bookings/supplements/${appointmentId}`
+      );
+      
+      const appointment = appointments.find(app => app._id === appointmentId);
+      setCurrentAppointment(appointment);
+      
+      if (response.ok) {
+        const data = await response.json();
+        setSupplements(data.supplements || []);
+      } else {
+        // If no supplements exist yet, start with empty array
+        setSupplements([]);
+      }
+      
+      setShowSupplementsModal(true);
+    } catch (error) {
+      console.error("Error fetching supplements:", error);
+      // If error, still open modal but with empty supplements array
+      setSupplements([]);
+      setShowSupplementsModal(true);
+    }
+  };
+
+  // Function to add a new supplement to the list
+  const handleAddSupplement = () => {
+    if (!newMedicineName.trim() || !newIllness.trim()) {
+      alert("Please enter both medicine name and illness");
+      return;
+    }
+    
+    const newSupplement = {
+      medicineName: newMedicineName,
+      forIllness: newIllness
+    };
+    
+    setSupplements([...supplements, newSupplement]);
+    setNewMedicineName("");
+    setNewIllness("");
+  };
+
+  // Function to remove a supplement from the list
+  const handleRemoveSupplement = (index) => {
+    const updatedSupplements = [...supplements];
+    updatedSupplements.splice(index, 1);
+    setSupplements(updatedSupplements);
+  };
+
+  // Function to save supplements to the backend
+  const handleSaveSupplements = async () => {
+    if (!currentAppointment) return;
+    
+    try {
+      const response = await fetch(
+        `http://localhost:8080/api/bookings/supplements/${currentAppointment._id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ supplements }),
+        }
+      );
+
+      if (response.ok) {
+        alert("Supplements updated successfully!");
+        setShowSupplementsModal(false);
+      } else {
+        const data = await response.json();
+        alert(`Error: ${data.error}`);
+      }
+    } catch (error) {
+      alert("Failed to save supplements.");
+      console.error(error);
+    }
   };
 
   if (loading) {
@@ -134,11 +226,11 @@ function AppointmentSlots() {
               <div className="button-group">
                 <button
                   className="action-button suggest-button"
-                  onClick={() => handleSuggestPlan(appointment._id)}
+                  onClick={() => handleSuggestSupplements(appointment._id)}
                 >
-                  Suggest Diet and Yoga Plan
+                  Suggest Supplements
                 </button>
-                {linkSent[appointment._id] ? (
+                {meetLink[appointment._id] && meetLink[appointment._id] !== "no" ? (
                   <button
                     className="action-button"
                     onClick={() => window.open(meetLink[appointment._id], "_blank")}
@@ -175,6 +267,82 @@ function AppointmentSlots() {
             </div>
           </div>
         ))
+      )}
+
+      {/* Supplements Modal */}
+      {showSupplementsModal && currentAppointment && (
+        <div className="modal-overlay">
+          <div className="supplements-modal">
+            <h2>Recommend Supplements for {currentAppointment.patientName}</h2>
+            <p>Patient Illness: {currentAppointment.patientIllness}</p>
+            
+            <div className="supplements-list">
+              <h3>Current Recommendations</h3>
+              {supplements.length === 0 ? (
+                <p>No supplements recommended yet.</p>
+              ) : (
+                <ul>
+                  {supplements.map((supplement, index) => (
+                    <li key={index} className="supplement-item">
+                      <div>
+                        <strong>{supplement.medicineName}</strong> - For: {supplement.forIllness}
+                      </div>
+                      <button 
+                        className="remove-button"
+                        onClick={() => handleRemoveSupplement(index)}
+                      >
+                        ✕
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+            
+            <div className="add-supplement-form">
+              <h3>Add New Supplement</h3>
+              <div className="form-group">
+                <label>Medicine Name:</label>
+                <input
+                  type="text"
+                  value={newMedicineName}
+                  onChange={(e) => setNewMedicineName(e.target.value)}
+                  placeholder="Enter medicine name"
+                />
+              </div>
+              <div className="form-group">
+                <label>For Illness:</label>
+                <input
+                  type="text"
+                  value={newIllness}
+                  onChange={(e) => setNewIllness(e.target.value)}
+                  placeholder="Enter illness it treats"
+                />
+              </div>
+              <button 
+                className="add-button"
+                onClick={handleAddSupplement}
+              >
+                Add Supplement
+              </button>
+            </div>
+            
+            <div className="modal-buttons">
+              <button 
+                className="save-button"
+                onClick={handleSaveSupplements}
+              >
+                Save Recommendations
+              </button>
+              <button 
+                className="cancel-button"
+                onClick={() => setShowSupplementsModal(false)}
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );

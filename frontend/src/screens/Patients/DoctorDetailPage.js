@@ -74,7 +74,7 @@ function DoctorDetail() {
         const result = await response.json();
 
         if (response.ok) {
-          alert("Appointment booked successfully!");
+          alert("Appointment request sent successfully!");
           console.log("Booking response:", result); // Optional: log the server response
         } else {
           alert(result.error || "Failed to book appointment");

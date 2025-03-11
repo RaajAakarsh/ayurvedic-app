@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import "./AppointedDoctor.css"; // Ensure the CSS file is linked
 
 function AppointedDoctor() {
-  const [activeTab, setActiveTab] = useState("Current"); // State to manage active tab
+  const [activeTab, setActiveTab] = useState("Upcoming"); // State to manage active tab
   const [pendingDoctors, setPendingDoctors] = useState([]);
-  const [currentDoctors, setCurrentDoctors] = useState([]);
+  const [upcomingAppointments, setUpcomingAppointments] = useState([]);
   const [deniedDoctors, setDeniedDoctors] = useState([]);
+  const [previousAppointments, setPreviousAppointments] = useState([]); // New state for previous appointments
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -28,20 +29,50 @@ function AppointedDoctor() {
           (booking) => booking.patientEmail === email
         );
 
-        // Separate pending, accepted, and denied bookings
-        const pendingBookings = patientBookings.filter(
-          (booking) => booking.requestAccept === "o"
-        );
-        const acceptedBookings = patientBookings.filter(
-          (booking) => booking.requestAccept === "y"
-        );
-        const deniedBookings = patientBookings.filter(
-          (booking) => booking.requestAccept === "n"
+        const currentDate = new Date();
+        
+        // Sort bookings into upcoming, past, pending, and denied
+        const sortedBookings = patientBookings.reduce(
+          (acc, booking) => {
+            const appointmentDate = new Date(booking.dateOfAppointment);
+            const isPastAppointment = appointmentDate < currentDate;
+            
+            // For past appointments, add to previousAppointments with source info
+            if (isPastAppointment) {
+              // Add a source property to track where this appointment came from
+              let appointmentWithSource = { ...booking };
+              
+              if (booking.requestAccept === "y") {
+                appointmentWithSource.source = "Completed";
+                acc.previous.push(appointmentWithSource);
+              } else if (booking.requestAccept === "n") {
+                appointmentWithSource.source = "Denied";
+                acc.previous.push(appointmentWithSource);
+              } else if (booking.requestAccept === "o") {
+                appointmentWithSource.source = "Pending";
+                acc.previous.push(appointmentWithSource);
+              }
+            } 
+            // For non-past appointments
+            else if (!isPastAppointment) {
+              if (booking.requestAccept === "o") {
+                acc.pending.push(booking);
+              } else if (booking.requestAccept === "y") {
+                acc.upcoming.push(booking);
+              } else if (booking.requestAccept === "n") {
+                acc.denied.push(booking);
+              }
+            }
+            
+            return acc;
+          },
+          { pending: [], upcoming: [], denied: [], previous: [] }
         );
 
-        setPendingDoctors(pendingBookings);
-        setCurrentDoctors(acceptedBookings);
-        setDeniedDoctors(deniedBookings);
+        setPendingDoctors(sortedBookings.pending);
+        setUpcomingAppointments(sortedBookings.upcoming);
+        setDeniedDoctors(sortedBookings.denied);
+        setPreviousAppointments(sortedBookings.previous);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching doctor data:", error);
@@ -73,9 +104,13 @@ function AppointedDoctor() {
         throw new Error("Failed to delete the request");
       }
 
-      // Remove the deleted request from the deniedDoctors state
+      // Remove the deleted request from the appropriate state
       setDeniedDoctors((prevDeniedDoctors) =>
         prevDeniedDoctors.filter((doctor) => doctor._id !== bookingId)
+      );
+      
+      setPreviousAppointments((prevDoctors) => 
+        prevDoctors.filter((doctor) => doctor._id !== bookingId)
       );
     } catch (error) {
       console.error("Error deleting the request:", error);
@@ -99,13 +134,13 @@ function AppointedDoctor() {
   return (
     <>
       <div className="appointed-container">
-        {/* Tabs for Current, Pending, and Denied Doctors */}
+        {/* Tabs for Upcoming, Pending, Denied, and Previous Appointments */}
         <div className="tabs">
           <button
-            onClick={() => setActiveTab("Current")}
-            className={`tab ${activeTab === "Current" ? "active" : ""}`}
+            onClick={() => setActiveTab("Upcoming")}
+            className={`tab ${activeTab === "Upcoming" ? "active" : ""}`}
           >
-            Current Doctor
+            Upcoming Appointments
           </button>
           <button
             onClick={() => setActiveTab("Pending")}
@@ -119,45 +154,51 @@ function AppointedDoctor() {
           >
             Denied Requests
           </button>
+          <button
+            onClick={() => setActiveTab("Previous")}
+            className={`tab ${activeTab === "Previous" ? "active" : ""}`}
+          >
+            Previous Appointments
+          </button>
         </div>
 
-        {/* Display Current Doctors Information */}
-        {activeTab === "Current" && (
-          <div className="doctor-info current">
-            {currentDoctors.length > 0 ? (
+        {/* Display Upcoming Appointments Information */}
+        {activeTab === "Upcoming" && (
+          <div className="doctor-info upcoming">
+            {upcomingAppointments.length > 0 ? (
               <>
-                <h1>Your Current Doctors</h1>
-                {currentDoctors.map((currentDoctor) => (
-                  <div key={currentDoctor._id} className="singled-doctor">
+                <h1>Your Upcoming Appointments</h1>
+                {upcomingAppointments.map((upcomingAppointment) => (
+                  <div key={upcomingAppointment._id} className="singled-doctor">
                     <hr className="hr"></hr>
-                    <h2>with Dr. {currentDoctor.doctorName}</h2>
+                    <h2>with Dr. {upcomingAppointment.doctorName}</h2>
                     <ul>
                       <li>
                         <strong>Date:</strong>{" "}
                         {new Date(
-                          currentDoctor.dateOfAppointment
+                          upcomingAppointment.dateOfAppointment
                         ).toLocaleDateString("en-GB")}{" "}
                         (dd/mm/yyyy)
                       </li>
                       <li>
-                        <strong>Timeslot:</strong> {currentDoctor.timeSlot}
+                        <strong>Timeslot:</strong> {upcomingAppointment.timeSlot}
                       </li>
                       <li>
                         <strong>Doctor's Email:</strong>{" "}
-                        {currentDoctor.doctorEmail}
+                        {upcomingAppointment.doctorEmail}
                       </li>
                       <li>
-                        <strong>Illness:</strong> {currentDoctor.patientIllness}
+                        <strong>Illness:</strong> {upcomingAppointment.patientIllness}
                       </li>
                     </ul>
 
                     {/* Show "Join Meet" button if meetLink is available */}
-                    {currentDoctor.meetLink &&
-                    currentDoctor.meetLink !== "no" ? (
+                    {upcomingAppointment.meetLink &&
+                    upcomingAppointment.meetLink !== "no" ? (
                       <button
                         className="action-button"
                         onClick={() =>
-                          window.open(currentDoctor.meetLink, "_blank")
+                          window.open(upcomingAppointment.meetLink, "_blank")
                         }
                       >
                         Join Meet
@@ -165,34 +206,16 @@ function AppointedDoctor() {
                     ) : (
                       <button
                         className="action-button pay-fees"
-                        onClick={() => handlePayFees(currentDoctor._id)}
+                        onClick={() => handlePayFees(upcomingAppointment._id)}
                       >
                         Pay Fees
                       </button>
                     )}
-
-                    {/* Recommended Supplements Section */}
-                    <div className="supplements">
-                      <h2>Recommended Supplements</h2>
-                      <div className="medicines">
-                        {["Medicine 1", "Medicine 2", "Medicine 3"].map(
-                          (medicine, index) => (
-                            <div key={index} className="medicine">
-                              <p>
-                                <strong>Name of Medicine:</strong> {medicine}
-                              </p>
-                              <p>Cures Illness</p>
-                              <p>Price</p>
-                            </div>
-                          )
-                        )}
-                      </div>
-                    </div>
                   </div>
                 ))}
               </>
             ) : (
-              <p>No current doctor assigned.</p>
+              <p>No upcoming doctor assigned.</p>
             )}
           </div>
         )}
@@ -287,6 +310,88 @@ function AppointedDoctor() {
               </>
             ) : (
               <p>No denied doctor requests at the moment.</p>
+            )}
+          </div>
+        )}
+
+        {/* New Section: Display Previous Appointments Information */}
+        {activeTab === "Previous" && (
+          <div className="doctor-info previous">
+            {previousAppointments.length > 0 ? (
+              <>
+                <h1>Your Previous Appointments</h1>
+                {previousAppointments
+                  .sort((a, b) => new Date(b.dateOfAppointment) - new Date(a.dateOfAppointment)) // Sort by date, newest first
+                  .map((previousAppointment) => (
+                    <div key={previousAppointment._id} className="singled-doctor">
+                      <hr className="hr"></hr>
+                      <h2>with Dr. {previousAppointment.doctorName}</h2>
+                      <ul>
+                        <li>
+                          <strong>Status:</strong> {previousAppointment.source}
+                        </li>
+                        <li>
+                          <strong>Date:</strong>{" "}
+                          {new Date(
+                            previousAppointment.dateOfAppointment
+                          ).toLocaleDateString("en-GB")}{" "}
+                          (dd/mm/yyyy)
+                        </li>
+                        <li>
+                          <strong>Timeslot:</strong> {previousAppointment.timeSlot}
+                        </li>
+                        <li>
+                          <strong>Doctor's Email:</strong>{" "}
+                          {previousAppointment.doctorEmail}
+                        </li>
+                        <li>
+                          <strong>Illness:</strong> {previousAppointment.patientIllness}
+                        </li>
+                        {previousAppointment.doctorsMessage && (
+                          <li>
+                            <strong>Doctor's Notes:</strong>{" "}
+                            {previousAppointment.doctorsMessage}
+                          </li>
+                        )}
+                        <li>
+                          <strong>Request Type:</strong>{" "}
+                          {previousAppointment.source === "Completed" ? "Accepted" : 
+                           previousAppointment.source === "Denied" ? "Denied" : "Pending"}
+                        </li>
+                      </ul>
+                      
+                      {/* Recommended Supplements Section - Only show for completed appointments */}
+                      {previousAppointment.source === "Completed" && (
+                        <div className="supplements">
+                          <h2>Recommended Supplements</h2>
+                          <div className="medicines">
+                            {["Medicine 1", "Medicine 2", "Medicine 3"].map(
+                              (medicine, index) => (
+                                <div key={index} className="medicine">
+                                  <p>
+                                    <strong>Name of Medicine:</strong> {medicine}
+                                  </p>
+                                  <p>Cures Illness</p>
+                                  <p>Price</p>
+                                </div>
+                              )
+                            )}
+                          </div>
+                        </div>
+                      )}
+                      
+                      {/* Optional: Add a button to view past records or delete */}
+                      <button
+                        className="action-button delete"
+                        onClick={() => handleDeleteRequest(previousAppointment._id)}
+                      >
+                        Remove from History
+                      </button>
+                    </div>
+                  ))}
+              </>
+            ) : (
+              <p>No previous appointments in your history.</p>
             )}
           </div>
         )}
