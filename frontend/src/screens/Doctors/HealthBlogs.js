@@ -1,29 +1,38 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
-import './HealthBlogs.css'; // Ensure this CSS file is linked
-import { AuthContext } from '../../context/AuthContext'; // Import AuthContext
+import './HealthBlogs.css';
+import { AuthContext } from '../../context/AuthContext';
 
 function HealthBlogs() {
-  const { auth } = useContext(AuthContext); // Get auth state from context
-  const doctorId = auth.user ? auth.user.id : null; // Get doctor ID from the user object
+  const { auth } = useContext(AuthContext);
+  const doctorId = auth.user ? auth.user.id : null;
 
   const [activeTab, setActiveTab] = useState('recent');
   const [blogs, setBlogs] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
   const [formData, setFormData] = useState({
     title: '',
     description: '',
-    date: '',
+    category: '',
+    image: ''
   });
 
   // Fetch blogs that belong to the specific doctor
   useEffect(() => {
     if (doctorId) {
       const fetchBlogs = async () => {
+        setIsLoading(true);
         try {
-          const response = await axios.get(`http://localhost:8080/api/blogs/doctor/${doctorId}`);
+          // Use the new endpoint format
+          const response = await axios.get(`http://localhost:8080/api/blogs/author/doctor/${doctorId}`);
           setBlogs(response.data);
+          setError(null);
         } catch (error) {
           console.error('Error fetching blogs:', error);
+          setError('Failed to fetch your blogs. Please try again.');
+        } finally {
+          setIsLoading(false);
         }
       };
       fetchBlogs();
@@ -38,24 +47,40 @@ function HealthBlogs() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!doctorId) {
-      console.error('Doctor ID is missing');
+      setError('Doctor ID is missing. Please ensure you are logged in.');
       return;
     }
   
-    // Create a new object including the doctorId
-    const dataToSubmit = { ...formData, doctorId };
+    // Create data object with the new authorType field
+    const dataToSubmit = {
+      ...formData,
+      authorType: 'doctor',  // Specify author type as doctor
+      authorId: doctorId,    // Use authorId instead of doctorId
+      date: new Date()       // Use current date
+    };
   
-    console.log('Form data with doctorId:', dataToSubmit); // Debug log
-  
+    setIsLoading(true);
     try {
       const response = await axios.post('http://localhost:8080/api/blogs', dataToSubmit);
       setBlogs([response.data, ...blogs]); // Add the new blog to the current list
       setActiveTab('recent'); // Switch to recent blogs tab
+      
+      // Reset form
+      setFormData({
+        title: '',
+        description: '',
+        category: '',
+        image: ''
+      });
+      
+      setError(null);
     } catch (error) {
       console.error('Error publishing blog:', error);
+      setError('Failed to publish blog. Please try again.');
+    } finally {
+      setIsLoading(false);
     }
   };
-  
 
   return (
     <div className="health-blogs-container">
@@ -77,13 +102,25 @@ function HealthBlogs() {
         </div>
       </div>
 
+      {error && <div className="error-message">{error}</div>}
+
       {activeTab === 'recent' && (
         <div className="blogs-grid">
+          {isLoading && <p className="loading-message">Loading your blogs...</p>}
+          {!isLoading && blogs.length === 0 && <p className="empty-message">You haven't published any blogs yet.</p>}
           {blogs.map((blog, index) => (
-            <div key={index} className="blog-card">
+            <div key={blog._id || index} className="blog-card">
               <h2>{blog.title}</h2>
-              <p>{blog.description}</p>
-              <p><strong>Date - {new Date(blog.date).toLocaleDateString()}</strong></p>
+              {blog.category && <div className="blog-category">{blog.category}</div>}
+              <p className="blog-description">{blog.description}</p>
+              {blog.image && (
+                <div className="blog-image">
+                  <img src={blog.image} alt={blog.title} />
+                </div>
+              )}
+              <p className="blog-date">
+                <strong>Published: {new Date(blog.date).toLocaleDateString()}</strong>
+              </p>
             </div>
           ))}
         </div>
@@ -94,7 +131,7 @@ function HealthBlogs() {
           <h2>Write a New Blog</h2>
           <form onSubmit={handleSubmit}>
             <div className="form-group">
-              <label>Title:</label>
+              <label>Title: <span className="required">*</span></label>
               <input
                 type="text"
                 name="title"
@@ -105,26 +142,42 @@ function HealthBlogs() {
               />
             </div>
             <div className="form-group">
-              <label>Description:</label>
+              <label>Description: <span className="required">*</span></label>
               <textarea
                 name="description"
-                placeholder="Enter blog description"
+                placeholder="Enter blog content"
                 value={formData.description}
                 onChange={handleInputChange}
                 required
               ></textarea>
             </div>
             <div className="form-group">
-              <label>Date:</label>
+              <label>Category:</label>
               <input
-                type="date"
-                name="date"
-                value={formData.date}
+                type="text"
+                name="category"
+                placeholder="E.g., Nutrition, Mental Health, Fitness"
+                value={formData.category}
                 onChange={handleInputChange}
-                required
               />
             </div>
-            <button type="submit" className="submit-button">Publish Blog</button>
+            <div className="form-group">
+              <label>Image URL:</label>
+              <input
+                type="text"
+                name="image"
+                placeholder="Enter image URL (optional)"
+                value={formData.image}
+                onChange={handleInputChange}
+              />
+            </div>
+            <button 
+              type="submit" 
+              className="submit-button"
+              disabled={isLoading}
+            >
+              {isLoading ? 'Publishing...' : 'Publish Blog'}
+            </button>
           </form>
         </div>
       )}

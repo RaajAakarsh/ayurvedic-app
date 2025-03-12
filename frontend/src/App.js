@@ -91,6 +91,11 @@ function App() {
         <Route path="/appointed-doctor" element={<AppointedDoctor />} />
         <Route path="/patient-home" element={<PatientPage />} />
 
+        <Route path="/admin-home" element={<AdminPage />} />
+        <Route path="/admin/users" element={<AdminUsers />} />
+        <Route path="/admin/consultations" element={<AdminDoctors />} />
+        <Route path="/admin/medicine-orders" element={<AdminRetailers />} />
+        <Route path="/admin/blogs" element={<AdminBlogs />} />
 
 
         <Route element={<ProtectedRoute />}>
@@ -108,11 +113,7 @@ function App() {
           {/* <Route path="/analytics" element={<Analytics />} /> */}
           <Route path="/my-orders" element={<MyOrders />} />
           {/* <Route path="/customer-support" element={<CustomerSupport />} /> */}
-          <Route path="/admin-home" element={<AdminPage />} />
-          <Route path="/admin/users" element={<AdminUsers />} />
-          <Route path="/admin/consultations" element={<AdminDoctors />} />
-          <Route path="/admin/medicine-orders" element={<AdminRetailers />} />
-          <Route path="/admin/blogs" element={<AdminBlogs />} />
+
         </Route>
       </Routes>
       <Footer />

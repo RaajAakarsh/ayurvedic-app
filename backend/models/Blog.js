@@ -11,16 +11,30 @@ const blogSchema = new mongoose.Schema({
     },
     date: {
         type: Date,
+        default: Date.now,
         required: true,
     },
-    doctorId: {
+    authorType: {
+        type: String,
+        enum: ['doctor', 'admin'],
+        required: true
+    },
+    authorId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Doctor', // Assuming you have a Doctor schema/model
+        refPath: 'authorType',
         required: true,
     },
-    doctorName: { // New field to store the doctor's name
+    authorName: {
         type: String,
         required: true,
+    },
+    image: {
+        type: String,
+        default: ''
+    },
+    category: {
+        type: String,
+        default: 'General'
     }
 });
 
