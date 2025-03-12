@@ -9,8 +9,43 @@ function AppointedDoctor() {
   const [previousAppointments, setPreviousAppointments] = useState([]); // New state for previous appointments
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
   const email = localStorage.getItem("email");
+  const [supplements, setSupplements] = useState({}); // Key: appointment ID, Value: supplements array
+
+  // Function to fetch supplements for a specific appointment
+  const fetchSupplements = async (appointmentId) => {
+    try {
+      const response = await fetch(
+        `http://localhost:8080/api/bookings/supplements/${appointmentId}`
+      );
+      if (!response.ok) {
+        throw new Error("Failed to fetch supplements");
+      }
+
+      const data = await response.json();
+      setSupplements((prev) => ({
+        ...prev,
+        [appointmentId]: data.supplements || [],
+      }));
+    } catch (error) {
+      console.error("Error fetching supplements:", error);
+      setSupplements((prev) => ({
+        ...prev,
+        [appointmentId]: [],
+      }));
+    }
+  };
+
+  // Fetch supplements when the "Previous" tab is active
+  useEffect(() => {
+    if (activeTab === "Previous") {
+      previousAppointments.forEach((appointment) => {
+        if (appointment.source === "Completed") {
+          fetchSupplements(appointment._id);
+        }
+      });
+    }
+  }, [activeTab, previousAppointments]);
 
   useEffect(() => {
     const fetchDoctors = async () => {
@@ -36,9 +71,12 @@ function AppointedDoctor() {
           (acc, booking) => {
             const appointmentDate = new Date(booking.dateOfAppointment);
             const isPastAppointment = appointmentDate < currentDate;
-            
+            const isWithinOneDayAfterAppointment =
+              appointmentDate < currentDate &&
+              currentDate - appointmentDate <= 24 * 60 * 60 * 1000; // 1 day in milliseconds
+
             // For past appointments, add to previousAppointments with source info
-            if (isPastAppointment) {
+            if (isPastAppointment && !isWithinOneDayAfterAppointment) {
               // Add a source property to track where this appointment came from
               let appointmentWithSource = { ...booking };
               
@@ -53,8 +91,8 @@ function AppointedDoctor() {
                 acc.previous.push(appointmentWithSource);
               }
             } 
-            // For non-past appointments
-            else if (!isPastAppointment) {
+            // For non-past appointments or appointments within 1 day after
+            else if (!isPastAppointment || isWithinOneDayAfterAppointment) {
               if (booking.requestAccept === "o") {
                 acc.pending.push(booking);
               } else if (booking.requestAccept === "y") {
@@ -365,25 +403,29 @@ function AppointedDoctor() {
                       {previousAppointment.source === "Completed" && (
                         <div className="supplements">
                           <h2>Recommended Supplements</h2>
-                          <div className="medicines">
-                            {["Medicine 1", "Medicine 2", "Medicine 3"].map(
-                              (medicine, index) => (
+                          {supplements[previousAppointment._id] &&
+                          supplements[previousAppointment._id].length > 0 ? (
+                            <div className="medicines">
+                              {supplements[previousAppointment._id].map((supplement, index) => (
                                 <div key={index} className="medicine">
                                   <p>
-                                    <strong>Name of Medicine:</strong> {medicine}
+                                    <strong>Name of Medicine:</strong> {supplement.medicineName}
                                   </p>
-                                  <p>Cures Illness</p>
-                                  <p>Price</p>
+                                  <p>
+                                    <strong>For Illness:</strong> {supplement.forIllness}
+                                  </p>
                                 </div>
-                              )
-                            )}
-                          </div>
+                              ))}
+                            </div>
+                          ) : (
+                            <p>No supplements recommended for this appointment.</p>
+                          )}
                         </div>
                       )}
                       
                       {/* Optional: Add a button to view past records or delete */}
                       <button
-                        className="action-button delete"
+                        className="action-button action-delete"
                         onClick={() => handleDeleteRequest(previousAppointment._id)}
                       >
                         Remove from History
