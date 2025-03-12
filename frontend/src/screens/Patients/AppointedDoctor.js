@@ -168,6 +168,7 @@ function AppointedDoctor() {
             {upcomingAppointments.length > 0 ? (
               <>
                 <h1>Your Upcoming Appointments</h1>
+                <p>Completed appointments will be displayed here for a period of 24 hours, after which they will be archived in the previous appointments section.</p>
                 {upcomingAppointments.map((upcomingAppointment) => (
                   <div key={upcomingAppointment._id} className="singled-doctor">
                     <hr className="hr"></hr>
