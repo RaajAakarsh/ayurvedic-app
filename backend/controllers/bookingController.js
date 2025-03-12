@@ -201,3 +201,56 @@ exports.deleteBooking = async (req, res) => {
     return res.status(500).json({ error: "Server error" });
   }
 };
+
+// Add or update recommended supplements
+exports.updateRecommendedSupplements = async (req, res) => {
+  const { id } = req.params;
+  const { supplements } = req.body;
+  
+  try {
+    // Validate input
+    if (!supplements || !Array.isArray(supplements)) {
+      return res.status(400).json({ error: "Valid supplements array is required" });
+    }
+    
+    // Find the booking by ID and update the supplements
+    const updatedBooking = await Booking.findByIdAndUpdate(
+      id,
+      { recommendedSupplements: supplements },
+      { new: true }
+    );
+    
+    if (!updatedBooking) {
+      return res.status(404).json({ error: "Booking not found" });
+    }
+    
+    return res.status(200).json({
+      message: "Recommended supplements updated successfully",
+      booking: updatedBooking,
+    });
+  } catch (error) {
+    console.error("Error updating supplements:", error);
+    return res.status(500).json({ error: "Server error" });
+  }
+};
+
+// Get all supplements for a booking
+exports.getRecommendedSupplements = async (req, res) => {
+  const { id } = req.params;
+  
+  try {
+    const booking = await Booking.findById(id);
+    
+    if (!booking) {
+      return res.status(404).json({ error: "Booking not found" });
+    }
+    
+    return res.status(200).json({
+      message: "Recommended supplements retrieved successfully",
+      supplements: booking.recommendedSupplements,
+    });
+  } catch (error) {
+    console.error("Error retrieving supplements:", error);
+    return res.status(500).json({ error: "Server error" });
+  }
+};

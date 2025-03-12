@@ -9,6 +9,8 @@ const {
   updateBookingStatus,
   updateMeetLink,
   deleteBooking,
+  updateRecommendedSupplements,
+  getRecommendedSupplements,
 } = require("../controllers/bookingController");
 
 const Booking = require("../models/Booking");
@@ -28,6 +30,12 @@ router.put("/update/meet-link/:id", updateMeetLink);
 
 // DELETE route to delete a booking by ID
 router.delete("/delete/:id", deleteBooking);
+
+// Route to update recommended supplements
+router.put("/supplements/:id", updateRecommendedSupplements);
+
+// Route to get recommended supplements
+router.get("/supplements/:id", getRecommendedSupplements);
 
 // GET all bookings
 router.get("/", async (req, res) => {

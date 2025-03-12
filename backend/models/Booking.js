@@ -55,7 +55,19 @@ const bookingSchema = new mongoose.Schema({
     type: String,
     required: true,
     default: "no",
-  }
+  },
+  recommendedSupplements: [
+    {
+      medicineName: {
+        type: String,
+        required: true
+      },
+      forIllness: {
+        type: String,
+        required: true
+      }
+    }
+  ],
 });
 
 const Booking = mongoose.model("Booking", bookingSchema);
