@@ -20,7 +20,7 @@ exports.createBlog = async (req, res) => {
             if (!admin) {
                 return res.status(404).json({ error: 'Admin not found' });
             }
-            authorName = `Admin: ${admin.name || admin.username}`;
+            authorName = `${admin.firstName} ${admin.lastName}`;
         } else {
             return res.status(400).json({ error: 'Invalid author type' });
         }

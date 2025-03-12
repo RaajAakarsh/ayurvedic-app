@@ -162,7 +162,7 @@ const AdminBlogs = () => {
                 <div key={blog._id} className="blog-item">
                   <h3>{blog.title}</h3>
                   <p className="blog-meta">
-                  <p>By: {blog.authorName ? `Admin: ${blog.authorName}` : "Admin: Unknown"} | {blog.date}</p>
+                  <p>By: {blog.authorName} | {blog.date}</p>
                     {blog.category && <span className="blog-category">{blog.category}</span>}
                   </p>
                   <p className="blog-excerpt">{blog.description.substring(0, 150)}
