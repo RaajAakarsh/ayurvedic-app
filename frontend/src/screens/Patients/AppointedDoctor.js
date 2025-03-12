@@ -36,17 +36,6 @@ function AppointedDoctor() {
     }
   };
 
-  // Fetch supplements when the "Previous" tab is active
-  useEffect(() => {
-    if (activeTab === "Previous") {
-      previousAppointments.forEach((appointment) => {
-        if (appointment.source === "Completed") {
-          fetchSupplements(appointment._id);
-        }
-      });
-    }
-  }, [activeTab, previousAppointments]);
-
   useEffect(() => {
     const fetchDoctors = async () => {
       try {
@@ -65,7 +54,7 @@ function AppointedDoctor() {
         );
 
         const currentDate = new Date();
-        
+
         // Sort bookings into upcoming, past, pending, and denied
         const sortedBookings = patientBookings.reduce(
           (acc, booking) => {
@@ -77,9 +66,8 @@ function AppointedDoctor() {
 
             // For past appointments, add to previousAppointments with source info
             if (isPastAppointment && !isWithinOneDayAfterAppointment) {
-              // Add a source property to track where this appointment came from
               let appointmentWithSource = { ...booking };
-              
+
               if (booking.requestAccept === "y") {
                 appointmentWithSource.source = "Completed";
                 acc.previous.push(appointmentWithSource);
@@ -90,7 +78,7 @@ function AppointedDoctor() {
                 appointmentWithSource.source = "Pending";
                 acc.previous.push(appointmentWithSource);
               }
-            } 
+            }
             // For non-past appointments or appointments within 1 day after
             else if (!isPastAppointment || isWithinOneDayAfterAppointment) {
               if (booking.requestAccept === "o") {
@@ -101,7 +89,7 @@ function AppointedDoctor() {
                 acc.denied.push(booking);
               }
             }
-            
+
             return acc;
           },
           { pending: [], upcoming: [], denied: [], previous: [] }
@@ -112,6 +100,16 @@ function AppointedDoctor() {
         setDeniedDoctors(sortedBookings.denied);
         setPreviousAppointments(sortedBookings.previous);
         setLoading(false);
+
+        // Fetch supplements for completed upcoming and previous appointments
+        [...sortedBookings.upcoming, ...sortedBookings.previous].forEach(
+          (appointment) => {
+            if (appointment.source === "Completed" || appointment.requestAccept === "y") {
+              fetchSupplements(appointment._id);
+            }
+          }
+        );
+
       } catch (error) {
         console.error("Error fetching doctor data:", error);
         setError(error.message);
@@ -207,7 +205,9 @@ function AppointedDoctor() {
               <>
                 <h1>Your Upcoming Appointments</h1>
                 <p>Completed appointments will be displayed here for a period of 24 hours, after which they will be archived in the previous appointments section.</p>
-                {upcomingAppointments.map((upcomingAppointment) => (
+                {upcomingAppointments
+                  .sort((a, b) => new Date(a.dateOfAppointment) - new Date(b.dateOfAppointment)) // Sort by date, closest first
+                  .map((upcomingAppointment) => (
                   <div key={upcomingAppointment._id} className="singled-doctor">
                     <hr className="hr"></hr>
                     <h2>with Dr. {upcomingAppointment.doctorName}</h2>
@@ -250,6 +250,26 @@ function AppointedDoctor() {
                         Pay Fees
                       </button>
                     )}
+
+                    {/* Recommended Supplements Section */}
+                    {supplements[upcomingAppointment._id] &&
+                    supplements[upcomingAppointment._id].length > 0 && (
+                      <div className="supplements">
+                        <h2>Recommended Supplements</h2>
+                        <div className="medicines">
+                          {supplements[upcomingAppointment._id].map((supplement, index) => (
+                            <div key={index} className="medicine">
+                              <p>
+                                <strong>Medicine:</strong> {supplement.medicineName}
+                              </p>
+                              <p>
+                                <strong>For Illness:</strong> {supplement.forIllness}
+                              </p>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
                   </div>
                 ))}
               </>
@@ -265,7 +285,9 @@ function AppointedDoctor() {
             {pendingDoctors.length > 0 ? (
               <>
                 <h1>Your Pending Doctor Requests</h1>
-                {pendingDoctors.map((pendingDoctor) => (
+                {pendingDoctors
+                  .sort((a, b) => new Date(a.dateOfAppointment) - new Date(b.dateOfAppointment)) // Sort by date, closest first
+                  .map((pendingDoctor) => (
                   <div key={pendingDoctor._id} className="singled-doctor">
                     <hr className="hr"></hr>
                     <h2>with Dr. {pendingDoctor.doctorName}</h2>
@@ -307,7 +329,9 @@ function AppointedDoctor() {
             {deniedDoctors.length > 0 ? (
               <>
                 <h1>Your Denied Doctor Requests</h1>
-                {deniedDoctors.map((deniedDoctor) => (
+                {deniedDoctors
+                  .sort((a, b) => new Date(b.dateOfAppointment) - new Date(a.dateOfAppointment)) // Sort by date, newest first
+                  .map((deniedDoctor) => (
                   <div key={deniedDoctor._id} className="singled-doctor">
                     <hr className="hr"></hr>
                     <h2>with Dr. {deniedDoctor.doctorName}</h2>
@@ -409,7 +433,7 @@ function AppointedDoctor() {
                               {supplements[previousAppointment._id].map((supplement, index) => (
                                 <div key={index} className="medicine">
                                   <p>
-                                    <strong>Name of Medicine:</strong> {supplement.medicineName}
+                                    <strong>Medicine:</strong> {supplement.medicineName}
                                   </p>
                                   <p>
                                     <strong>For Illness:</strong> {supplement.forIllness}
