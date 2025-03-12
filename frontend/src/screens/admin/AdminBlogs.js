@@ -1,7 +1,12 @@
-import React, { useState, useEffect } from "react";
-import './AdminBlogs.css';
+import React, { useState, useEffect, useContext } from "react";
+import axios from "axios";
+import "./AdminBlogs.css";
+import { AuthContext } from "../../context/AuthContext";
 
 const AdminBlogs = () => {
+  const { auth } = useContext(AuthContext);
+  const adminId = auth.user ? auth.user.id : null;
+
   const [blogs, setBlogs] = useState([]);
   const [newBlog, setNewBlog] = useState({
     title: "",
@@ -10,16 +15,19 @@ const AdminBlogs = () => {
     image: "",
   });
 
-  // Load blogs from localStorage
+  // Fetch all blogs from API
   useEffect(() => {
-    const storedBlogs = JSON.parse(localStorage.getItem("blogs")) || [];
-    setBlogs(storedBlogs);
+    const fetchBlogs = async () => {
+      try {
+        const response = await axios.get("http://localhost:8080/api/blogs");
+        console.log("Fetched blogs:", response.data); // Debugging API response
+        setBlogs(response.data);
+      } catch (error) {
+        console.error("Error fetching blogs:", error);
+      }
+    };
+    fetchBlogs();
   }, []);
-
-  // Save blogs to localStorage
-  useEffect(() => {
-    localStorage.setItem("blogs", JSON.stringify(blogs));
-  }, [blogs]);
 
   // Handle form input change
   const handleChange = (e) => {
@@ -27,20 +35,31 @@ const AdminBlogs = () => {
   };
 
   // Add a new blog post
-  const addBlog = () => {
+  const addBlog = async () => {
     if (!newBlog.title || !newBlog.content || !newBlog.category) {
       alert("Please fill all fields!");
       return;
     }
 
-    const updatedBlogs = [...blogs, { ...newBlog, id: Date.now() }];
-    setBlogs(updatedBlogs);
-    setNewBlog({ title: "", content: "", category: "", image: "" });
+    const dataToSubmit = { ...newBlog, adminId };
+
+    try {
+      const response = await axios.post("http://localhost:8080/api/blogs", dataToSubmit);
+      setBlogs([response.data, ...blogs]);
+      setNewBlog({ title: "", content: "", category: "", image: "" });
+    } catch (error) {
+      console.error("Error adding blog:", error);
+    }
   };
 
   // Delete a blog post
-  const deleteBlog = (id) => {
-    setBlogs(blogs.filter((blog) => blog.id !== id));
+  const deleteBlog = async (id) => {
+    try {
+      await axios.delete(`http://localhost:8080/api/blogs/${id}`);
+      setBlogs(blogs.filter((blog) => blog._id !== id)); // Fix delete issue
+    } catch (error) {
+      console.error("Error deleting blog:", error);
+    }
   };
 
   return (
@@ -64,13 +83,6 @@ const AdminBlogs = () => {
         />
         <input
           type="text"
-          name="category"
-          value={newBlog.category}
-          onChange={handleChange}
-          placeholder="Category"
-        />
-        <input
-          type="text"
           name="image"
           value={newBlog.image}
           onChange={handleChange}
@@ -82,15 +94,18 @@ const AdminBlogs = () => {
       {/* Blog List */}
       <div className="blog-list">
         <h2>Existing Blogs</h2>
-        {blogs.map((blog) => (
-          <div key={blog.id} className="blog-item">
-            <h3>{blog.title}</h3>
-            <p>{blog.content.substring(0, 150)}...</p>
-            <p><strong>Category:</strong> {blog.category}</p>
-            {blog.image && <img src={blog.image} alt={blog.title} />}
-            <button onClick={() => deleteBlog(blog.id)}>Delete</button>
-          </div>
-        ))}
+        {blogs.length > 0 ? (
+          blogs.map((blog) => (
+            <div key={blog._id} className="blog-item">
+              <h3>{blog.title}</h3>
+              <p>{blog.description.substring(0, 150)}...</p>
+              {blog.image && <img src={blog.image} alt={blog.title} />}
+              <button onClick={() => deleteBlog(blog._id)}>Delete</button>
+            </div>
+          ))
+        ) : (
+          <p>No blogs available.</p>
+        )}
       </div>
     </div>
   );
