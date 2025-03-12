@@ -2,6 +2,9 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import "./AdminBlogs.css";
 import { AuthContext } from "../../context/AuthContext";
+import moment from "moment";
+
+const formatDate = (isoString) => moment(isoString).format("DD MMM YYYY");
 
 const AdminBlogs = () => {
   const { auth } = useContext(AuthContext);
@@ -162,7 +165,7 @@ const AdminBlogs = () => {
                 <div key={blog._id} className="blog-item">
                   <h3>{blog.title}</h3>
                   <p className="blog-meta">
-                  <p>By: {blog.authorName} | {blog.date}</p>
+                  <p>By: {blog.authorName} | {formatDate(blog.date)}</p>
                     {blog.category && <span className="blog-category">{blog.category}</span>}
                   </p>
                   <p className="blog-excerpt">{blog.description.substring(0, 150)}
