@@ -34,6 +34,11 @@ function PatientPage() {
     navigate("/medicines"); // Navigate to the Ayurvedic medicines page
   };
 
+  const handleOpenPrakritiForm = () => {
+    // Redirect to Prakriti Determination form page or show modal for the form
+    navigate("/prakritidetermination"); // Assume you have a page for this.
+  };
+
   return (
     <div className="patient-container">
       <main className="content">
@@ -43,6 +48,21 @@ function PatientPage() {
           Welcome back to your Ayurvedic wellness journey. We're here to help
           you achieve balance and harmony in your life.
         </p>
+
+        {/* Match Doctor Automatically Button */}
+        <div className="match-section">
+          {/*<button className="match-btn">Match Me Automatically</button>*/}
+          <button
+            className="match-btn"
+            onClick={handleOpenPrakritiForm}
+          >
+            Prakriti Determination
+          </button>
+          <p>
+            Let us find the perfect Ayurvedic doctor for you based on your
+            needs.
+          </p>
+        </div>
 
         {/* Key Services Section */}
         <section className="services-section">
@@ -97,15 +117,6 @@ function PatientPage() {
             </div>
           </div>
         </section>
-
-        {/* Match Doctor Automatically Button */}
-        <div className="match-section">
-          <button className="match-btn">Match Me Automatically</button>
-          <p>
-            Let us find the perfect Ayurvedic doctor for you based on your
-            needs.
-          </p>
-        </div>
 
         <div className="how-we-work">
           <h2 className="hww-heading">How We Work?</h2>
