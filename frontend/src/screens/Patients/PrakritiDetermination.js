@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './PrakritiDetermination.css';
-import './SignUpScreen.css';
+import '../SignUpScreen.css';
 
 function PrakritiDetermination() {
   const navigate = useNavigate();
