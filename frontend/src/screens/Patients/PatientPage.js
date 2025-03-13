@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./PatientPage.css"; // Import the CSS file for styling
 import { AuthContext } from "../../context/AuthContext";
@@ -17,6 +17,37 @@ function PatientPage() {
   const { auth, setAuth } = useContext(AuthContext);
   const firstName = auth.user?.firstName || "Patient";
   const navigate = useNavigate();
+  const [isPrakritiFilled, setIsPrakritiFilled] = useState(false); // Track if Prakriti form is filled
+
+  // Fetch Prakriti Determination data from the backend
+  useEffect(() => {
+    const fetchPrakritiData = async () => {
+      try {
+        const response = await fetch(`http://localhost:8080/api/prakriti/${auth.user?.email}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          if (data) {
+            setIsPrakritiFilled(true); // Prakriti form is filled
+          }
+        } else {
+          setIsPrakritiFilled(false); // Prakriti form is not filled
+        }
+      } catch (error) {
+        console.error("Error fetching Prakriti Determination data:", error);
+        setIsPrakritiFilled(false); // Assume form is not filled in case of error
+      }
+    };
+
+    if (auth.user?.email) {
+      fetchPrakritiData(); // Fetch data only if the user is logged in
+    }
+  }, [auth.user?.email]);
 
   const goToAppointedDoctor = () => {
     navigate("/appointed-doctor"); // Navigate to the appointed doctor page
@@ -35,8 +66,12 @@ function PatientPage() {
   };
 
   const handleOpenPrakritiForm = () => {
-    // Redirect to Prakriti Determination form page or show modal for the form
-    navigate("/prakritidetermination"); // Assume you have a page for this.
+    navigate("/prakritidetermination"); // Redirect to Prakriti Determination form page
+  };
+
+  const handleMatchDoctor = () => {
+    // Logic to match the doctor automatically
+    alert("Matching you with the perfect Ayurvedic doctor...");
   };
 
   return (
@@ -51,17 +86,28 @@ function PatientPage() {
 
         {/* Match Doctor Automatically Button */}
         <div className="match-section">
-          {/*<button className="match-btn">Match Me Automatically</button>*/}
-          <button
-            className="match-btn"
-            onClick={handleOpenPrakritiForm}
-          >
-            Prakriti Determination
-          </button>
-          <p>
-            Let us find the perfect Ayurvedic doctor for you based on your
-            needs.
-          </p>
+          {isPrakritiFilled ? (
+            <>
+              <button className="match-btn" onClick={handleMatchDoctor}>
+                Match Me Automatically
+              </button>
+              <p>
+                Let us find the perfect Ayurvedic doctor for you based on your
+                needs.
+              </p>
+            </>
+          ) : (
+            <>
+              <button className="match-btn" onClick={handleOpenPrakritiForm}>
+                Prakriti Determination
+              </button>
+              <p>
+                Kindly complete the Prakriti Determination Form. This will enable
+                us to automatically identify the most suitable doctor for your
+                needs.
+              </p>
+            </>
+          )}
         </div>
 
         {/* Key Services Section */}
