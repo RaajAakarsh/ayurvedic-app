@@ -24,6 +24,10 @@ function SignInScreen() {
     navigate('/signup'); // Navigate to the SignUpScreen
   };
 
+  const handleButton = () => {
+    navigate('/signin');
+  }
+
   const handleSignIn = async (e) => {
     e.preventDefault();
 
@@ -78,7 +82,7 @@ function SignInScreen() {
         <h1>AYURVEDIC</h1>
         <h2>Consultations</h2>
         <div className='outbox'>
-          <button className="sconsult-btn consult-btn">
+          <button className="sconsult-btn consult-btn" onClick={handleButton}>
             Consult an Ayurvedic Doctor <br /> Book a Session
           </button>
         </div>

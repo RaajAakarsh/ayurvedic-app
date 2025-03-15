@@ -8,6 +8,10 @@ function SignUpScreen() {
   const navigate = useNavigate();
   const [userType, setUserType] = useState('');
 
+  const handleButton = () => {
+    navigate('/signin');
+  }
+
   const handleSignUp = (role) => {
     setUserType(role);
     if (role === 'patient') {
@@ -26,7 +30,7 @@ function SignUpScreen() {
         <h1 className="left-title">AYURVEDIC </h1>
         <h2> Consultations</h2>
         <div className='outbox'>
-        <button className="consult-btn">Consult an Ayurvedic Doctor<br />Book a Session</button>
+        <button className="consult-btn" onClick={handleButton}>Consult an Ayurvedic Doctor<br />Book a Session</button>
         </div>
       </div>
       <div className="signin-right">
