@@ -11,6 +11,91 @@ function AppointedDoctor() {
   const [error, setError] = useState(null);
   const email = localStorage.getItem("email");
   const [supplements, setSupplements] = useState({}); // Key: appointment ID, Value: supplements array
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentAppointmentId, setCurrentAppointmentId] = useState(null);
+  const [rating, setRating] = useState(0);
+  const [review, setReview] = useState("");
+
+  const RatingModal = ({ isOpen, onClose, onSubmit, rating, setRating, review, setReview }) => {
+    if (!isOpen) return null;
+
+    return (
+      <div className="modal-overlay">
+        <div className="modal-content">
+          <h2>Rate Your Experience</h2>
+          <div className="rating-stars">
+            {[1, 2, 3, 4, 5].map((star) => (
+              <span
+                key={star}
+                className={`star ${star <= rating ? "filled" : ""}`}
+                onClick={() => setRating(star)}
+              >
+                ★
+              </span>
+            ))}
+          </div>
+          <textarea
+            placeholder="Write your review (optional)"
+            value={review}
+            onChange={(e) => setReview(e.target.value)}
+          />
+          <div className="modal-actions">
+            <button onClick={onSubmit} disabled={!rating}>
+              Submit
+            </button>
+            <button onClick={onClose}>Close</button>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  const handleRatingSubmit = async () => {
+    if (!currentAppointmentId || !rating) {
+      alert("Please provide a rating before submitting.");
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        `http://localhost:8080/api/bookings/rating-review/${currentAppointmentId}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ rating, review }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to submit rating and review");
+      }
+
+      // Update the local state to reflect the new rating and review
+      const updatedAppointments = upcomingAppointments.map((appointment) =>
+        appointment._id === currentAppointmentId
+          ? { ...appointment, rating, review }
+          : appointment
+      );
+      setUpcomingAppointments(updatedAppointments);
+
+      const updatedPreviousAppointments = previousAppointments.map((appointment) =>
+        appointment._id === currentAppointmentId
+          ? { ...appointment, rating, review }
+          : appointment
+      );
+      setPreviousAppointments(updatedPreviousAppointments);
+
+      // Close the modal and reset the state
+      setIsModalOpen(false);
+      setRating(0);
+      setReview("");
+    } catch (error) {
+      console.error("Error submitting rating and review:", error);
+      alert("Failed to submit rating and review. Please try again.");
+    }
+  };
 
   // Function to fetch supplements for a specific appointment
   const fetchSupplements = async (appointmentId) => {
@@ -206,72 +291,86 @@ function AppointedDoctor() {
                 <h1>Your Upcoming Appointments</h1>
                 <p>Completed appointments will be displayed here for a period of 24 hours, after which they will be archived in the previous appointments section.</p>
                 {upcomingAppointments
-                  .sort((a, b) => new Date(a.dateOfAppointment) - new Date(b.dateOfAppointment)) // Sort by date, closest first
+                  .sort((a, b) => new Date(a.dateOfAppointment) - new Date(b.dateOfAppointment))
                   .map((upcomingAppointment) => (
-                  <div key={upcomingAppointment._id} className="singled-doctor">
-                    <hr className="hr"></hr>
-                    <h2>with Dr. {upcomingAppointment.doctorName}</h2>
-                    <ul>
-                      <li>
-                        <strong>Date:</strong>{" "}
-                        {new Date(
-                          upcomingAppointment.dateOfAppointment
-                        ).toLocaleDateString("en-GB")}{" "}
-                        (dd/mm/yyyy)
-                      </li>
-                      <li>
-                        <strong>Timeslot:</strong> {upcomingAppointment.timeSlot}
-                      </li>
-                      <li>
-                        <strong>Doctor's Email:</strong>{" "}
-                        {upcomingAppointment.doctorEmail}
-                      </li>
-                      <li>
-                        <strong>Illness:</strong> {upcomingAppointment.patientIllness}
-                      </li>
-                    </ul>
+                    <div key={upcomingAppointment._id} className="singled-doctor">
+                      <hr className="hr"></hr>
+                      <h2>with Dr. {upcomingAppointment.doctorName}</h2>
+                      <ul>
+                        <li>
+                          <strong>Date:</strong>{" "}
+                          {new Date(upcomingAppointment.dateOfAppointment).toLocaleDateString("en-GB")}{" "}
+                          (dd/mm/yyyy)
+                        </li>
+                        <li>
+                          <strong>Timeslot:</strong> {upcomingAppointment.timeSlot}
+                        </li>
+                        <li>
+                          <strong>Doctor's Email:</strong>{" "}
+                          {upcomingAppointment.doctorEmail}
+                        </li>
+                        <li>
+                          <strong>Illness:</strong> {upcomingAppointment.patientIllness}
+                        </li>
+                      </ul>
 
-                    {/* Show "Join Meet" button if meetLink is available */}
-                    {upcomingAppointment.meetLink &&
-                    upcomingAppointment.meetLink !== "no" ? (
-                      <button
-                        className="action-button"
-                        onClick={() =>
-                          window.open(upcomingAppointment.meetLink, "_blank")
-                        }
-                      >
-                        Join Meet
-                      </button>
-                    ) : (
-                      <button
-                        className="action-button pay-fees"
-                        onClick={() => handlePayFees(upcomingAppointment._id)}
-                      >
-                        Pay Fees
-                      </button>
-                    )}
+                      {/* Show "Join Meet" button if meetLink is available */}
+                      {upcomingAppointment.meetLink && upcomingAppointment.meetLink !== "no" ? (
+                        <button
+                          className="action-button"
+                          onClick={() => window.open(upcomingAppointment.meetLink, "_blank")}
+                        >
+                          Join Meet
+                        </button>
+                      ) : (
+                        <button
+                          className="action-button pay-fees"
+                          onClick={() => handlePayFees(upcomingAppointment._id)}
+                        >
+                          Pay Fees
+                        </button>
+                      )}
 
-                    {/* Recommended Supplements Section */}
-                    {supplements[upcomingAppointment._id] &&
-                    supplements[upcomingAppointment._id].length > 0 && (
-                      <div className="supplements">
-                        <h2>Recommended Supplements</h2>
-                        <div className="medicines">
-                          {supplements[upcomingAppointment._id].map((supplement, index) => (
-                            <div key={index} className="medicine">
-                              <p>
-                                <strong>Medicine:</strong> {supplement.medicineName}
-                              </p>
-                              <p>
-                                <strong>For Illness:</strong> {supplement.forIllness}
-                              </p>
-                            </div>
-                          ))}
+                      {
+                        new Date(upcomingAppointment.dateOfAppointment) < new Date() && (
+                          <>
+                            {upcomingAppointment.rating ? (
+                              <p>Thank you for your opinion!</p>
+                            ) : (
+                              <button
+                                className="action-button"
+                                onClick={() => {
+                                  setCurrentAppointmentId(upcomingAppointment._id);
+                                  setIsModalOpen(true);
+                                }}
+                              >
+                                Give your Rating
+                              </button>
+                            )}
+                          </>
+                        )
+                      }
+
+                      {/* Recommended Supplements Section */}
+                      {supplements[upcomingAppointment._id] && supplements[upcomingAppointment._id].length > 0 && (
+                        <div className="supplements">
+                          <h2>Recommended Supplements</h2>
+                          <div className="medicines">
+                            {supplements[upcomingAppointment._id].map((supplement, index) => (
+                              <div key={index} className="medicine">
+                                <p>
+                                  <strong>Medicine:</strong> {supplement.medicineName}
+                                </p>
+                                <p>
+                                  <strong>For Illness:</strong> {supplement.forIllness}
+                                </p>
+                              </div>
+                            ))}
+                          </div>
                         </div>
-                      </div>
-                    )}
-                  </div>
-                ))}
+                      )}
+                    </div>
+                  ))}
               </>
             ) : (
               <p>No upcoming doctor assigned.</p>
@@ -384,7 +483,7 @@ function AppointedDoctor() {
               <>
                 <h1>Your Previous Appointments</h1>
                 {previousAppointments
-                  .sort((a, b) => new Date(b.dateOfAppointment) - new Date(a.dateOfAppointment)) // Sort by date, newest first
+                  .sort((a, b) => new Date(b.dateOfAppointment) - new Date(a.dateOfAppointment))
                   .map((previousAppointment) => (
                     <div key={previousAppointment._id} className="singled-doctor">
                       <hr className="hr"></hr>
@@ -395,9 +494,7 @@ function AppointedDoctor() {
                         </li>
                         <li>
                           <strong>Date:</strong>{" "}
-                          {new Date(
-                            previousAppointment.dateOfAppointment
-                          ).toLocaleDateString("en-GB")}{" "}
+                          {new Date(previousAppointment.dateOfAppointment).toLocaleDateString("en-GB")}{" "}
                           (dd/mm/yyyy)
                         </li>
                         <li>
@@ -422,8 +519,27 @@ function AppointedDoctor() {
                            previousAppointment.source === "Denied" ? "Denied" : "Pending"}
                         </li>
                       </ul>
-                      
-                      {/* Recommended Supplements Section - Only show for completed appointments */}
+
+                      {/* Rating and Review Section */}
+                      {previousAppointment.source === "Completed" && (
+                        <>
+                          {previousAppointment.rating ? (
+                            <p>Thank you for your opinion!</p>
+                          ) : (
+                            <button
+                              className="action-button"
+                              onClick={() => {
+                                setCurrentAppointmentId(previousAppointment._id);
+                                setIsModalOpen(true);
+                              }}
+                            >
+                              Give your Rating
+                            </button>
+                          )}
+                        </>
+                      )}
+
+                      {/* Recommended Supplements Section */}
                       {previousAppointment.source === "Completed" && (
                         <div className="supplements">
                           <h2>Recommended Supplements</h2>
@@ -446,7 +562,7 @@ function AppointedDoctor() {
                           )}
                         </div>
                       )}
-                      
+
                       {/* Optional: Add a button to view past records or delete */}
                       <button
                         className="action-button action-delete"
@@ -462,6 +578,17 @@ function AppointedDoctor() {
             )}
           </div>
         )}
+
+        {/* Rating Modal */}
+        <RatingModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          onSubmit={handleRatingSubmit}
+          rating={rating}
+          setRating={setRating}
+          review={review}
+          setReview={setReview}
+        />
       </div>
     </>
   );
