@@ -2,12 +2,13 @@
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 0 20px;
   margin-top:140px;
 }
 
 .content {
   text-align: center;
+  padding-top: 0;
 }
 
 h1 {
@@ -65,7 +66,7 @@ p {
 }
 
 .match-section {
-  margin-top: 40px;
+  margin-top: 0;
 }
 
 .match-btn {

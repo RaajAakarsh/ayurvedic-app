@@ -20,9 +20,9 @@ import SignUpScreen from './screens/SignUpScreen';
 import SignUpPatientScreen from './screens/Patients/SignUpPatientScreen';
 import SignUpDoctorScreen from './screens/Doctors/SignUpDoctorScreen';
 import SignUpRetailerScreen from './screens/Retailers/SignUpRetailerScreen';
-import PrakritiDetermination from './screens/PrakritiDetermination';
+import PrakritiDetermination from './screens/Patients/PrakritiDetermination';
 import TreatmentsScreen from './screens/Treatments';
-import AppointedDoctor from './screens/Patients/AppointedDoctor';
+import AppointedDoctor from './screens/Patients/Appointments/AppointedDoctor';
 import PatientPage from './screens/Patients/PatientPage'
 import OrderHistory from './screens/Patients/OrderHistory';
 import DoctorHomeScreen from './screens/Doctors/DoctorHomeScreen';

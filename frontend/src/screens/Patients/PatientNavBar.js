@@ -107,11 +107,6 @@ function PatientNavBar() {
     }
   };
 
-  const handleOpenPrakritiForm = () => {
-    // Redirect to Prakriti Determination form page or show modal for the form
-    navigate("/prakritidetermination"); // Assume you have a page for this.
-  };
-
   return (
     <header className="navbar-header">
       <div className="top-navbar">
@@ -176,18 +171,6 @@ function PatientNavBar() {
                 onClick={handleChangeAddress}
                 className="change-address-link"
               > (Change) </a>
-            </p>
-          </div>
-          <div className="prakriti-link-container">
-            <p>
-              <strong>Prakriti Determination: </strong>
-              <a
-                href="#"
-                onClick={handleOpenPrakritiForm}
-                className="prakriti-form-link"
-              >
-                Open Form
-              </a>
             </p>
           </div>
           <div className="modal-btn-container">
