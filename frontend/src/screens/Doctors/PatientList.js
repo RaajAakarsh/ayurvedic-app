@@ -112,7 +112,7 @@ function PatientList() {
             <p>No previous appointments found.</p>
           ) : (
             previousAppointments.map((appointment) => (
-              <div key={appointment._id} className="appointment-card">
+              <div key={appointment._id} className="appointment-card-patient-list">
                 <h3>{appointment.patientName}</h3>
                 <p><strong>Date:</strong> {new Date(appointment.dateOfAppointment).toLocaleDateString()}</p>
                 <p><strong>Time Slot:</strong> {appointment.timeSlot}</p>
@@ -132,7 +132,7 @@ function PatientList() {
             <p>No denied requests found.</p>
           ) : (
             deniedAppointments.map((appointment) => (
-              <div key={appointment._id} className="appointment-card">
+              <div key={appointment._id} className="appointment-card-patient-list">
                 <h3>{appointment.patientName}</h3>
                 <p><strong>Date:</strong> {new Date(appointment.dateOfAppointment).toLocaleDateString()}</p>
                 <p><strong>Time Slot:</strong> {appointment.timeSlot}</p>

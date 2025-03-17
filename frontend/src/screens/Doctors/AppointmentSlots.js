@@ -186,6 +186,7 @@ function AppointmentSlots() {
   return (
     <div className="appointments-container">
       <h1>My Appointment Slots</h1>
+      <p>Please navigate to the patient list tab to write down what supplements, food, and yoga the patient should do.</p>
       {appointments.length === 0 ? (
         <p>No appointments found.</p>
       ) : (

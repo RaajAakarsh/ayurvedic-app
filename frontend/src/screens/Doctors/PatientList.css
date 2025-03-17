@@ -1,6 +1,6 @@
 .patient-list-container {
   width: 90%;
-  max-width: 800px;
+  max-width: 1100px;
   margin: 20px auto;
   background-color: #fff;
   padding: 20px;
@@ -41,21 +41,23 @@
   margin-top: 20px;
 }
 
-.appointment-card {
+.appointment-card-patient-list {
+  display: block;
   background-color: #f9f9f9;
   padding: 15px;
   border-radius: 8px;
-  margin-bottom: 15px;
+  margin-bottom: 35px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.appointment-card h3 {
+.appointment-card-patient-list h3 {
   font-size: 20px;
   margin-bottom: 10px;
   color: #007bff;
+  text-align: center;
 }
 
-.appointment-card p {
+.appointment-card-patient-list p {
   font-size: 16px;
   margin-bottom: 5px;
   color: #555;
@@ -69,7 +71,9 @@
   border-radius: 5px;
   cursor: pointer;
   font-size: 14px;
-  margin-top: 10px;
+  margin-top: 15px;
+  width: 100%;
+  text-align: center;
 }
 
 .delete-button:hover {
