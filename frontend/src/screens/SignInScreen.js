@@ -109,8 +109,8 @@ function SignInScreen() {
           <button type="submit" className="signin-btn">SIGN IN</button> {/* onSubmit handles this */}
         </form>
         <p>
-          Don’t have an account? 
-          <a href="#" onClick={handleSignUp}>Sign Up</a> {/* Add onClick to handleSignUp */}
+          Don’t have an account?
+          <a href="#" onClick={handleSignUp}> Sign Up</a> {/* Add onClick to handleSignUp */}
         </p>
       </div>
     </div>

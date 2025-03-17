@@ -1,32 +1,77 @@
 .patient-list-container {
-    width: 90%;
-    margin: 20px auto;
-    padding: 20px;
-    font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    margin-top:150px;
-  }
-  
-  .patient-card {
-    border-bottom: 1px solid #ccc;
-    padding: 20px;
-    margin-bottom: 10px;
-  }
-  
-  .patient-card:last-child {
-    border-bottom: none;
-  }
-  
-  .patient-card h2 {
-    color: #333;
-    font-size: 1.5em;
-  }
-  
-  .patient-card p {
-    color: #666;
-    margin: 5px 0;
-    font-size: 1.1em;
-  }
-  
+  width: 90%;
+  max-width: 800px;
+  margin: 20px auto;
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  font-family: Arial, sans-serif;
+  margin-top: 150px;
+}
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.tab {
+  padding: 10px 20px;
+  margin: 0 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #f0f0f0;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.tab.active {
+  background-color: #007bff;
+  color: white;
+}
+
+.tab:hover {
+  background-color: #0056b3;
+  color: white;
+}
+
+.appointment-list {
+  margin-top: 20px;
+}
+
+.appointment-card {
+  background-color: #f9f9f9;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.appointment-card h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #007bff;
+}
+
+.appointment-card p {
+  font-size: 16px;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+.delete-button {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.delete-button:hover {
+  background-color: #c82333;
+}
