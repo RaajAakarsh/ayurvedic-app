@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 function TreatmentsScreen() {
   const navigate = useNavigate();
-  const treatments = [
+  const treatments = [ 
     { category: 'Digestive Health', image: '/images/digestive.jpg' },
     { category: 'Respiratory Health', image: '/images/respiratory.jpg' },
     { category: 'Skin Care', image: '/images/skincare.jpg' },
