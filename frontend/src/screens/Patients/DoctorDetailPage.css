@@ -211,6 +211,12 @@
 	}
 }
 
+@media (max-width: 900px) {
+	.doctor-info h1 {
+		font-size: 40px;
+	}
+}
+
 @media (max-width: 670px) {
 	.doctor-info h1 {
 		font-size: 25px;

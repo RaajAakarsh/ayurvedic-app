@@ -6,8 +6,8 @@
 	background: rgb(91, 253, 255);
 	background: linear-gradient(
 		131deg,
-		rgba(91, 253, 255, 1) 0%,
-		rgba(255, 221, 145, 1) 100%
+		rgba(91, 252, 255, 0.33) 0%,
+		rgba(255, 220, 145, 0.877) 100%
 	);
   border-radius: 15px;
   margin-bottom: 50px;

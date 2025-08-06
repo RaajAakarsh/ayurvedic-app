@@ -935,7 +935,7 @@ function TreatmentDetailsScreen() {
 
 	if (!details) {
 		return <h2>Category not found.</h2>;
-	}
+	} 
 
 	// Rotate consultation messages based on category index
 	const consultationIndex =
