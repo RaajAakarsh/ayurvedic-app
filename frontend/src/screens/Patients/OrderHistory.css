@@ -1,0 +1,19 @@
+.order-history {
+  margin-top: 160px;
+  text-align: center;
+}
+
+.order-history h1 {
+  text-align: center;
+}
+
+.order-card {
+  background: #f9f9f9;
+  padding: 10px 15px;
+  margin: 10px auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  width: 80%;
+  max-width: 1000px;
+  text-align: left;
+}
